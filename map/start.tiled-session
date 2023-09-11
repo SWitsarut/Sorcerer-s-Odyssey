@@ -1,0 +1,34 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Mage.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Programming/OOPwitsarut/game/map",
+    "last.imagePath": "C:/Users/suea/Downloads",
+    "map.lastUsedExportFilter": "ไฟล์ CSV (*.csv)",
+    "map.renderOrder": null,
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
+    "map.width": 20,
+    "openFiles": [
+    ],
+    "project": "start.tiled-project",
+    "recentFiles": [
+        "Mage.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
