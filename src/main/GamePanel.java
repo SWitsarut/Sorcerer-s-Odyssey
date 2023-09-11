@@ -16,7 +16,9 @@ public class GamePanel extends JPanel {
 
     MouseInput mouseInput;
     private double deltaX = 100, deltaY = 100;
-    private BufferedImage img;
+    private BufferedImage img, subImage;
+
+    private int tileSize = 32;
 
     public GamePanel() {
         mouseInput = new MouseInput(this);
@@ -47,9 +49,18 @@ public class GamePanel extends JPanel {
         setMaximumSize(size);
     }
 
+    private int animateX = 0;
+    private int animateY = 0;
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        subImage = getNextAnimate(img);
+        g.drawImage(subImage, 0, 0, 64, 64, null);
+    }
 
-        // g.drawimage(null, x, y, null);
+    private BufferedImage getNextAnimate(BufferedImage img) {
+        BufferedImage sub = img.getSubimage(animateX, animateY, tileSize, tileSize);
+        animateX = (animateX + tileSize) % (tileSize * 10);
+        return sub;
     }
 }
