@@ -1,0 +1,7 @@
+/tiled/
+*.class
+tempCodeRunnerFile.*
+/bin/
+.classpath
+.project
+/Test/
