@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -53,30 +54,29 @@ public class LoadSave {
         return img;
     }
 
-    public static int[][] getLevelDate(String file) {
+    public static int[][] getLevelData(String file) {
         int[][] mapData = null;
 
         try {
             ArrayList<ArrayList<Integer>> tempArr = new ArrayList<>();
-            File name = new File(file);
-            FileReader fr = new FileReader(name);
-            BufferedReader br = new BufferedReader(fr);
+            InputStream is = LoadSave.class.getResourceAsStream("/img/map/" + file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line = "";
 
             int colCount = 0;
-            int rowCount = 0;
             while ((line = br.readLine()) != null) {
                 String[] tile_id = line.split(",");
                 if (colCount == 0) {
                     colCount = tile_id.length;
                 } else if (colCount != tile_id.length) {
                     break;
-                } else {
-                    for (int i = 0; i < tile_id.length; i++) {
-                        tempArr.get(rowCount).add(Integer.parseInt(tile_id[i]));
-                    }
                 }
-                rowCount++;
+                ArrayList<Integer> rowValues = new ArrayList<>();
+                for (int i = 0; i < tile_id.length; i++) {
+                    rowValues.add(Integer.parseInt(tile_id[i]));
+                }
+
+                tempArr.add(rowValues);
             }
 
             mapData = new int[tempArr.size()][tempArr.get(0).size()];

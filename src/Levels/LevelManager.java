@@ -14,6 +14,14 @@ public class LevelManager {
     public LevelManager(Game game) {
         this.game = game;
         importTile();
+        int arr[][] = getLevelData("desert.csv");
+        for (int[] is : arr) {
+            for (int is2 : is) {
+                System.out.print(is2 + " ");
+            }
+            System.out.println();
+        }
+
     }
 
     public void importTile() {
