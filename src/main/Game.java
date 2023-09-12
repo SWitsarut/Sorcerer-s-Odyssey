@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 
+import Levels.LevelManager;
 import entity.Player;
 import static util.Constants.Config.*;
 
@@ -10,8 +11,7 @@ public class Game implements Runnable {
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS_SET = MAX_FPS;
-    private final int UPS_SET = MAX_UPS;
+    private LevelManager levelManager;
 
     private Player player;
 
@@ -26,9 +26,11 @@ public class Game implements Runnable {
 
     private void initClass() {
         player = new Player(0, 0);
+        levelManager = new LevelManager(this);
     }
 
     public void render(Graphics g) {
+        levelManager.draw(g);
         player.render(g);
     }
 
@@ -87,5 +89,7 @@ public class Game implements Runnable {
         return player;
     }
 
-
+    public void windowFocusLost() {
+        player.resetDirection();
+    }
 }

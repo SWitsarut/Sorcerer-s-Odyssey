@@ -2,9 +2,6 @@ package entity;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 
 import util.LoadSave;
 
@@ -20,13 +17,18 @@ public class Player extends Entity {
     private double speed = 1.25;
 
     private boolean up, down, right, left;
+
+    public void resetDirection() {
+        up = down = right = left = false;
+    }
+
     private boolean attack, isStunned = false;
 
     private double deltaStunned = 0;
     private double stunnedDuration;
 
     private void channel(double duration) {
-        this.stunnedDuration = duration * MAX_UPS;
+        this.stunnedDuration = duration * UPS_SET;
         isStunned = true;
     }
 
@@ -141,4 +143,5 @@ public class Player extends Entity {
     public void setLeft(boolean left) {
         this.left = left;
     }
+
 }

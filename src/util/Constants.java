@@ -2,16 +2,16 @@ package util;
 
 public class Constants {
     public static class Config {
-        public static final int MAX_FPS = 120;
-        public static final int MAX_UPS = 200;
+        public static final int FPS_SET = 120;
+        public static final int UPS_SET = 200;
         public static final int aniFramePersecond = 12;
         public static final int TILE_DEFAULT_SIZE = 16;
-        public static final float SCALE = 3.0f;
-        public static final int TILES_IN_WIDTH = 26;
-        public static final int TILES_IN_HEIGHT = 14;
+        public static final float SCALE = 1.5f;
+        public static final int TILES_IN_WIDTH = 70;
+        public static final int TILES_IN_HEIGHT = 40;
         public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
         public static final int SCREEN_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
-        public static final int SCREEN_HEIGHT = TILE_SIZE * TILES_IN_WIDTH;
+        public static final int SCREEN_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
 
     }
 
