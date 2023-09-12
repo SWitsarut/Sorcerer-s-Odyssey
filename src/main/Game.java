@@ -3,14 +3,15 @@ package main;
 import java.awt.Graphics;
 
 import entity.Player;
+import static util.Constants.Config.*;
 
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS_SET = 120;
-    private final int UPS_SET = 200;
+    private final int FPS_SET = MAX_FPS;
+    private final int UPS_SET = MAX_UPS;
 
     private Player player;
 
@@ -35,9 +36,6 @@ public class Game implements Runnable {
         player.update();
     }
 
-
-
-    
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -88,4 +86,6 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return player;
     }
+
+
 }

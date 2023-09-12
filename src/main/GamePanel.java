@@ -1,6 +1,5 @@
 package main;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import input.KeyboardInput;
@@ -8,12 +7,7 @@ import input.MouseInput;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import static util.Constants.PlayerConstants.*;
-import static util.Constants.Direction.*;
+import static util.Constants.Config.*;
 
 public class GamePanel extends JPanel {
 
@@ -32,7 +26,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280, 800);
+        Dimension size = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);

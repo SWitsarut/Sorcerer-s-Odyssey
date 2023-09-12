@@ -1,12 +1,27 @@
 package util;
 
 public class Constants {
+    public static class Config {
+        public static final int MAX_FPS = 120;
+        public static final int MAX_UPS = 200;
+        public static final int aniFramePersecond = 12;
+        public static final int TILE_DEFAULT_SIZE = 16;
+        public static final float SCALE = 3.0f;
+        public static final int TILES_IN_WIDTH = 26;
+        public static final int TILES_IN_HEIGHT = 14;
+        public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
+        public static final int SCREEN_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
+        public static final int SCREEN_HEIGHT = TILE_SIZE * TILES_IN_WIDTH;
+
+    }
+
     public static class PlayerConstants {
         public static final int IDLE = 0;
         public static final int GESTURE = 1;
         public static final int WALKING = 2;
         public static final int ATTACK = 3;
         public static final int DYING = 4;
+        public static final int STUNNED = DYING;
     }
 
     public static class Direction {
@@ -19,4 +34,5 @@ public class Constants {
         public static final int LEFT = 6;
         public static final int UP_LEFT = 7;
     }
+
 }

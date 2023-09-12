@@ -6,16 +6,46 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
+import util.LoadSave;
+
 import static util.Constants.PlayerConstants.*;
+import static util.Constants.Config.*;
 
 public class Player extends Entity {
     private int charectorSize = 32;
     private BufferedImage[][] animation;
-    private boolean up, down, right, left;
     private int aniTick = 0, aniIndex, aniFramePersecond = 15;
 
     private int palyerAction = IDLE;
     private double speed = 1.25;
+
+    private boolean up, down, right, left;
+    private boolean attack, isStunned = false;
+
+    private double deltaStunned = 0;
+    private double stunnedDuration;
+
+    private void channel(double duration) {
+        this.stunnedDuration = duration * MAX_UPS;
+        isStunned = true;
+    }
+
+    public void stunned(double duration) {
+        newAction(IDLE);
+        channel(duration);
+    }
+
+    public void attack() {
+        newAction(ATTACK);
+        aniIndex = 3;
+        channel(0.3);
+    }
+
+    public void useMagic() {
+        newAction(GESTURE);
+        aniIndex = 3;
+        channel(0.5);
+    }
 
     public Player(float x, float y) {
         super(x, y);
@@ -31,6 +61,7 @@ public class Player extends Entity {
     }
 
     public void update() {
+        updateStatus();
         move();
         updateAnimationTick();
     }
@@ -40,42 +71,55 @@ public class Player extends Entity {
     }
 
     private void loadAnimation() {
-        InputStream is = getClass().getResourceAsStream("/img/entity/rogue.png");
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        try {
-            BufferedImage img = ImageIO.read(is);
-            animation = new BufferedImage[5][10];
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 10; j++) {
-                    animation[i][j] = img.getSubimage(charectorSize * j, charectorSize * i, charectorSize,
-                            charectorSize);
-                }
+        animation = new BufferedImage[5][10];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 10; j++) {
+                animation[i][j] = img.getSubimage(charectorSize * j, charectorSize * i, charectorSize,
+                        charectorSize);
             }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
 
     }
 
-    public void move() {
-        if (up || right || left || down) {
-            setPalyerAction(WALKING);
-            if (left && !right) {
-                x -= speed;
-            } else if (right && !left) {
-                x += speed;
+    private void updateStatus() {
+        if (isStunned) {
+            if (deltaStunned >= stunnedDuration) {
+                isStunned = false;
+                deltaStunned = 0;
+            } else {
+                deltaStunned += 1;
             }
+        }
+    }
 
-            if (up && !down) {
-                y -= speed;
-            } else if (down && !up) {
-                y += speed;
+    public void move() {
+        if (!isStunned) {
+            if (up || right || left || down) {
+                setPalyerAction(WALKING);
+                if (left && !right) {
+                    x -= speed;
+                } else if (right && !left) {
+                    x += speed;
+                }
+
+                if (up && !down) {
+                    y -= speed;
+                } else if (down && !up) {
+                    y += speed;
+                }
+            } else {
+                setPalyerAction(IDLE);
             }
-        } else {
-            setPalyerAction(IDLE);
         }
 
+    }
+
+    public void newAction(int action) {
+        aniTick = 0;
+        aniIndex = 0;
+        setPalyerAction(action);
     }
 
     public void setPalyerAction(int palyerAction) {

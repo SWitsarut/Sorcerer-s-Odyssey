@@ -4,14 +4,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import entity.Player;
 import main.GamePanel;
 
 public class MouseInput implements MouseListener, MouseMotionListener {
 
     GamePanel gp;
+    Player player;
 
     public MouseInput(GamePanel gp) {
-        this.gp = gp;
+        player = gp.getGame().getPlayer();
     }
 
     @Override
@@ -27,7 +29,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         // click
-
+        switch (e.getButton()) {
+            case 1:
+                player.attack();
+                break;
+            case 3:
+                player.useMagic();
+                break;
+        }
     }
 
     @Override
