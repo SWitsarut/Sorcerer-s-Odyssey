@@ -3,14 +3,17 @@ package input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import entity.Player;
 import main.GamePanel;
 
+import static util.Constants.PlayerConstants.*;
+import static util.Constants.Direction.*;
+
 public class KeyboardInput implements KeyListener {
-    boolean up, down, left, right;
-    GamePanel gp;
+    Player player;
 
     public KeyboardInput(GamePanel gp) {
-        this.gp = gp;
+        this.player = gp.getGame().getPlayer();
     }
 
     @Override
@@ -21,21 +24,17 @@ public class KeyboardInput implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W: // W
-                up = true;
+                player.setUp(true);
                 break;
             case KeyEvent.VK_D:// D
-                right = true;
+                player.setRight(true);
                 break;
             case KeyEvent.VK_A:// A
-                left = true;
+                player.setLeft(true);
                 break;
             case KeyEvent.VK_S:// S
-                down = true;
+                player.setDown(true);
                 break;
-        }
-        if (up && right) {
-        }
-        if (up && left) {
         }
     }
 
@@ -43,16 +42,16 @@ public class KeyboardInput implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W: // W
-                up = false;
+                player.setUp(false);
                 break;
             case KeyEvent.VK_D:// D
-                right = false;
+                player.setRight(false);
                 break;
             case KeyEvent.VK_A:// A
-                left = false;
+                player.setLeft(false);
                 break;
             case KeyEvent.VK_S:// S
-                down = false;
+                player.setDown(false);
                 break;
         }
     }
