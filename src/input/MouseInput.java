@@ -34,7 +34,7 @@ public class MouseInput implements MouseListener, MouseMotionListener {
                 player.attack(e.getX());
                 break;
             case 3:
-                player.useMagic();
+                player.useMagic(e.getX());
                 break;
         }
     }

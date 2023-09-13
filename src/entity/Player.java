@@ -38,13 +38,23 @@ public class Player extends Entity {
         channel(duration);
     }
 
+    private void calculateFacing(int clickPos) {
+        if (clickPos < SCREEN_WIDTH / 2) {
+            facingLeft = true;
+        } else {
+            facingLeft = false;
+        }
+    }
+
     public void attack(int clickPos) {
+        calculateFacing(clickPos);
         newAction(ATTACK);
         aniIndex = 3;
         channel(0.3);
     }
 
-    public void useMagic() {
+    public void useMagic(int clickPos) {
+        calculateFacing(clickPos);
         newAction(GESTURE);
         aniIndex = 3;
         channel(0.5);
@@ -70,8 +80,13 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE, null);
-        // flipอยู่
+        if (facingLeft) {
+            g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE,
+                    null);
+        } else {
+            g.drawImage(animation[palyerAction][aniIndex], (int) x, (int) y, CHAR_SIZE, CHAR_SIZE,
+                    null);
+        }
     }
 
     private void loadAnimation() {
@@ -104,8 +119,10 @@ public class Player extends Entity {
                 setPalyerAction(WALKING);
                 if (left && !right) {
                     x -= speed;
+                    facingLeft = true;
                 } else if (right && !left) {
                     x += speed;
+                    facingLeft = false;
                 }
 
                 if (up && !down) {

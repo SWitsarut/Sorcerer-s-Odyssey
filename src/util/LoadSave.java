@@ -2,12 +2,14 @@ package util;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -92,24 +94,30 @@ public class LoadSave {
         }
         return mapData;
     }
-public static void printFileList(String path) {
+
+    public static String[] GetFileList(String path) {
         // Specify the folder path (relative to the "src" directory)
         String folderPath = path; // Change this if the folder is in a different location
 
         // Create a Path object for the folder
-        Path folder = Paths.get("src", folderPath);
+        Path folder = Paths.get("src/img/map", folderPath);
 
         try {
+
             // Create a DirectoryStream to list files in the folder
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folder)) {
+            try (java.nio.file.DirectoryStream<Path> stream = Files.newDirectoryStream(folder)) {
+                List<String> fileList = new ArrayList<>();
                 for (Path file : stream) {
-                    // Print the file names
-                    System.out.println(file.getFileName());
+                    fileList.add(file.getFileName().toString());
+
                 }
+
+                return fileList.toArray(new String[0]);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
-        
+
 }
