@@ -14,7 +14,8 @@ public class GameWindow {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gp);
         jframe.setResizable(false);
-        jframe.setLocationRelativeTo(null);
+        // jframe.setLocationRelativeTo(null);
+        jframe.setLocation(0, 0);
         jframe.pack();
         jframe.setTitle("Travellering sorcerer");
         // keep last

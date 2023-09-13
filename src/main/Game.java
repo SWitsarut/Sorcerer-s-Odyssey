@@ -26,12 +26,11 @@ public class Game implements Runnable {
 
     private void initClass() {
         player = new Player(0, 0);
-        levelManager = new LevelManager(this);
+        levelManager = new LevelManager(this, player);
     }
 
     public void render(Graphics g) {
         levelManager.draw(g);
-        player.render(g);
     }
 
     public void update() {

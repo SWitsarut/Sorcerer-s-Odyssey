@@ -14,6 +14,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Levels.Level;
+import util.Constants.LayerOrder;
+import util.Constants.LayerOrder.*;
 
 public class LoadSave {
 
@@ -97,7 +99,7 @@ public class LoadSave {
         return mapData;
     }
 
-    public static String[] GetFileList(String path) {
+    public static String[] getFileList(String path) {
         // Specify the folder path (relative to the "src" directory)
         String folderPath = path; // Change this if the folder is in a different location
 
@@ -123,15 +125,14 @@ public class LoadSave {
     }
 
     public static Level[] getLevelLeyerData(String mapName) {
-        String[] fileArr = GetFileList(mapName);
+        String[] fileArr = getFileList(mapName);
         for (String string : fileArr) {
             System.out.println(string);
         }
         Level[] lvlLayer = new Level[fileArr.length];
-        int i = 0;
-        for (String fileName : fileArr) {
-            lvlLayer[i] = new Level(getLevelData(mapName + "/" + fileName));
-            i++;
+        String[] layer_order_string = { "ground", "wall", "front", "collision" };
+        for (int i = 0; i < 4; i++) {
+            lvlLayer[i] = new Level(getLevelData(mapName + "/" + mapName + "_" + layer_order_string[i] + ".csv"));
         }
         return lvlLayer;
     }
