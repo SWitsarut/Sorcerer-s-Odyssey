@@ -17,7 +17,7 @@ public class LevelManager {
         this.game = game;
         importTile();
         levelOne = new Level(LoadSave.getLevelData("desert.csv"));
-
+    
     }
 
     public void importTile() {

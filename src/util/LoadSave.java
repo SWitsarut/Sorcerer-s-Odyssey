@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import Levels.Level;
+
 public class LoadSave {
 
     public static String PLAYER_ATLAS = "rogue.png";
@@ -118,6 +120,17 @@ public class LoadSave {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Level[] getLevelLeyerData(String mapName) {
+        String[] fileArr = GetFileList(mapName);
+        Level[] lvlLayer = new Level[fileArr.length];
+        int i = 0;
+        for (String fileName : fileArr) {
+            lvlLayer[i] = new Level(getLevelData(fileName));
+            i++;
+        }
+        return lvlLayer;
     }
 
 }
