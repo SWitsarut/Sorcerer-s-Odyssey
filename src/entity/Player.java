@@ -12,6 +12,8 @@ public class Player extends Entity {
     private BufferedImage[][] animation;
     private int aniTick = 0, aniIndex, aniFramePersecond = 15;
 
+    private boolean facingLeft = false;
+
     private int palyerAction = IDLE;
     private double speed = 1.25;
 
@@ -36,7 +38,7 @@ public class Player extends Entity {
         channel(duration);
     }
 
-    public void attack() {
+    public void attack(int clickPos) {
         newAction(ATTACK);
         aniIndex = 3;
         channel(0.3);
@@ -69,7 +71,7 @@ public class Player extends Entity {
 
     public void render(Graphics g) {
         g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE, null);
-        // flipอยู่    
+        // flipอยู่
     }
 
     private void loadAnimation() {
