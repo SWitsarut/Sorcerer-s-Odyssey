@@ -92,4 +92,24 @@ public class LoadSave {
         }
         return mapData;
     }
+public static void printFileList(String path) {
+        // Specify the folder path (relative to the "src" directory)
+        String folderPath = path; // Change this if the folder is in a different location
+
+        // Create a Path object for the folder
+        Path folder = Paths.get("src", folderPath);
+
+        try {
+            // Create a DirectoryStream to list files in the folder
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folder)) {
+                for (Path file : stream) {
+                    // Print the file names
+                    System.out.println(file.getFileName());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        
 }
