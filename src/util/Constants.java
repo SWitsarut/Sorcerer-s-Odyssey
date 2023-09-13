@@ -5,7 +5,7 @@ public class Constants {
         public static final int FPS_SET = 120;
         public static final int UPS_SET = 200;
         public static final int aniFramePersecond = 12;
-        public static final int TILE_DEFAULT_SIZE = 16;
+        public static final int TILE_DEFAULT_SIZE = 32;
         public static final float SCALE = 2.5f;
 
         public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
@@ -38,4 +38,10 @@ public class Constants {
         public static final int UP_LEFT = 7;
     }
 
+    public static class LayerOrder {
+        public static final int GROUND = 0;
+        public static final int WALL = 1;
+        public static final int FRONT = 2;
+        public static final int COLLISION = 3;
+    }
 }

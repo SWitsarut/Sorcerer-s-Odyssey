@@ -124,10 +124,13 @@ public class LoadSave {
 
     public static Level[] getLevelLeyerData(String mapName) {
         String[] fileArr = GetFileList(mapName);
+        for (String string : fileArr) {
+            System.out.println(string);
+        }
         Level[] lvlLayer = new Level[fileArr.length];
         int i = 0;
         for (String fileName : fileArr) {
-            lvlLayer[i] = new Level(getLevelData(fileName));
+            lvlLayer[i] = new Level(getLevelData(mapName + "/" + fileName));
             i++;
         }
         return lvlLayer;

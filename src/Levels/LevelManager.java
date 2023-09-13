@@ -11,17 +11,18 @@ import static util.Constants.Config.*;
 public class LevelManager {
     private Game game;
     private BufferedImage[] levelSprite;
-    private Level levelOne;
+    private Level levelLayers[];
 
     public LevelManager(Game game) {
         this.game = game;
         importTile();
-        levelOne = new Level(LoadSave.getLevelData("desert.csv"));
-    
+        // private Level levelLayers[] = LoadSave.getLevelLeyerData("forest");
+        levelLayers = LoadSave.getLevelLeyerData("forest");
+
     }
 
     public void importTile() {
-        BufferedImage img = GetLevelAtlas("desert.png");
+        BufferedImage img = GetLevelAtlas("terrain_atlas.png");
 
         int highCount = (img.getHeight() / TILE_DEFAULT_SIZE);
         int widthCount = (img.getWidth() / TILE_DEFAULT_SIZE);
@@ -41,9 +42,11 @@ public class LevelManager {
     public void draw(Graphics g) {
         for (int j = 0; j < TILES_IN_HEIGHT; j++) {
             for (int i = 0; i < TILES_IN_WIDTH; i++) {
-                int index = levelOne.getSpriteIndex(i, j);
-                g.drawImage(levelSprite[index], (int) (i * TILE_SIZE), (int) (j * TILE_SIZE), TILE_SIZE, TILE_SIZE,
-                        null);
+                int index = levelLayers[3].getSpriteIndex(i, j);
+                if (index >= 0) {
+                    g.drawImage(levelSprite[index], (int) (i * TILE_SIZE), (int) (j * TILE_SIZE), TILE_SIZE, TILE_SIZE,
+                            null);
+                }
             }
         }
     }
