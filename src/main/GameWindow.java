@@ -16,7 +16,7 @@ public class GameWindow {
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
         jframe.pack();
-
+        jframe.setTitle("Travellering sorcerer");
         // keep last
         jframe.setVisible(true);
         jframe.addWindowFocusListener(new WindowFocusListener() {

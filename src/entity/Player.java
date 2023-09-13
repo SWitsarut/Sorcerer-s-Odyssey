@@ -9,7 +9,6 @@ import static util.Constants.PlayerConstants.*;
 import static util.Constants.Config.*;
 
 public class Player extends Entity {
-    private int charectorSize = 32;
     private BufferedImage[][] animation;
     private int aniTick = 0, aniIndex, aniFramePersecond = 15;
 
@@ -69,7 +68,8 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g) {
-        g.drawImage(animation[palyerAction][aniIndex], (int) x, (int) y, 64, 64, null);
+        g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE, null);
+        // flipอยู่    
     }
 
     private void loadAnimation() {
@@ -78,8 +78,8 @@ public class Player extends Entity {
         animation = new BufferedImage[5][10];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
-                animation[i][j] = img.getSubimage(charectorSize * j, charectorSize * i, charectorSize,
-                        charectorSize);
+                animation[i][j] = img.getSubimage(CHAR_DEFAULT_SIZE * j, CHAR_DEFAULT_SIZE * i, CHAR_DEFAULT_SIZE,
+                        CHAR_DEFAULT_SIZE);
             }
         }
 

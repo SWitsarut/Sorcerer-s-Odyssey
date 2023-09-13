@@ -3,6 +3,7 @@ package Levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
+import util.LoadSave;
 
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
@@ -10,17 +11,12 @@ import static util.Constants.Config.*;
 public class LevelManager {
     private Game game;
     private BufferedImage[] levelSprite;
+    private Level levelOne;
 
     public LevelManager(Game game) {
         this.game = game;
         importTile();
-        int arr[][] = getLevelData("desert.csv");
-        for (int[] is : arr) {
-            for (int is2 : is) {
-                System.out.print(is2 + " ");
-            }
-            System.out.println();
-        }
+        levelOne = new Level(LoadSave.getLevelData("desert.csv"));
 
     }
 
@@ -43,6 +39,12 @@ public class LevelManager {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(levelSprite[92], 0, 0, (int) (TILE_SIZE * SCALE), (int) (TILE_SIZE * SCALE), null);
+        for (int j = 0; j < TILES_IN_HEIGHT; j++) {
+            for (int i = 0; i < TILES_IN_WIDTH; i++) {
+                int index = levelOne.getSpriteIndex(i, j);
+                g.drawImage(levelSprite[index], (int) (i * TILE_SIZE), (int) (j * TILE_SIZE), TILE_SIZE, TILE_SIZE,
+                        null);
+            }
+        }
     }
 }
