@@ -26,11 +26,14 @@ public class Game implements Runnable {
 
     private void initClass() {
         player = new Player(0, 0);
-        levelManager = new LevelManager(this, player);
+        levelManager = new LevelManager(this);
+        player.loadCollision(levelManager.getCollision());
     }
 
     public void render(Graphics g) {
-        levelManager.draw(g);
+        levelManager.drawBehind(g);
+        player.render(g);
+        levelManager.drawFront(g);
     }
 
     public void update() {
@@ -45,9 +48,6 @@ public class Game implements Runnable {
     @Override
     public void run() {
 
-        double timePerFrame = 1000000000.0 / FPS_SET;
-        double timePerUpdate = 1000000000.0 / UPS_SET;
-
         long previousTime = System.nanoTime();
 
         int frame = 0;
@@ -61,8 +61,9 @@ public class Game implements Runnable {
 
             long currentTime = System.nanoTime();
 
-            deltaU += (currentTime - previousTime) / timePerUpdate;
-            deltaF += (currentTime - previousTime) / timePerFrame;
+            deltaU += (currentTime - previousTime) / TIME_PER_UPDATE;
+
+            deltaF += (currentTime - previousTime) / TIME_PER_FRAME;
             previousTime = currentTime;
             if (deltaU >= 1) {
                 // update
@@ -76,8 +77,9 @@ public class Game implements Runnable {
             }
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
-                lastCheck = System.currentTimeMillis();
+                System.out.println(TIME_PER_UPDATE / 1e9);
                 System.out.println("fps : " + frame + " | ups : " + update);
+                lastCheck = System.currentTimeMillis();
                 frame = 0;
                 update = 0;
             }

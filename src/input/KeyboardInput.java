@@ -6,8 +6,6 @@ import java.awt.event.KeyListener;
 import entity.Player;
 import main.GamePanel;
 
-import static util.Constants.PlayerConstants.*;
-import static util.Constants.Direction.*;
 
 public class KeyboardInput implements KeyListener {
     Player player;

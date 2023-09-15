@@ -14,8 +14,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Levels.Level;
-import util.Constants.LayerOrder;
-import util.Constants.LayerOrder.*;
 
 public class LoadSave {
 

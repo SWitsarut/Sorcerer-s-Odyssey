@@ -29,19 +29,16 @@ public class MouseInput implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         // click
-        switch (e.getButton()) {
-            case 1:
-                player.attack(e.getX());
-                break;
-            case 3:
-                player.useMagic(e.getX());
-                break;
+        if (e.getButton() == e.BUTTON1) {
+            player.attack(e.getX());
+        } else {
+            player.useMagic(e.getX());
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
+
     }
 
     @Override
