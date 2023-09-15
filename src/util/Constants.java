@@ -12,14 +12,15 @@ public class Constants {
 
         public static final int ANIMATION_FRAME_PERSECOND = FPS_SET / 10;
 
+        public static final double SCALE = 2;
         public static final int TILE_DEFAULT_SIZE = 32;
-        public static final int TILE_SIZE = 64;
+        public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
         public static final int SCREEN_WIDTH = 1200;
         public static final int SCREEN_HEIGHT = 800;
         public static final int TILES_IN_WIDTH = (int) (SCREEN_WIDTH / TILE_SIZE);
         public static final int TILES_IN_HEIGHT = (int) (SCREEN_HEIGHT / TILE_SIZE);
         public static final int CHAR_DEFAULT_SIZE = 32;
-        public static final int CHAR_SIZE = 64;
+        public static final int CHAR_SIZE = (int) (CHAR_DEFAULT_SIZE * SCALE);
 
     }
 

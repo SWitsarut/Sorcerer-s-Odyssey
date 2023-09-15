@@ -23,12 +23,12 @@ public class LevelManager {
         this.game = game;
         importTile();
         // private Level levelLayers[] = LoadSave.getLevelLeyerData("forest");
-        levelLayers = LoadSave.getLevelLeyerData("forest");
+        levelLayers = LoadSave.getLevelLeyerData("lava");
 
     }
 
     public void importTile() {
-        BufferedImage img = GetLevelAtlas("terrain_atlas.png");
+        BufferedImage img = GetLevelAtlas("base_out_atlas.png");
 
         int highCount = (img.getHeight() / TILE_DEFAULT_SIZE);
         int widthCount = (img.getWidth() / TILE_DEFAULT_SIZE);

@@ -17,7 +17,7 @@ public class GameWindow {
         // jframe.setLocationRelativeTo(null);
         jframe.setLocation(0, 0);
         jframe.pack();
-        jframe.setTitle("Travellering sorcerer");
+        jframe.setTitle("Sorcerer's Odysey");
         // keep last
         jframe.setVisible(true);
         jframe.addWindowFocusListener(new WindowFocusListener() {

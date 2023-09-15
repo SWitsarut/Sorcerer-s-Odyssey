@@ -13,6 +13,9 @@ import static util.Helper.*;
 public class Player extends Entity {
     private BufferedImage[][] animation;
     private Level collisionMap;
+    private float xDrawOffset = 20;
+    private float yDrawOffset = 10;
+
     private int aniTick = 0, aniIndex, aniFramePersecond = ANIMATION_FRAME_PERSECOND;
 
     private boolean facingLeft = false;
@@ -49,6 +52,7 @@ public class Player extends Entity {
     public Player(float x, float y) {
         super(x, y);
         loadAnimation();
+        initHitbox((int) x, (int) y);
     }
 
     private void updateAnimationTick() {
@@ -60,13 +64,13 @@ public class Player extends Entity {
     }
 
     public void update() {
-        updateHitbox();
+        // updateHitbox();
         move();
         updateAnimationTick();
     }
 
     public void render(Graphics g) {
-        drawHitbox(g);
+        // drawHitbox(g);
         if (facingLeft) {
             g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE,
                     null);
