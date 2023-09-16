@@ -2,42 +2,67 @@ package main;
 
 import java.awt.Graphics;
 
-import Levels.LevelManager;
-import entity.Player;
+import gamestates.Gamestate;
+import gamestates.Menu;
+import gamestates.Playing;
+
 import static util.Constants.Config.*;
+import static gamestates.Gamestate.*;
 
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private LevelManager levelManager;
 
-    private Player player;
+    private Playing playing;
+    private Menu menu;
 
     public Game() {
-        initClass();
+        initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
-
         startGameLoop();
     }
 
-    private void initClass() {
-        player = new Player(0, 0);
-        levelManager = new LevelManager(this);
-        player.loadCollision(levelManager.getCollision());
+    public void initClasses() {
+        menu = new Menu(this);
+        playing = new Playing(this);
     }
 
     public void render(Graphics g) {
-        levelManager.drawBehind(g);
-        player.render(g);
-        levelManager.drawFront(g);
+
+        switch (state) {
+            case MENU:
+                menu.draw(g);
+                break;
+            case PLAYING:
+                playing.draw(g);
+                break;
+            case DIALOGUE:
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void update() {
-        player.update();
+
+        switch (state) {
+            case MENU:
+                menu.update();
+                break;
+            case PLAYING:
+                playing.update();
+                break;
+            case DIALOGUE:
+
+                break;
+            default:
+                break;
+        }
     }
 
     private void startGameLoop() {
@@ -85,11 +110,17 @@ public class Game implements Runnable {
         }
     }
 
-    public Player getPlayer() {
-        return player;
+    public void windowFocusLost() {
+        if (Gamestate.state == Gamestate.PLAYING) {
+            playing.getPlayer().resetDirection();
+        }
     }
 
-    public void windowFocusLost() {
-        player.resetDirection();
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Playing getPlaying() {
+        return playing;
     }
 }

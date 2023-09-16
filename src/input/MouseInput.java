@@ -5,15 +5,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import entity.Player;
+import gamestates.Gamestate;
 import main.GamePanel;
 
 public class MouseInput implements MouseListener, MouseMotionListener {
-
-    GamePanel gp;
-    Player player;
+    private GamePanel gp;
 
     public MouseInput(GamePanel gp) {
-        player = gp.getGame().getPlayer();
+        this.gp = gp;
     }
 
     @Override
@@ -28,11 +27,15 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // click
-        if (e.getButton() == e.BUTTON1) {
-            player.attack(e.getX());
-        } else {
-            player.useMagic(e.getX());
+        switch (Gamestate.state) {
+            case MENU:
+                gp.getGame().getMenu().mouseClicked(e);
+                break;
+            case PLAYING:
+                gp.getGame().getPlaying().mouseClicked(e);
+                break;
+            default:
+                break;
         }
     }
 

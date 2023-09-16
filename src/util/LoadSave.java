@@ -22,7 +22,7 @@ public class LoadSave {
 
     public static BufferedImage GetSpriteAtlas(String file) {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getResourceAsStream("/img/entity/" + file);
+        InputStream is = LoadSave.class.getResourceAsStream("/res/entity/" + file);
 
         try {
             img = ImageIO.read(is);
@@ -41,7 +41,7 @@ public class LoadSave {
 
     public static BufferedImage GetLevelAtlas(String file) {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getResourceAsStream("/img/tile set/" + file);
+        InputStream is = LoadSave.class.getResourceAsStream("/res/tile set/" + file);
 
         try {
             img = ImageIO.read(is);
@@ -63,7 +63,7 @@ public class LoadSave {
 
         try {
             ArrayList<ArrayList<Integer>> tempArr = new ArrayList<>();
-            InputStream is = LoadSave.class.getResourceAsStream("/img/map/" + file);
+            InputStream is = LoadSave.class.getResourceAsStream("/res/map/" + file);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line = "";
 
@@ -102,7 +102,7 @@ public class LoadSave {
         String folderPath = path; // Change this if the folder is in a different location
 
         // Create a Path object for the folder
-        Path folder = Paths.get("src/img/map", folderPath);
+        Path folder = Paths.get("src/res/map", folderPath);
 
         try {
 
@@ -132,6 +132,7 @@ public class LoadSave {
         for (int i = 0; i < 4; i++) {
             lvlLayer[i] = new Level(getLevelData(mapName + "/" + mapName + "_" + layer_order_string[i] + ".csv"));
         }
+        System.out.println(" getLevelLeyerData work ");
         return lvlLayer;
     }
 

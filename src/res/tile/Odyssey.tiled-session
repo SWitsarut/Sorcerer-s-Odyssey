@@ -1,0 +1,45 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Mercenary camp.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Programming/game/tiled/tile set/universal_tile_set.tsx": {
+            "scaleInDock": 4,
+            "scaleInEditor": 0.75
+        },
+        "Mercenary camp.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": -169,
+                "y": 273
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Programming/game/src/res/tile/Mercenary camp",
+    "last.imagePath": "C:/Programming/game/src/res/tile set",
+    "map.height": 40,
+    "map.lastUsedExportFilter": "ไฟล์ CSV (*.csv)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 70,
+    "openFiles": [
+        "Mercenary camp.tmx",
+        "C:/Programming/game/tiled/tile set/universal_tile_set.tsx"
+    ],
+    "project": "Odyssey.tiled-project",
+    "recentFiles": [
+        "C:/Programming/game/tiled/tile set/universal_tile_set.tsx",
+        "Mercenary camp.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

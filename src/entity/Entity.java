@@ -2,29 +2,31 @@ package entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import static util.Constants.Config.*;
 
 public abstract class Entity {
 
-    protected float x, y;
+    protected float x, y, width, height;
 
     protected Rectangle2D.Float hitbox;
 
-    public Entity(float x, float y) {
+    public Entity(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
+
     }
 
     protected void drawHitbox(Graphics g) {
-        g.setColor(Color.RED);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, CHAR_SIZE, CHAR_SIZE);
+        g.setColor(Color.MAGENTA);
+        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
     }
 
-    public  void initHitbox(int x, int y) {
-        hitbox = new Rectangle2D.Float(x, y, CHAR_SIZE, CHAR_SIZE);
+    public void initHitbox(float x, float y, float width, float height) {
+        hitbox = new Rectangle2D.Float(x, y, width, height);
     }
 
     // protected void updateHitbox() {

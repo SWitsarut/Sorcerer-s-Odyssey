@@ -13,8 +13,8 @@ public class Constants {
         public static final int ANIMATION_FRAME_PERSECOND = FPS_SET / 10;
 
         public static final double SCALE = 2;
-        public static final int TILE_DEFAULT_SIZE = 32;
-        public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
+        public static final int TILE_DEFAULT_SIZE = 16;
+        public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE * 1.5);
         public static final int SCREEN_WIDTH = 1200;
         public static final int SCREEN_HEIGHT = 800;
         public static final int TILES_IN_WIDTH = (int) (SCREEN_WIDTH / TILE_SIZE);

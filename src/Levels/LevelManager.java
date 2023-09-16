@@ -23,12 +23,12 @@ public class LevelManager {
         this.game = game;
         importTile();
         // private Level levelLayers[] = LoadSave.getLevelLeyerData("forest");
-        levelLayers = LoadSave.getLevelLeyerData("lava");
+        levelLayers = LoadSave.getLevelLeyerData("camp");
 
     }
 
     public void importTile() {
-        BufferedImage img = GetLevelAtlas("base_out_atlas.png");
+        BufferedImage img = GetLevelAtlas("universal_tile_set.png");
 
         int highCount = (img.getHeight() / TILE_DEFAULT_SIZE);
         int widthCount = (img.getWidth() / TILE_DEFAULT_SIZE);
@@ -63,6 +63,10 @@ public class LevelManager {
                             TILE_SIZE,
                             TILE_SIZE,
                             null);
+                    // g.drawImage(levelSprite, 0, 0,
+                    // TILE_SIZE,
+                    // TILE_SIZE,
+                    // null);
                 }
             }
         }

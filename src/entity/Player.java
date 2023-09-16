@@ -13,8 +13,8 @@ import static util.Helper.*;
 public class Player extends Entity {
     private BufferedImage[][] animation;
     private Level collisionMap;
-    private float xDrawOffset = 20;
-    private float yDrawOffset = 10;
+    private float xDrawOffset = (float) (10 * SCALE);
+    private float yDrawOffset = (float) (16 * SCALE);
 
     private int aniTick = 0, aniIndex, aniFramePersecond = ANIMATION_FRAME_PERSECOND;
 
@@ -29,30 +29,18 @@ public class Player extends Entity {
         up = down = right = left = false;
     }
 
-    private void calculateFacing(int clickPos) {
-        if (clickPos < SCREEN_WIDTH / 2) {
-            facingLeft = true;
-        } else {
-            facingLeft = false;
-        }
-    }
-
-    public void attack(int clickPos) {
-        calculateFacing(clickPos);
-        newAction(ATTACK);
-        aniIndex = 4;
-    }
-
-    public void useMagic(int clickPos) {
-        calculateFacing(clickPos);
-        newAction(GESTURE);
-        aniIndex = 3;
-    }
+    // private void calculateFacing(int clickPos) {
+    // if (clickPos < SCREEN_WIDTH / 2) {
+    // facingLeft = true;
+    // } else {
+    // facingLeft = false;
+    // }
+    // }
 
     public Player(float x, float y) {
-        super(x, y);
+        super(x, y, CHAR_SIZE, CHAR_SIZE);
         loadAnimation();
-        initHitbox((int) x, (int) y);
+        initHitbox(x, y, (float) (10 * SCALE), (float) (16 * SCALE));
     }
 
     private void updateAnimationTick() {
@@ -72,17 +60,23 @@ public class Player extends Entity {
     public void render(Graphics g) {
         // drawHitbox(g);
         if (facingLeft) {
-            g.drawImage(animation[palyerAction][aniIndex], (int) x + CHAR_SIZE, (int) y, CHAR_SIZE * -1, CHAR_SIZE,
+            g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) + CHAR_SIZE),
+                    (int) (hitbox.y - yDrawOffset),
+                    CHAR_SIZE * -1,
+                    CHAR_SIZE,
                     null);
         } else {
-            g.drawImage(animation[palyerAction][aniIndex], (int) x, (int) y, CHAR_SIZE, CHAR_SIZE,
+            g.drawImage(animation[palyerAction][aniIndex], (int) (hitbox.x - xDrawOffset),
+                    (int) (hitbox.y - yDrawOffset),
+                    CHAR_SIZE,
+                    CHAR_SIZE,
                     null);
         }
+        // drawHitbox(g);
     }
 
     private void loadAnimation() {
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
-
         animation = new BufferedImage[5][10];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
@@ -115,9 +109,14 @@ public class Player extends Entity {
             } else if (down && !up) {
                 ySpeed += speed;
             }
-            if (CanMoveHere(x + xSpeed, y + ySpeed, collisionMap.getData())) {
-                this.x += xSpeed;
-                this.y += ySpeed;
+            // if (CanMoveHere(x + xSpeed, y + ySpeed, collisionMap.getData())) {
+            // this.x += xSpeed;
+            // this.y += ySpeed;
+            // }
+            if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height,
+                    collisionMap.getData())) {
+                hitbox.x += xSpeed;
+                hitbox.y += ySpeed;
             }
         } else {
             setPalyerAction(IDLE);

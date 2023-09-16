@@ -2,12 +2,12 @@ package util;
 
 public class Helper {
 
-    public static boolean CanMoveHere(float x, float y, int[][] levelData) {
-        System.out.println(x + " " + y);
+    public static boolean CanMoveHere(float x, float y, float width, float height, int[][] levelData) {
+        // System.out.println(x + " " + y);
         if (!unWalkable(x, y, levelData))
-            if (!unWalkable(x + Constants.Config.CHAR_SIZE, y + Constants.Config.CHAR_SIZE, levelData))
-                if (!unWalkable(x + Constants.Config.CHAR_SIZE, y, levelData))
-                    if (!unWalkable(x, y + Constants.Config.CHAR_SIZE, levelData))
+            if (!unWalkable(x + width, y + height, levelData))
+                if (!unWalkable(x + width, y, levelData))
+                    if (!unWalkable(x, y + height, levelData))
                         return true;
         return false;
     }
@@ -20,8 +20,8 @@ public class Helper {
             return true;
         }
 
-        float xIndex = x / Constants.Config.CHAR_SIZE;
-        float yIndex = y / Constants.Config.CHAR_SIZE;
+        float xIndex = x / Constants.Config.TILE_SIZE;
+        float yIndex = y / Constants.Config.TILE_SIZE;
 
         int value = levelData[(int) yIndex][(int) xIndex];
         if (value == 0) {
