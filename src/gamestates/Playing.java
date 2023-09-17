@@ -132,6 +132,7 @@ public class Playing extends State implements Statemethods {
                 player.setDown(true);
                 break;
             case KeyEvent.VK_ESCAPE:
+                player.resetDirection();
                 Gamestate.state = Gamestate.MENU;
         }
     }

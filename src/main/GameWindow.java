@@ -24,6 +24,7 @@ public class GameWindow {
         jframe.setIconImage(icon.getImage());
         // keep last
         jframe.setVisible(true);
+
         jframe.addWindowFocusListener(new WindowFocusListener() {
 
             @Override
