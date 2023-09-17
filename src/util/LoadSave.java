@@ -1,7 +1,10 @@
 package util;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -134,6 +137,17 @@ public class LoadSave {
         }
         System.out.println(" getLevelLeyerData work ");
         return lvlLayer;
+    }
+
+    public static Font GetFont(int size) {
+        Font font = new Font("Arial", Font.TRUETYPE_FONT, size);
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/asset/Oleaguid.ttf"));
+            font = font.deriveFont(Font.PLAIN, size);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        return font;
     }
 
 }

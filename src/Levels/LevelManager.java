@@ -44,14 +44,14 @@ public class LevelManager {
         }
     }
 
-    public void drawBehind(Graphics g) {
+    public void drawBehind(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int layer = 0; layer < 2; layer++) {
-            drawMap(g, layer);
+            drawMap(g, layer, xLvlOffset, yLvlOffset);
         }
     }
 
-    public void drawFront(Graphics g) {
-        drawMap(g, FRONT);
+    public void drawFront(Graphics g, int xLvlOffset, int yLvlOffset) {
+        drawMap(g, FRONT, xLvlOffset, yLvlOffset);
     }
 
     private void drawMap(Graphics g, int layer) {
@@ -70,18 +70,25 @@ public class LevelManager {
                 }
             }
         }
-        // for (int j = 0; (j < TILES_IN_HEIGHT) && (TILES_IN_HEIGHT <
-        // levelLayers[layer].getYlength()); j++) {
-        // for (int i = 0; i < TILES_IN_WIDTH && (TILES_IN_HEIGHT <
-        // levelLayers[layer].getYlength()); i++) {
-        // int index = levelLayers[layer].getSpriteIndex(i, j);
-        // if (index >= 0) {
-        // g.drawImage(levelSprite[index], (int) (i * TILE_SIZE), (int) (j * TILE_SIZE),
-        // TILE_SIZE,
-        // TILE_SIZE,
-        // null);
-        // }
-        // }
-        // }
+    }
+
+    private void drawMap(Graphics g, int layer, int xLvlOffset, int yLvlOffset) {
+        for (int j = 0; j < levelLayers[layer].getYlength() - 1; j++) {
+            for (int i = 0; i < levelLayers[layer].getXlength() - 1; i++) {
+                int index = levelLayers[layer].getSpriteIndex(i, j);
+                if (index >= 0) {
+                    g.drawImage(levelSprite[index],
+                            (int) (i * TILE_SIZE) - xLvlOffset,
+                            (int) (j * TILE_SIZE) - yLvlOffset,
+                            TILE_SIZE,
+                            TILE_SIZE,
+                            null);
+                }
+            }
+        }
+    }
+
+    public Level[] getCurrentLevels() {
+        return levelLayers;
     }
 }

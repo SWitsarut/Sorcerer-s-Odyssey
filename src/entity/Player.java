@@ -21,7 +21,7 @@ public class Player extends Entity {
     private boolean facingLeft = false;
 
     private int palyerAction = IDLE;
-    private double speed = 2;
+    private double speed = 5;
 
     private boolean up, down, right, left;
 
@@ -53,21 +53,22 @@ public class Player extends Entity {
 
     public void update() {
         // updateHitbox();
+
         move();
         updateAnimationTick();
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
         // drawHitbox(g);
         if (facingLeft) {
-            g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) + CHAR_SIZE),
-                    (int) (hitbox.y - yDrawOffset),
+            g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE),
+                    (int) (hitbox.y - yDrawOffset) - yLvlOffset,
                     CHAR_SIZE * -1,
                     CHAR_SIZE,
                     null);
         } else {
-            g.drawImage(animation[palyerAction][aniIndex], (int) (hitbox.x - xDrawOffset),
-                    (int) (hitbox.y - yDrawOffset),
+            g.drawImage(animation[palyerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset,
+                    (int) (hitbox.y - yDrawOffset) - yLvlOffset,
                     CHAR_SIZE,
                     CHAR_SIZE,
                     null);

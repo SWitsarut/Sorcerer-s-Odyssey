@@ -1,5 +1,7 @@
 package util;
 
+import util.Constants.Config;
+
 public class Helper {
 
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] levelData) {
@@ -13,10 +15,12 @@ public class Helper {
     }
 
     private static boolean unWalkable(float x, float y, int[][] levelData) {
-        if (x < 0 || x >= Constants.Config.SCREEN_WIDTH) {
+        int levelHeight = (levelData.length - 1) * Config.TILE_SIZE;
+        int levelWidth = (levelData[0].length - 1) * Config.TILE_SIZE;
+        if (x < 0 || x >= levelWidth) {
             return true;
         }
-        if (y < 0 || y >= Constants.Config.SCREEN_HEIGHT) {
+        if (y < 0 || y >= levelHeight) {
             return true;
         }
 

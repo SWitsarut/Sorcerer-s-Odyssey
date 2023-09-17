@@ -17,6 +17,8 @@ public class Constants {
         public static final int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE * 1.5);
         public static final int SCREEN_WIDTH = 1200;
         public static final int SCREEN_HEIGHT = 800;
+        public static final double SCREEN_MOVER_AFTER_PerCent = 0.5;
+
         public static final int TILES_IN_WIDTH = (int) (SCREEN_WIDTH / TILE_SIZE);
         public static final int TILES_IN_HEIGHT = (int) (SCREEN_HEIGHT / TILE_SIZE);
         public static final int CHAR_DEFAULT_SIZE = 32;
