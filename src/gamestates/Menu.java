@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import helperClass.Coordinate;
 import main.Game;
+import main.Sound;
 import util.LoadSave;
 import util.Constants.Config;
 import util.Ui;
@@ -20,18 +21,24 @@ public class Menu extends State implements Statemethods {
     int selectedChoice = 0;
     ArrayList<String> text = new ArrayList<>();
     int maxChoice;
+    Sound titleMusic;
+    boolean musicPlaying = true;
 
-    private void initTextArr() {
+    private void initClasses() {
         text.add("START");
         text.add("OPTION");
         text.add("CREDIT");
         text.add("EXIT");
         maxChoice = text.size();
+        titleMusic = new Sound("song/title.wav");
+        titleMusic.play();
     }
 
     private void submit() {
         switch (selectedChoice) {
             case 0:
+                titleMusic.stop();
+                titleMusic.close();
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case 3:
@@ -50,7 +57,8 @@ public class Menu extends State implements Statemethods {
     public Menu(Game game) {
         super(game);
         font = LoadSave.GetFont(40);
-        initTextArr();
+        initClasses();
+
         // TODO Auto-generated constructor stub
     }
 
@@ -75,7 +83,7 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Gamestate.state = Gamestate.PLAYING;
+        submit();
     }
 
     @Override
