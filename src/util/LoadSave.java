@@ -135,7 +135,6 @@ public class LoadSave {
         for (int i = 0; i < 4; i++) {
             lvlLayer[i] = new Level(getLevelData(mapName + "/" + mapName + "_" + layer_order_string[i] + ".csv"));
         }
-        System.out.println(" getLevelLeyerData work ");
         return lvlLayer;
     }
 

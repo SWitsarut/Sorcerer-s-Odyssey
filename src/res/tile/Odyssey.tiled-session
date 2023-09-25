@@ -3,39 +3,64 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Mercenary camp.tmx",
+    "activeFile": "debug.tmx",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "ไฟล์ทั้งหมด (*)",
     "fileStates": {
+        "../tile set/universal_tile_set.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
         "C:/Programming/game/tiled/tile set/universal_tile_set.tsx": {
-            "scaleInDock": 4,
+            "scaleInDock": 1,
             "scaleInEditor": 0.75
         },
         "Mercenary camp.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 2,
+            "scale": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": -169,
-                "y": 273
+                "x": 559.5,
+                "y": 319.5
+            }
+        },
+        "cave/cave.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 404,
+                "y": 402
+            }
+        },
+        "debug.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -35,
+                "y": 44.25
             }
         }
     },
-    "last.exportedFilePath": "C:/Programming/game/src/res/tile/Mercenary camp",
+    "last.exportedFilePath": "C:/Programming/game/src/res/map",
     "last.imagePath": "C:/Programming/game/src/res/tile set",
-    "map.height": 40,
+    "map.height": 15,
     "map.lastUsedExportFilter": "ไฟล์ CSV (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 70,
+    "map.width": 15,
     "openFiles": [
-        "Mercenary camp.tmx",
-        "C:/Programming/game/tiled/tile set/universal_tile_set.tsx"
+        "debug.tmx",
+        "../tile set/universal_tile_set.tsx"
     ],
     "project": "Odyssey.tiled-project",
     "recentFiles": [
+        "../tile set/universal_tile_set.tsx",
+        "debug.tmx",
         "C:/Programming/game/tiled/tile set/universal_tile_set.tsx",
-        "Mercenary camp.tmx"
+        "Mercenary camp.tmx",
+        "cave/cave.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

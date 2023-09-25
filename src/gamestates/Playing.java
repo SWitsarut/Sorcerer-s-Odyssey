@@ -3,9 +3,12 @@ package gamestates;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import Levels.LevelManager;
-import entity.Player;
+import entities.Player;
+import interact.InteractableManager;
+import interact.MotherObject;
 import main.Game;
 import util.Constants.Config;
 
@@ -13,6 +16,7 @@ public class Playing extends State implements Statemethods {
 
     private LevelManager levelManager;
     private Player player;
+    private InteractableManager InterManager;
 
     private int xLvlOffset;
     private int yLvlOffset;
@@ -27,7 +31,10 @@ public class Playing extends State implements Statemethods {
     private int maxYTileOffset;
     private int maxLevelOffsetY;
 
-    public Playing(Game game) {
+    // private ArrayList<MotherObject> arrObj = new ArrayList<>();
+
+    public Playing(
+            Game game) {
         super(game);
         initClass();
     }
@@ -35,6 +42,11 @@ public class Playing extends State implements Statemethods {
     private void initClass() {
         player = new Player(0, 0);
         levelManager = new LevelManager(game);
+        InterManager = new InteractableManager(levelManager);
+        handleMapChange();
+    }
+
+    public void handleMapChange() {
         player.loadCollision(levelManager.getCollision());
         lvlTileWide = levelManager.getCurrentLevels()[0].getXlength() - 2;
         lvlTileHeight = levelManager.getCurrentLevels()[0].getYlength() - 2;
@@ -42,6 +54,7 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
         maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
+        InterManager.handleMapUpdate();
     }
 
     public void windowFocusLost() {
@@ -96,8 +109,9 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mouseClicked(MouseEvent e) {
         // click
-        if (e.getButton() == e.BUTTON1) {
-            // player.attack(e.getX());
+        if (e.getButton() == 1) {
+            levelManager.nextMap();
+            handleMapChange();
         } else {
             // player.useMagic(e.getX());
         }

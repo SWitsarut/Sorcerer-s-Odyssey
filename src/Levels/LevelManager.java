@@ -2,18 +2,22 @@ package Levels;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import interact.MotherObject;
 import main.Game;
-import util.LoadSave;
-
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
+import static util.ObjectType.*;
 
 public class LevelManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
+
+    private int curMapIndex = 2;
+    private String[] mapNameArr;
 
     public Level getCollision() {
         return levelLayers[COLLISION];
@@ -22,9 +26,8 @@ public class LevelManager {
     public LevelManager(Game game) {
         this.game = game;
         importTile();
-        // private Level levelLayers[] = LoadSave.getLevelLeyerData("forest");
-        levelLayers = LoadSave.getLevelLeyerData("camp");
-
+        mapNameArr = getFileList("");
+        levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
     }
 
     public void importTile() {
@@ -44,6 +47,11 @@ public class LevelManager {
         }
     }
 
+    public void nextMap() {
+        curMapIndex = (curMapIndex + 1) % mapNameArr.length;
+        levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
+    }
+
     public void drawBehind(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int layer = 0; layer < 2; layer++) {
             drawMap(g, layer, xLvlOffset, yLvlOffset);
@@ -54,27 +62,9 @@ public class LevelManager {
         drawMap(g, FRONT, xLvlOffset, yLvlOffset);
     }
 
-    private void drawMap(Graphics g, int layer) {
-        for (int j = 0; j < levelLayers[layer].getYlength() && j < TILES_IN_HEIGHT + 3; j++) {
-            for (int i = 0; i < levelLayers[layer].getXlength() && j < TILES_IN_WIDTH + 3; i++) {
-                int index = levelLayers[layer].getSpriteIndex(i, j);
-                if (index >= 0) {
-                    g.drawImage(levelSprite[index], (int) (i * TILE_SIZE), (int) (j * TILE_SIZE),
-                            TILE_SIZE,
-                            TILE_SIZE,
-                            null);
-                    // g.drawImage(levelSprite, 0, 0,
-                    // TILE_SIZE,
-                    // TILE_SIZE,
-                    // null);
-                }
-            }
-        }
-    }
-
     private void drawMap(Graphics g, int layer, int xLvlOffset, int yLvlOffset) {
-        for (int j = 0; j < levelLayers[layer].getYlength() - 1; j++) {
-            for (int i = 0; i < levelLayers[layer].getXlength() - 1; i++) {
+        for (int j = 0; j < levelLayers[layer].getYlength(); j++) {
+            for (int i = 0; i < levelLayers[layer].getXlength(); i++) {
                 int index = levelLayers[layer].getSpriteIndex(i, j);
                 if (index >= 0) {
                     g.drawImage(levelSprite[index],

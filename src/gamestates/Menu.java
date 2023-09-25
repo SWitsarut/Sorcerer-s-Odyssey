@@ -3,9 +3,13 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import helperClass.Coordinate;
@@ -31,7 +35,7 @@ public class Menu extends State implements Statemethods {
         text.add("EXIT");
         maxChoice = text.size();
         titleMusic = new Sound("song/title.wav");
-        titleMusic.play();
+
     }
 
     private void submit() {
@@ -64,14 +68,24 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void update() {
+        if (Gamestate.MENU == Gamestate.state) {
+            titleMusic.play();
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-        fm = g.getFontMetrics(font);
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        Point start = new Point(0, 0);
+        Point end = new Point(Config.SCREEN_WIDTH, 0);
+        GradientPaint gradientPaint = new GradientPaint(start, Color.RED, end, Color.BLACK);
+        g2d.setPaint(gradientPaint);
+        g2d.fill(new Rectangle2D.Double(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
+
         g.setFont(font);
+        fm = g.getFontMetrics(font);
         g.setColor(Color.WHITE);
         int fontHeight = fm.getHeight();
         Coordinate[] coordinates = Ui.DrawArrayLineMiddle(g, text);

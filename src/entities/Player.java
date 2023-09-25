@@ -1,9 +1,10 @@
-package entity;
+package entities;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import Levels.Level;
+import helperClass.Coordinate;
 import util.LoadSave;
 
 import static util.Constants.PlayerConstants.*;
@@ -29,14 +30,6 @@ public class Player extends Entity {
         up = down = right = left = false;
     }
 
-    // private void calculateFacing(int clickPos) {
-    // if (clickPos < SCREEN_WIDTH / 2) {
-    // facingLeft = true;
-    // } else {
-    // facingLeft = false;
-    // }
-    // }
-
     public Player(float x, float y) {
         super(x, y, CHAR_SIZE, CHAR_SIZE);
         loadAnimation();
@@ -53,13 +46,28 @@ public class Player extends Entity {
 
     public void update() {
         // updateHitbox();
-
+        // System.out.println(getStandingTile());
+        checkObj();
         move();
         updateAnimationTick();
     }
 
+    private void checkObj() {
+    }
+
+    private Coordinate getStandingTile() {
+        float centerX = hitbox.x + (hitbox.width / 2);
+        float centerY = hitbox.y + (hitbox.height / 2);
+
+        int tileX = (int) (centerX / TILE_SIZE); // Assuming TILE_SIZE is the size of a map tile
+        int tileY = (int) (centerY / TILE_SIZE);
+
+        Coordinate standingTile = new Coordinate(tileX, tileY);
+
+        return standingTile;
+    }
+
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
-        // drawHitbox(g);
         if (facingLeft) {
             g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE),
                     (int) (hitbox.y - yDrawOffset) - yLvlOffset,
@@ -110,10 +118,6 @@ public class Player extends Entity {
             } else if (down && !up) {
                 ySpeed += speed;
             }
-            // if (CanMoveHere(x + xSpeed, y + ySpeed, collisionMap.getData())) {
-            // this.x += xSpeed;
-            // this.y += ySpeed;
-            // }
             if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height,
                     collisionMap.getData())) {
                 hitbox.x += xSpeed;
@@ -122,6 +126,12 @@ public class Player extends Entity {
         } else {
             setPalyerAction(IDLE);
         }
+    }
+
+    public Coordinate calMapCoordinate() {
+        Coordinate coor = new Coordinate((int) (hitbox.x + xDrawOffset), (int) (hitbox.y + yDrawOffset));
+        System.out.println(coor);
+        return coor;
     }
 
     public void newAction(int action) {
@@ -150,4 +160,8 @@ public class Player extends Entity {
         this.left = left;
     }
 
+    public void setPosition(Coordinate coor) {
+        hitbox.x = coor.x;
+        hitbox.y = coor.y;
+    }
 }
