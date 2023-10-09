@@ -130,7 +130,7 @@ public class Player extends Entity {
 
     public Coordinate calMapCoordinate() {
         Coordinate coor = new Coordinate((int) (hitbox.x + xDrawOffset), (int) (hitbox.y + yDrawOffset));
-        System.out.println(coor);
+        System.out.println("coor " + coor);
         return coor;
     }
 

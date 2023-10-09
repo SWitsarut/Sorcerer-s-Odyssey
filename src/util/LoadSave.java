@@ -128,7 +128,7 @@ public class LoadSave {
     public static Level[] getLevelLeyerData(String mapName) {
         String[] fileArr = getFileList(mapName);
         for (String string : fileArr) {
-            System.out.println(string);
+            System.out.println("layer " + string + " loaded");
         }
         Level[] lvlLayer = new Level[fileArr.length];
         String[] layer_order_string = { "ground", "wall", "front", "collision" };

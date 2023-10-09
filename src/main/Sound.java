@@ -1,21 +1,24 @@
 package main;
 
+import java.io.File;
+import java.net.URL;
+
 import javax.sound.sampled.*;
 
 public class Sound {
-    String audioPath;
+    URL url;
     Clip clip;
 
     public Sound(String audioPath) {
-        this.audioPath = audioPath;
+        this.url = getClass().getResource("/res/asset/sound/" + audioPath);
         loadAudio();
-        System.out.println("res/asset/sound/" + audioPath);
+        System.out.println(url +" loaded");
     }
 
     private void loadAudio() {
         try {
-            AudioInputStream audioInputStream = AudioSystem
-                    .getAudioInputStream(Sound.class.getResourceAsStream("/res/asset/sound/" + audioPath));
+            // File file = new File(url);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
         } catch (Exception e) {
