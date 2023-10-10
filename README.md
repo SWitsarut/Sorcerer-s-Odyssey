@@ -1,3 +1,19 @@
+# To-do list
+
+1. [x] collision + map interaction
+1. [x] layered map
+1. [x] camera
+1. [x] after camera do facing left and right relative to character
+1. [ ] magic
+1. [ ] effect (slash + magic)
+1. [x] sound effect
+1. [ ] enemy
+1. [ ] damage calculation
+1. [x] main menu
+1. [ ] เดินไถลกำแพงตอนเดินติด
+1. [ ] interacable
+1. [ ] small map fix
+
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
@@ -6,8 +22,8 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
 The workspace contains two folders by default, where:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+-   `src`: the folder to maintain sources
+-   `lib`: the folder to maintain dependencies
 
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
