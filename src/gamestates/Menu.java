@@ -14,19 +14,21 @@ import java.util.ArrayList;
 
 import helperClass.Coordinate;
 import main.Game;
-import main.Sound;
-import util.LoadSave;
+import main.sound.Sound;
+import main.sound.SoundEffect;
 import util.Constants.Config;
+import util.LoadSave;
 import util.Ui;
 
 public class Menu extends State implements Statemethods {
-    Font font;
-    FontMetrics fm;
-    int selectedChoice = 0;
-    ArrayList<String> text = new ArrayList<>();
-    int maxChoice;
-    Sound titleMusic;
-    boolean musicPlaying = true;
+    private Font font;
+    private FontMetrics fm;
+    private int selectedChoice = 0;
+    private ArrayList<String> text = new ArrayList<>();
+    private int maxChoice;
+    private Sound titleMusic;
+    private SoundEffect nextEffect;
+    private SoundEffect submitEffect;
 
     private void initClasses() {
         text.add("START");
@@ -35,6 +37,10 @@ public class Menu extends State implements Statemethods {
         text.add("EXIT");
         maxChoice = text.size();
         titleMusic = new Sound("song/title.wav");
+        submitEffect = new SoundEffect("Fantasy/Fantasy_UI (5).wav");
+        nextEffect = new SoundEffect("Fantasy/Fantasy_UI (1).wav");
+        titleMusic.setVolume(60);
+        nextEffect.setVolume(80);
 
     }
 
@@ -44,6 +50,11 @@ public class Menu extends State implements Statemethods {
                 titleMusic.stop();
                 titleMusic.close();
                 Gamestate.state = Gamestate.PLAYING;
+                break;
+            case 1:
+                break;
+            case 2:
+                titleMusic.toggleSound();
                 break;
             case 3:
                 System.exit(0);
@@ -62,8 +73,6 @@ public class Menu extends State implements Statemethods {
         super(game);
         font = LoadSave.GetFont(40);
         initClasses();
-
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -113,24 +122,31 @@ public class Menu extends State implements Statemethods {
         // Gamestate.state = Gamestate.PLAYING;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN:
+                nextEffect.play();
                 circleChoice(1);
                 break;
             case KeyEvent.VK_S:
+                nextEffect.play();
                 circleChoice(1);
                 break;
             case KeyEvent.VK_W:
+                nextEffect.play();
                 circleChoice(-1);
                 break;
             case KeyEvent.VK_UP:
+                nextEffect.play();
                 circleChoice(-1);
                 break;
             case KeyEvent.VK_ENTER:
+                submitEffect.play();
                 submit();
                 break;
             case KeyEvent.VK_E:
+                submitEffect.play();
                 submit();
                 break;
             case KeyEvent.VK_SPACE:
+                submitEffect.play();
                 submit();
                 break;
         }

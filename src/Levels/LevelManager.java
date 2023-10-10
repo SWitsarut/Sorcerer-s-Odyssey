@@ -2,14 +2,11 @@ package Levels;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import interact.MotherObject;
 import main.Game;
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
-import static util.ObjectType.*;
 
 public class LevelManager {
     private Game game;
