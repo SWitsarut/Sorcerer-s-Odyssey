@@ -12,3 +12,4 @@
 1. [x] main menu
 1. [ ] เดินไถลกำแพงตอนเดินติด
 1. [ ] interacable
+1. [ ] small map fix
