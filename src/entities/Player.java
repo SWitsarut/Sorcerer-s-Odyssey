@@ -2,9 +2,12 @@ package entities;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Levels.Level;
 import helperClass.Coordinate;
+import main.sound.Sound;
+import main.sound.SoundEffect;
 import util.LoadSave;
 
 import static util.Constants.PlayerConstants.*;
@@ -16,6 +19,9 @@ public class Player extends Entity {
     private Level collisionMap;
     private float xDrawOffset = (float) (10 * SCALE);
     private float yDrawOffset = (float) (16 * SCALE);
+    private Sound footStepSound[] = new Sound[10];
+    private Random random = new Random(System.nanoTime());
+    private long lastFootstepPlayed = 0;
 
     private int aniTick = 0, aniIndex, aniFramePersecond = ANIMATION_FRAME_PERSECOND;
 
@@ -33,7 +39,15 @@ public class Player extends Entity {
     public Player(float x, float y) {
         super(x, y, CHAR_SIZE, CHAR_SIZE);
         loadAnimation();
+        loadSound();
         initHitbox(x, y, (float) (10 * SCALE), (float) (16 * SCALE));
+    }
+
+    private void loadSound() {
+        for (int i = 0; i < 10; i++) {
+            footStepSound[i] = new SoundEffect("general/wav/footstep0" + i + ".wav", 45);
+            footStepSound[i].setVolume(10);
+        }
     }
 
     private void updateAnimationTick() {
@@ -47,12 +61,27 @@ public class Player extends Entity {
     public void update() {
         // updateHitbox();
         // System.out.println(getStandingTile());
-        checkObj();
+        updateStatus();
         move();
         updateAnimationTick();
     }
 
-    private void checkObj() {
+    private void updateStatus() {
+        switch (palyerAction) {
+            case WALKING:
+                playFootStepSound();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void playFootStepSound() {
+        long curtime = System.currentTimeMillis();
+        if (curtime - lastFootstepPlayed > 300) {
+            footStepSound[random.nextInt(10)].play();
+            lastFootstepPlayed = curtime;
+        }
     }
 
     private Coordinate getStandingTile() {

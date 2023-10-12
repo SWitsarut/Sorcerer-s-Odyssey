@@ -25,18 +25,25 @@ public class Sound {
         }
     }
 
-    public void setVolume(int percent) {
+    public void setVolume(float percent) {
         if (volumeControl != null) {
-            float min = volumeControl.getMinimum();
-            float max = volumeControl.getMaximum();
-            float range = max - min;
-
-            // Calculate the desired volume level within the control's range
-            float desiredVolume = min + (range * percent / 100);
-
+            float desiredVolume = calVolumn(volumeControl, percent);
             // Set the volume
             volumeControl.setValue(desiredVolume);
         }
+    }
+
+    public static float calVolumn(FloatControl volumeControl, float percent) {
+        float min = volumeControl.getMinimum();
+        float max = volumeControl.getMaximum();
+        float range = max - min;
+
+        // Calculate the desired volume level within the control's range
+        float desiredVolume = (float) (min + (range * percent / 100));
+
+        // Set the volume
+
+        return desiredVolume;
     }
 
     public void toggleSound() {

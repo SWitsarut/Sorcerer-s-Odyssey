@@ -40,8 +40,8 @@ public class Pause extends State implements Statemethods {
         text.add("RESUME");
         text.add("EXIT TO MENU");
         maxChoice = text.size();
-        nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT);
-        submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT);
+        nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT, 80);
+        submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT, 80);
         nextEffect.setVolume(60);
         submitEffect.setVolume(60);
 
