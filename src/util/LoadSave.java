@@ -128,7 +128,7 @@ public class LoadSave {
     public static Level[] getLevelLeyerData(String mapName) {
         String[] fileArr = getFileList(mapName);
         for (String string : fileArr) {
-            System.out.println("layer " + string + " loaded"); 
+            System.out.println("layer " + string + " loaded");
         }
         Level[] lvlLayer = new Level[fileArr.length];
         String[] layer_order_string = { "ground", "wall", "front", "collision" };
@@ -149,4 +149,22 @@ public class LoadSave {
         return font;
     }
 
+    public static BufferedImage GetImage(String file) {
+        BufferedImage img = null;
+        InputStream is = LoadSave.class.getResourceAsStream("/res/asset/" + file);
+
+        try {
+            img = ImageIO.read(is);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return img;
+    }
 }

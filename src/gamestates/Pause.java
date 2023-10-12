@@ -78,7 +78,8 @@ public class Pause extends State implements Statemethods {
 
         Point start = new Point(Config.SCREEN_WIDTH / 2, 0);
         Point end = new Point(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT);
-        GradientPaint gradientPaint = new GradientPaint(start, new Color(255, 255, 255, 0), end, Color.BLACK);
+        GradientPaint gradientPaint = new GradientPaint(start, new Color(255, 255,
+                255, 0), end, Color.BLACK);
         g2d.setPaint(gradientPaint);
         g2d.fill(new Rectangle2D.Double(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
@@ -149,5 +150,11 @@ public class Pause extends State implements Statemethods {
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
     }
 }

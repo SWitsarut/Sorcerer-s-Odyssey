@@ -164,4 +164,8 @@ public class Player extends Entity {
         hitbox.x = coor.x;
         hitbox.y = coor.y;
     }
+
+    public int getAniIndex() {
+        return aniIndex;
+    }
 }

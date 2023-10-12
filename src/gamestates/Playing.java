@@ -3,11 +3,13 @@ package gamestates;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 import Levels.LevelManager;
 import entities.Player;
 import interact.InteractableManager;
 import main.Game;
+import util.LoadSave;
 import util.Constants.Config;
 
 public class Playing extends State implements Statemethods {
@@ -29,6 +31,10 @@ public class Playing extends State implements Statemethods {
     private int maxYTileOffset;
     private int maxLevelOffsetY;
 
+    private int mousePosX;
+    private int mousePosY;
+    private BufferedImage crosshair;
+    private int crosshairSize = 40;
     // private ArrayList<MotherObject> arrObj = new ArrayList<>();
 
     public Playing(
@@ -38,6 +44,7 @@ public class Playing extends State implements Statemethods {
     }
 
     private void initClass() {
+        crosshair = LoadSave.GetImage("crosshair007.png");
         player = new Player(0, 0);
         levelManager = new LevelManager(game);
         InterManager = new InteractableManager(levelManager);
@@ -99,9 +106,13 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
+        int aniIndex = player.getAniIndex();
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
+        g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
+                crosshairSize + aniIndex,
+                crosshairSize + aniIndex, null);
     }
 
     @Override
@@ -121,6 +132,8 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        mousePosX = e.getX();
+        mousePosY = e.getY();
     }
 
     @Override
@@ -161,6 +174,12 @@ public class Playing extends State implements Statemethods {
                 player.setDown(false);
                 break;
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mousePosX = e.getX();
+        mousePosY = e.getY();
     }
 
 }
