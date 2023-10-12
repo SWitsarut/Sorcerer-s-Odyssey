@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import gamestates.Gamestate;
 import gamestates.Menu;
+import gamestates.Pause;
 import gamestates.Playing;
 
 import static util.Constants.Config.*;
@@ -17,6 +18,7 @@ public class Game implements Runnable {
 
     private Playing playing;
     private Menu menu;
+    private Pause pause;
 
     public Game() {
         initClasses();
@@ -30,6 +32,7 @@ public class Game implements Runnable {
     public void initClasses() {
         menu = new Menu(this);
         playing = new Playing(this);
+        pause = new Pause(this);
     }
 
     public void render(Graphics g) {
@@ -42,6 +45,10 @@ public class Game implements Runnable {
                 playing.draw(g);
                 break;
             case DIALOGUE:
+                break;
+            case PAUSE:
+                playing.draw(g);
+                pause.draw(g);
                 break;
             default:
                 break;
@@ -60,6 +67,9 @@ public class Game implements Runnable {
                 break;
             case DIALOGUE:
 
+                break;
+            case PAUSE:
+                pause.update();
                 break;
             default:
                 break;
@@ -123,5 +133,9 @@ public class Game implements Runnable {
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public Pause getPause() {
+        return pause;
     }
 }

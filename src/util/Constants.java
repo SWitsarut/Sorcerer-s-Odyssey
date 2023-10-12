@@ -1,6 +1,11 @@
 package util;
 
 public class Constants {
+    public static class SoundFile {
+        public static final String NEXT_EFFECT = "Fantasy/Fantasy_UI (1).wav";
+        public static final String SUBMIT_EFFECT = "Fantasy/Fantasy_UI (4).wav";
+    }
+
     public static class Config {
         public static final int FPS_SET = 60;
         public static final int UPS_SET = 120;

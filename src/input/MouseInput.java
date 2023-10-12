@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import entities.Player;
 import gamestates.Gamestate;
 import main.GamePanel;
 
@@ -22,7 +21,19 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // System.err.println("x is " + e.getX() + " y is " + e.getY());
+        switch (Gamestate.state) {
+            case MENU:
+                gp.getGame().getMenu().mouseMoved(e);
+                break;
+            case PLAYING:
+                gp.getGame().getPlaying().mouseMoved(e);
+                break;
+            case PAUSE:
+                gp.getGame().getPause().mouseMoved(e);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -33,6 +44,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
                 break;
             case PLAYING:
                 gp.getGame().getPlaying().mouseClicked(e);
+                break;
+            case PAUSE:
+                gp.getGame().getPause().mouseClicked(e);
                 break;
             default:
                 break;

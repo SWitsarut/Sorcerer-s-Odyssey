@@ -3,12 +3,10 @@ package gamestates;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import Levels.LevelManager;
 import entities.Player;
 import interact.InteractableManager;
-import interact.MotherObject;
 import main.Game;
 import util.Constants.Config;
 
@@ -119,14 +117,10 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
     }
 
     @Override
@@ -147,7 +141,7 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_ESCAPE:
                 player.resetDirection();
-                Gamestate.state = Gamestate.MENU;
+                Gamestate.state = Gamestate.PAUSE;
         }
     }
 

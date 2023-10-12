@@ -14,34 +14,34 @@ import java.util.ArrayList;
 
 import helperClass.Coordinate;
 import main.Game;
-import main.sound.Sound;
 import main.sound.SoundEffect;
 import util.Constants.Config;
 import util.Constants.SoundFile;
 import util.LoadSave;
 import util.Ui;
 
-public class Menu extends State implements Statemethods {
+public class Pause extends State implements Statemethods {
+    public Pause(Game game) {
+        super(game);
+        initClasses();
+    }
+
     private Font font;
     private FontMetrics fm;
     private int selectedChoice = 0;
     private ArrayList<String> text = new ArrayList<>();
     private int maxChoice;
-    private Sound titleMusic;
     private SoundEffect nextEffect;
     private SoundEffect submitEffect;
     private Coordinate[] coordinates;
 
     private void initClasses() {
-        text.add("START");
-        text.add("OPTION");
-        text.add("CREDIT");
-        text.add("EXIT TO DESKTOP");
+        font = LoadSave.GetFont(40);
+        text.add("RESUME");
+        text.add("EXIT TO MENU");
         maxChoice = text.size();
-        titleMusic = new Sound("song/title.wav");
         nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT);
         submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT);
-        titleMusic.setVolume(60);
         nextEffect.setVolume(60);
         submitEffect.setVolume(60);
 
@@ -51,17 +51,10 @@ public class Menu extends State implements Statemethods {
         submitEffect.play();
         switch (selectedChoice) {
             case 0:
-                titleMusic.stop();
-                titleMusic.close();
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case 1:
-                break;
-            case 2:
-                titleMusic.toggleSound();
-                break;
-            case 3:
-                System.exit(0);
+                Gamestate.state = Gamestate.MENU;
                 break;
         }
     }
@@ -73,17 +66,9 @@ public class Menu extends State implements Statemethods {
         selectedChoice = (selectedChoice + amount) % maxChoice;
     }
 
-    public Menu(Game game) {
-        super(game);
-        font = LoadSave.GetFont(40);
-        initClasses();
-    }
-
     @Override
     public void update() {
-        if (Gamestate.MENU == Gamestate.state) {
-            titleMusic.play();
-        }
+
     }
 
     @Override
@@ -91,9 +76,9 @@ public class Menu extends State implements Statemethods {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        Point start = new Point(0, 0);
-        Point end = new Point(Config.SCREEN_WIDTH, 0);
-        GradientPaint gradientPaint = new GradientPaint(start, Color.RED, end, Color.BLACK);
+        Point start = new Point(Config.SCREEN_WIDTH / 2, 0);
+        Point end = new Point(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT);
+        GradientPaint gradientPaint = new GradientPaint(start, new Color(255, 255, 255, 0), end, Color.BLACK);
         g2d.setPaint(gradientPaint);
         g2d.fill(new Rectangle2D.Double(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
