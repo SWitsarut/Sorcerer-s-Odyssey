@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import Levels.LevelManager;
 import entities.Player;
+import entities.Enemy.EnemyManager;
 import helperClass.Coordinate;
 import interact.InteractableManager;
 import main.Game;
@@ -17,7 +18,7 @@ public class Playing extends State implements Statemethods {
 
     private LevelManager levelManager;
     private Player player;
-    private InteractableManager InterManager;
+    private EnemyManager enemyManager;
 
     private int xLvlOffset;
     private int yLvlOffset;
@@ -45,10 +46,10 @@ public class Playing extends State implements Statemethods {
     }
 
     private void initClass() {
-        crosshair = LoadSave.GetImage("crosshair007.png");
+        crosshair = LoadSave.GetImage("asset/crosshair007.png");
         player = new Player(0, 0);
+        enemyManager = new EnemyManager();
         levelManager = new LevelManager(game);
-        InterManager = new InteractableManager(levelManager);
         handleMapChange();
     }
 
@@ -60,7 +61,6 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
         maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT - 1;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
-        InterManager.handleMapUpdate();
     }
 
     public void windowFocusLost() {
@@ -75,7 +75,6 @@ public class Playing extends State implements Statemethods {
     public void update() {
         player.update();
         checkCloseToBorder();
-        getWorldRealPos();
     }
 
     private void checkCloseToBorder() {
@@ -106,24 +105,12 @@ public class Playing extends State implements Statemethods {
             yLvlOffset = 0;
     }
 
-    public void getWorldRealPos() {
-        System.out.println(player.getHitbox().x + xLvlOffset - 50);
-        System.out.println("player hitbox " + player.getHitbox().x + " , " + player.getHitbox().y);
-
-        System.out
-                .println("coor"
-                        + new Coordinate((int) (player.getHitbox().x - xLvlOffset),
-                                (int) (player.getHitbox().y - yLvlOffset)));
-        System.out.println(
-                "cal " + (player.getHitbox().x + (player.getHitbox().x + xLvlOffset - 600)) + " , "
-                        + (player.getHitbox().y + (player.getHitbox().y + yLvlOffset - 400)));
-    }
-
     @Override
     public void draw(Graphics g) {
         int aniIndex = player.getAniIndex();
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
+        enemyManager.draw(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
@@ -161,7 +148,6 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // System.out.println(player.getHitbox().x + "");
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W: // W
                 player.setUp(true);
@@ -178,6 +164,10 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_ESCAPE:
                 player.resetDirection();
                 Gamestate.state = Gamestate.PAUSE;
+                break;
+            case KeyEvent.VK_N:
+                player.toggleNoClip();
+                break;
         }
     }
 

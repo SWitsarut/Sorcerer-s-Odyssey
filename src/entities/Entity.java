@@ -15,6 +15,7 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+        initHitbox(x, y, width, height);
 
     }
 

@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -15,6 +16,10 @@ import static util.Constants.Config.*;
 import static util.Helper.*;
 
 public class Player extends Entity {
+
+    // no clip
+    private boolean noclip = true;
+
     private BufferedImage[][] animation;
     private Level collisionMap;
     private float xDrawOffset = (float) (10 * SCALE);
@@ -63,7 +68,6 @@ public class Player extends Entity {
         // System.out.println(getStandingTile());
         updateStatus();
         move();
-        updateAnimationTick();
     }
 
     private void updateStatus() {
@@ -97,6 +101,11 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
+        updateAnimationTick();
+        if (noclip) {
+            g.setColor(Color.WHITE);
+            g.drawString("no clip enable", 0, 20);
+        }
         if (facingLeft) {
             g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE),
                     (int) (hitbox.y - yDrawOffset) - yLvlOffset,
@@ -110,7 +119,7 @@ public class Player extends Entity {
                     CHAR_SIZE,
                     null);
         }
-        // drawHitbox(g);
+        drawHitbox(g, xLvlOffset, yLvlOffset);
     }
 
     private void loadAnimation() {
@@ -122,7 +131,6 @@ public class Player extends Entity {
                         CHAR_DEFAULT_SIZE);
             }
         }
-
     }
 
     public void loadCollision(Level collision) {
@@ -147,9 +155,14 @@ public class Player extends Entity {
             } else if (down && !up) {
                 ySpeed += speed;
             }
-            if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width,
-                    hitbox.height,
-                    collisionMap.getData())) {
+            if (!noclip) {
+                if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width,
+                        hitbox.height,
+                        collisionMap.getData())) {
+                    hitbox.x += xSpeed;
+                    hitbox.y += ySpeed;
+                }
+            } else {
                 hitbox.x += xSpeed;
                 hitbox.y += ySpeed;
             }
@@ -205,5 +218,13 @@ public class Player extends Entity {
 
     public int getAniIndex() {
         return aniIndex;
+    }
+
+    public boolean getNoclip() {
+        return noclip;
+    }
+
+    public void toggleNoClip() {
+        this.noclip = !noclip;
     }
 }
