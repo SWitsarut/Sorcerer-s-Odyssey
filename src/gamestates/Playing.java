@@ -8,9 +8,8 @@ import java.awt.image.BufferedImage;
 import Levels.LevelManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
-import helperClass.Coordinate;
-import interact.InteractableManager;
 import main.Game;
+import ui.Hud;
 import util.LoadSave;
 import util.Constants.Config;
 
@@ -19,6 +18,7 @@ public class Playing extends State implements Statemethods {
     private LevelManager levelManager;
     private Player player;
     private EnemyManager enemyManager;
+    private Hud hud;
 
     private int xLvlOffset;
     private int yLvlOffset;
@@ -48,8 +48,9 @@ public class Playing extends State implements Statemethods {
     private void initClass() {
         crosshair = LoadSave.GetImage("asset/crosshair007.png");
         player = new Player(0, 0);
-        enemyManager = new EnemyManager();
         levelManager = new LevelManager(game);
+        hud = new Hud(player);
+        enemyManager = new EnemyManager(this);
         handleMapChange();
     }
 
@@ -74,6 +75,7 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
         player.update();
+        enemyManager.update();
         checkCloseToBorder();
     }
 
@@ -107,6 +109,7 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
+
         int aniIndex = player.getAniIndex();
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
@@ -115,6 +118,7 @@ public class Playing extends State implements Statemethods {
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
+        hud.draw(g);
     }
 
     @Override
@@ -133,7 +137,6 @@ public class Playing extends State implements Statemethods {
     }
 
     private void getRealPos(int x, int y) {
-        System.out.println();
     }
 
     @Override

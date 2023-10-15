@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import entities.Entity;
+import gamestates.Gamestate;
 import util.LoadSave;
 import util.Constants.Config;
 
@@ -15,6 +16,8 @@ public abstract class Enemy extends Entity {
     protected int maxAniFrame = 1;
     protected int aniTick = 0, aniIndex, aniFramePersecond = Config.ANIMATION_FRAME_PERSECOND;
     protected float scale = 1;
+
+    protected double damage;
 
     private void updateAnimationTick() {
         aniTick++;
@@ -32,7 +35,8 @@ public abstract class Enemy extends Entity {
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        updateAnimationTick();
+        if (Gamestate.state == Gamestate.PLAYING)
+            updateAnimationTick();
         g.drawImage(animation[aniIndex], (int) x - xLvlOffset, (int) y - yLvlOffset,
                 (int) (img.getWidth() / maxAniFrame * scale * Config.SCALE),
                 (int) (img.getHeight() * scale * Config.SCALE), null);

@@ -4,10 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class EnemyManager {
-    ArrayList<Enemy> enemies;
+import entities.Player;
+import gamestates.Playing;
 
-    public EnemyManager() {
+public class EnemyManager {
+
+    ArrayList<Enemy> enemies;
+    private Player player;
+
+    public EnemyManager(Playing playing) {
+        player = playing.getPlayer();
         enemies = new ArrayList<>();
         enemies.add(new CorruptedTreant(900, 900));
     }
@@ -21,7 +27,11 @@ public class EnemyManager {
 
     public void update() {
         for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).update();
+            Enemy enemy = enemies.get(i);
+            if (player.getHitbox().intersects(enemy.getHitbox())) {
+                player.getAttacked(enemy.damage);
+            }
+            enemy.update();
         }
     }
 }

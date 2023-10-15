@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import Levels.Level;
+import gamestates.Gamestate;
 import helperClass.Coordinate;
 import main.sound.Sound;
 import main.sound.SoundEffect;
@@ -37,6 +38,12 @@ public class Player extends Entity {
 
     private boolean up, down, right, left;
 
+    private double hp, mp;
+    private double maxHp = 100, maxMp = 100;
+
+    private boolean iFraming = false;
+    private int curIFrameTick = 0, maxIFrameTick = (int) (0.5 * UPS_SET);
+
     public void resetDirection() {
         up = down = right = left = false;
     }
@@ -46,6 +53,17 @@ public class Player extends Entity {
         loadAnimation();
         loadSound();
         initHitbox(x, y, (float) (10 * SCALE), (float) (16 * SCALE));
+        hp = maxHp;
+        mp = maxMp;
+    }
+
+    public void getAttacked(double damage) {
+        if (!iFraming) {
+            hp -= damage;
+            curIFrameTick = 0;
+            iFraming = true;
+            System.out.println("player take " + damage + " dmg! now having " + hp + " hp!");
+        }
     }
 
     private void loadSound() {
@@ -64,8 +82,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-        // updateHitbox();
-        // System.out.println(getStandingTile());
         updateStatus();
         move();
     }
@@ -77,6 +93,14 @@ public class Player extends Entity {
                 break;
             default:
                 break;
+        }
+        if (iFraming) {
+            if (curIFrameTick >= maxIFrameTick) {
+                iFraming = false;
+                curIFrameTick = 0;
+            } else {
+                curIFrameTick++;
+            }
         }
     }
 
@@ -101,10 +125,12 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
-        updateAnimationTick();
+        if (Gamestate.state == Gamestate.PLAYING) {
+            updateAnimationTick();
+        }
         if (noclip) {
             g.setColor(Color.WHITE);
-            g.drawString("no clip enable", 0, 20);
+            g.drawString("no clip enable", 0, SCREEN_HEIGHT);
         }
         if (facingLeft) {
             g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE),
@@ -226,5 +252,13 @@ public class Player extends Entity {
 
     public void toggleNoClip() {
         this.noclip = !noclip;
+    }
+
+    public double getHp() {
+        return hp;
+    }
+
+    public double getMp() {
+        return mp;
     }
 }
