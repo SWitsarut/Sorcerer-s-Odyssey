@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import Levels.LevelManager;
 import entities.Player;
+import helperClass.Coordinate;
 import interact.InteractableManager;
 import main.Game;
 import util.LoadSave;
@@ -53,11 +54,11 @@ public class Playing extends State implements Statemethods {
 
     public void handleMapChange() {
         player.loadCollision(levelManager.getCollision());
-        lvlTileWide = levelManager.getCurrentLevels()[0].getXlength() - 2;
-        lvlTileHeight = levelManager.getCurrentLevels()[0].getYlength() - 2;
+        lvlTileWide = levelManager.getCurrentLevels()[0].getXlength();
+        lvlTileHeight = levelManager.getCurrentLevels()[0].getYlength();
         maxTileOffset = lvlTileWide - Config.TILES_IN_WIDTH;
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
-        maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT;
+        maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT - 1;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
         InterManager.handleMapUpdate();
     }
@@ -74,6 +75,7 @@ public class Playing extends State implements Statemethods {
     public void update() {
         player.update();
         checkCloseToBorder();
+        getWorldRealPos();
     }
 
     private void checkCloseToBorder() {
@@ -104,6 +106,19 @@ public class Playing extends State implements Statemethods {
             yLvlOffset = 0;
     }
 
+    public void getWorldRealPos() {
+        System.out.println(player.getHitbox().x + xLvlOffset - 50);
+        System.out.println("player hitbox " + player.getHitbox().x + " , " + player.getHitbox().y);
+
+        System.out
+                .println("coor"
+                        + new Coordinate((int) (player.getHitbox().x - xLvlOffset),
+                                (int) (player.getHitbox().y - yLvlOffset)));
+        System.out.println(
+                "cal " + (player.getHitbox().x + (player.getHitbox().x + xLvlOffset - 600)) + " , "
+                        + (player.getHitbox().y + (player.getHitbox().y + yLvlOffset - 400)));
+    }
+
     @Override
     public void draw(Graphics g) {
         int aniIndex = player.getAniIndex();
@@ -112,18 +127,26 @@ public class Playing extends State implements Statemethods {
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
-                crosshairSize + aniIndex, null);
+                crosshairSize + aniIndex, null);// cross hair
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // click
-        if (e.getButton() == 1) {
-            levelManager.nextMap();
-            handleMapChange();
-        } else {
-            // player.useMagic(e.getX());
+        switch (e.getButton()) {
+            case MouseEvent.BUTTON1:
+                getRealPos(e.getX(), e.getY());
+                break;
+            case MouseEvent.BUTTON3:
+
+                break;
+
+            default:
+                break;
         }
+    }
+
+    private void getRealPos(int x, int y) {
+        System.out.println();
     }
 
     @Override

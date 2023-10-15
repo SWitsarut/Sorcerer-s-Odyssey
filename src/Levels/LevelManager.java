@@ -9,11 +9,11 @@ import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
 
 public class LevelManager {
-    private Game game;
+    // private Game game;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
 
-    private int curMapIndex = 2;
+    private int curMapIndex = 0;
     private String[] mapNameArr;
 
     public Level getCollision() {
@@ -21,7 +21,7 @@ public class LevelManager {
     }
 
     public LevelManager(Game game) {
-        this.game = game;
+        // this.game = game;
         importTile();
         mapNameArr = getFileList("");
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);

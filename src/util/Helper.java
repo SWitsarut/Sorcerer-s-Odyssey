@@ -13,11 +13,13 @@ public class Helper {
                         return true;
         return false;
     }
-    
 
-    private static boolean unWalkable(float x, float y, int[][] levelData) {
-        int levelHeight = (levelData.length - 1) * Config.TILE_SIZE;
-        int levelWidth = (levelData[0].length - 2) * Config.TILE_SIZE;
+    // public static boolean MoveAble(float x, float y, float width, float height,
+    // int[][] levelData)
+
+    public static boolean unWalkable(float x, float y, int[][] levelData) {
+        int levelHeight = (levelData.length) * Config.TILE_SIZE;
+        int levelWidth = (levelData[0].length) * Config.TILE_SIZE;
         if (x < 0 || x >= levelWidth) {
             return true;
         }

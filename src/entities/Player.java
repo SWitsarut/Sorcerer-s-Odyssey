@@ -147,11 +147,20 @@ public class Player extends Entity {
             } else if (down && !up) {
                 ySpeed += speed;
             }
-            if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height,
+            if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width,
+                    hitbox.height,
                     collisionMap.getData())) {
                 hitbox.x += xSpeed;
                 hitbox.y += ySpeed;
             }
+            // if (!unWalkable(hitbox.x + xSpeed + hitbox.width, hitbox.y + hitbox.height,
+            // collisionMap.getData())) {
+            // hitbox.x += xSpeed;
+            // }
+            // if (!unWalkable(hitbox.x + hitbox.width, hitbox.y + hitbox.height + ySpeed,
+            // collisionMap.getData())) {
+            // hitbox.y += ySpeed;
+            // }
         } else {
             setPalyerAction(IDLE);
         }
