@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import Levels.Level;
+import effect.EffectManager;
 import gamestates.Gamestate;
 import helperClass.Coordinate;
 import main.sound.Sound;
@@ -21,6 +22,8 @@ public class Player extends Entity {
     // no clip
     private boolean noclip = true;
 
+    private EffectManager effectManager;
+
     private BufferedImage[][] animation;
     private Level collisionMap;
     private float xDrawOffset = (float) (10 * SCALE);
@@ -28,6 +31,8 @@ public class Player extends Entity {
     private Sound footStepSound[] = new Sound[10];
     private Random random = new Random(System.nanoTime());
     private long lastFootstepPlayed = 0;
+    public int hitboxXcenter;
+    public int hitboxYcenter;
 
     private int aniTick = 0, aniIndex, aniFramePersecond = ANIMATION_FRAME_PERSECOND;
 
@@ -48,11 +53,14 @@ public class Player extends Entity {
         up = down = right = left = false;
     }
 
-    public Player(float x, float y) {
+    public Player(float x, float y, EffectManager effectManager) {
         super(x, y, CHAR_SIZE, CHAR_SIZE);
         loadAnimation();
         loadSound();
         initHitbox(x, y, (float) (10 * SCALE), (float) (16 * SCALE));
+        hitboxXcenter = (int) (hitbox.x + hitbox.width / 2);
+        hitboxYcenter = (int) (hitbox.y + hitbox.height / 2);
+        this.effectManager = effectManager;
         hp = maxHp;
         mp = maxMp;
     }
@@ -62,7 +70,8 @@ public class Player extends Entity {
             hp -= damage;
             curIFrameTick = 0;
             iFraming = true;
-            System.out.println("player take " + damage + " dmg! now having " + hp + " hp!");
+            effectManager.playAttacked((int) hitbox.x + hitboxXcenter, (int) hitbox.y +
+                    hitboxYcenter);
         }
     }
 

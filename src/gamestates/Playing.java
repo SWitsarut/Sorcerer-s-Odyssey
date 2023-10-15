@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import Levels.LevelManager;
+import effect.EffectManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
 import main.Game;
@@ -18,6 +19,7 @@ public class Playing extends State implements Statemethods {
     private LevelManager levelManager;
     private Player player;
     private EnemyManager enemyManager;
+    private EffectManager effectManager;
     private Hud hud;
 
     private int xLvlOffset;
@@ -33,6 +35,8 @@ public class Playing extends State implements Statemethods {
     private int maxYTileOffset;
     private int maxLevelOffsetY;
 
+    
+
     private int mousePosX;
     private int mousePosY;
     private BufferedImage crosshair;
@@ -47,7 +51,8 @@ public class Playing extends State implements Statemethods {
 
     private void initClass() {
         crosshair = LoadSave.GetImage("asset/crosshair007.png");
-        player = new Player(0, 0);
+        effectManager = new EffectManager();
+        player = new Player(0, 0, effectManager);
         levelManager = new LevelManager(game);
         hud = new Hud(player);
         enemyManager = new EnemyManager(this);
@@ -72,10 +77,15 @@ public class Playing extends State implements Statemethods {
         return player;
     }
 
+    public EffectManager getEffectManager() {
+        return effectManager;
+    }
+
     @Override
     public void update() {
         player.update();
         enemyManager.update();
+        effectManager.update();
         checkCloseToBorder();
     }
 
@@ -114,6 +124,7 @@ public class Playing extends State implements Statemethods {
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
+        effectManager.draw(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,

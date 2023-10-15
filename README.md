@@ -5,10 +5,11 @@
 1. [x] camera
 1. [x] after camera do facing left and right relative to character
 1. [ ] magic
-1. [ ] effect (slash + magic)
+1. [x] effect (slash + magic)
+1. [ ] sound effect manager 
 1. [x] sound effect
-1. [ ] enemy
-1. [ ] damage calculation
+1. [x] enemy
+1. [x] damage calculation
 1. [x] main menu
 1. [ ] เดินไถลกำแพงตอนเดินติด
 1. [ ] interacable
@@ -32,3 +33,4 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+2

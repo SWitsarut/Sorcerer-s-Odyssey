@@ -1,9 +1,7 @@
 package entities.Enemy;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-
 import entities.Player;
 import gamestates.Playing;
 
@@ -11,16 +9,17 @@ public class EnemyManager {
 
     ArrayList<Enemy> enemies;
     private Player player;
+    // private EffectManager effectManager;
 
     public EnemyManager(Playing playing) {
         player = playing.getPlayer();
+        // effectManager = playing.getEffectManager();
         enemies = new ArrayList<>();
         enemies.add(new CorruptedTreant(900, 900));
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int i = 0; i < enemies.size(); i++) {
-            g.setColor(Color.RED);
             enemies.get(i).draw(g, xLvlOffset, yLvlOffset);
         }
     }
