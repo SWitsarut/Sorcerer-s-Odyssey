@@ -39,7 +39,7 @@ public class Player extends Entity {
     private boolean up, down, right, left;
 
     private double hp, mp;
-    private double maxHp = 100, maxMp = 100;
+    private double maxHp = 200, maxMp = 100;
 
     private boolean iFraming = false;
     private int curIFrameTick = 0, maxIFrameTick = (int) (0.5 * UPS_SET);
@@ -260,5 +260,13 @@ public class Player extends Entity {
 
     public double getMp() {
         return mp;
+    }
+
+    public double getMaxHp() {
+        return maxHp;
+    }
+
+    public double getMaxMp() {
+        return maxMp;
     }
 }
