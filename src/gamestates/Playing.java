@@ -6,9 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import Levels.LevelManager;
+import Magic.Magic;
 import effect.EffectManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
+import helperClass.Coordinate;
 import main.Game;
 import ui.Hud;
 import util.LoadSave;
@@ -21,6 +23,7 @@ public class Playing extends State implements Statemethods {
     private EnemyManager enemyManager;
     private EffectManager effectManager;
     private Hud hud;
+    private Magic magic;
 
     private int xLvlOffset;
     private int yLvlOffset;
@@ -34,8 +37,6 @@ public class Playing extends State implements Statemethods {
     private int maxLevelOffsetX;
     private int maxYTileOffset;
     private int maxLevelOffsetY;
-
-    
 
     private int mousePosX;
     private int mousePosY;
@@ -55,6 +56,7 @@ public class Playing extends State implements Statemethods {
         player = new Player(0, 0, effectManager);
         levelManager = new LevelManager(game);
         hud = new Hud(player);
+        magic = new Magic(this);
         enemyManager = new EnemyManager(this);
         handleMapChange();
     }
@@ -86,6 +88,7 @@ public class Playing extends State implements Statemethods {
         player.update();
         enemyManager.update();
         effectManager.update();
+        magic.update();
         checkCloseToBorder();
     }
 
@@ -120,12 +123,13 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
 
-        int aniIndex = player.getAniIndex();
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
+        magic.draw(g, xLvlOffset, yLvlOffset);
         effectManager.draw(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
+        int aniIndex = player.getAniIndex();
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
@@ -136,10 +140,11 @@ public class Playing extends State implements Statemethods {
     public void mouseClicked(MouseEvent e) {
         switch (e.getButton()) {
             case MouseEvent.BUTTON1:
-                getRealPos(e.getX(), e.getY());
                 break;
             case MouseEvent.BUTTON3:
-
+                if (player.isCastable()) {
+                    magic.castFireBall(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
+                }
                 break;
 
             default:
@@ -147,7 +152,10 @@ public class Playing extends State implements Statemethods {
         }
     }
 
-    private void getRealPos(int x, int y) {
+    private Coordinate getClickedPos(int x, int y, int xLvlOffset, int yLvlOffset) {
+        Coordinate playerCoor = player.getPlayerOnScreen(xLvlOffset, yLvlOffset);
+        return new Coordinate((int) (player.getHitbox().x + x - playerCoor.x),
+                (int) (player.getHitbox().y + y - playerCoor.y));
     }
 
     @Override
@@ -203,10 +211,26 @@ public class Playing extends State implements Statemethods {
         }
     }
 
+    // java.awt.event.MouseEvent[MOUSE_DRAGGED,(821,366),absolute(829,397),modifiers=Meta+Button3,extModifiers=Button3,clickCount=0]
+    // on
+    // main.GamePanel[,0,0,1200x800,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=java.awt.Dimension[width=1200,height=800],minimumSize=java.awt.Dimension[width=1200,height=800],preferredSize=java.awt.Dimension[width=1200,height=800]]
+
     @Override
     public void mouseDragged(MouseEvent e) {
         mousePosX = e.getX();
         mousePosY = e.getY();
+        int modifiers = e.getModifiersEx();
+
+        // Check if the right mouse button is down
+        if ((modifiers & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
+            if (player.isCastable()) {
+                magic.castFireBall(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
+            }
+        }
+        // Check if the left mouse button is down
+        else if ((modifiers & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
+            // player.attack();
+        }
     }
 
 }

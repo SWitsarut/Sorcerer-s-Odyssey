@@ -46,6 +46,17 @@ public class Player extends Entity {
     private double hp, mp;
     private double maxHp = 200, maxMp = 100;
 
+    private double mpRegen;
+    private double hpRegen;
+
+    private double mpRegenMul = 1;
+    private double hpRegenMul = 1;
+    private double mpRegenMulDefault = 1;
+    private double hpRegenMulDefault = 1;
+
+    private int curSpellgap, maxSpellGap = (int) (0.1 * UPS_SET);
+    private boolean castSpellable = true;
+
     private boolean iFraming = false;
     private int curIFrameTick = 0, maxIFrameTick = (int) (0.5 * UPS_SET);
 
@@ -96,6 +107,8 @@ public class Player extends Entity {
     }
 
     private void updateStatus() {
+        regen();
+        SpellCastGap();
         switch (palyerAction) {
             case WALKING:
                 playFootStepSound();
@@ -110,6 +123,41 @@ public class Player extends Entity {
             } else {
                 curIFrameTick++;
             }
+        }
+    }
+
+    private void SpellCastGap() {
+        if (!castSpellable) {
+            if (curSpellgap >= maxSpellGap) {
+                curSpellgap = 0;
+                castSpellable = true;
+            }
+            curSpellgap++;
+        }
+    }
+
+    public boolean castSpell(double cost) {
+        if (castSpellable) {
+            if (mp >= cost) {
+                mp -= cost;
+                castSpellable = false;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public void regen() {
+        mpRegen = 0.5 * mpRegenMul;
+        hpRegen = 0.05 * hpRegenMul;
+        if (hp < maxHp) {
+            hp = Math.min(hp + hpRegen, maxHp);
+        }
+        if (mp < maxMp) {
+            mp = Math.min(mp + mpRegen, maxMp);
         }
     }
 
@@ -134,6 +182,7 @@ public class Player extends Entity {
     }
 
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
+        Coordinate playerOnScreen = getPlayerOnScreen(xLvlOffset, yLvlOffset);
         if (Gamestate.state == Gamestate.PLAYING) {
             updateAnimationTick();
         }
@@ -148,13 +197,21 @@ public class Player extends Entity {
                     CHAR_SIZE,
                     null);
         } else {
-            g.drawImage(animation[palyerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - xLvlOffset,
-                    (int) (hitbox.y - yDrawOffset) - yLvlOffset,
+            g.drawImage(animation[palyerAction][aniIndex], (int) playerOnScreen.x,
+                    (int) playerOnScreen.y,
                     CHAR_SIZE,
                     CHAR_SIZE,
                     null);
         }
         drawHitbox(g, xLvlOffset, yLvlOffset);
+    }
+
+    public Coordinate getPlayerOnScreen(int xLvlOffset, int yLvlOffset) {
+        int playerScreenX = (int) (hitbox.x - xDrawOffset) - xLvlOffset;
+        int playerScreenY = (int) (hitbox.y - yDrawOffset) - yLvlOffset;
+
+        Coordinate playerScreenPosition = new Coordinate(playerScreenX, playerScreenY);
+        return playerScreenPosition;
     }
 
     private void loadAnimation() {
@@ -230,6 +287,11 @@ public class Player extends Entity {
         this.palyerAction = palyerAction;
     }
 
+    public Coordinate getPlayerCenter() {
+        Coordinate playerCoor = new Coordinate((int) (hitbox.x + hitboxXcenter), (int) (hitbox.y + hitboxYcenter));
+        return playerCoor;
+    }
+
     public void setUp(boolean up) {
         this.up = up;
     }
@@ -278,4 +340,29 @@ public class Player extends Entity {
     public double getMaxMp() {
         return maxMp;
     }
+
+    public EffectManager getEffectManager() {
+        return effectManager;
+    }
+
+    public BufferedImage[][] getAnimation() {
+        return animation;
+    }
+
+    public Level getCollisionMap() {
+        return collisionMap;
+    }
+
+    public float getxDrawOffset() {
+        return xDrawOffset;
+    }
+
+    public float getyDrawOffset() {
+        return yDrawOffset;
+    }
+
+    public boolean isCastable() {
+        return castSpellable;
+    }
+
 }

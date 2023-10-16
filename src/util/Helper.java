@@ -4,6 +4,10 @@ import util.Constants.Config;
 
 public class Helper {
 
+    public static double toRadius(double degrees) {
+        return degrees * (Math.PI / 180);
+    }
+
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] levelData) {
         // System.out.println(x + " " + y);
         if (!unWalkable(x, y, levelData))

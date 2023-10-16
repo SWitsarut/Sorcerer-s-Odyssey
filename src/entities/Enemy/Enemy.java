@@ -42,7 +42,7 @@ public abstract class Enemy extends Entity {
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         if (Gamestate.state == Gamestate.PLAYING)
             updateAnimationTick();
-        g.drawImage(animation[aniIndex], (int) x - xLvlOffset, (int) y - yLvlOffset,
+        g.drawImage(animation[aniIndex], (int) hitbox.x - xLvlOffset, (int) hitbox.y - yLvlOffset,
                 (int) (animation[aniIndex].getWidth() * scale * Config.SCALE),
                 (int) (animation[aniIndex].getHeight() * scale * Config.SCALE), null);
         drawHitbox(g, xLvlOffset, yLvlOffset);
@@ -72,7 +72,7 @@ public abstract class Enemy extends Entity {
     }
 
     public void update() {
-
+        hitbox.x = x + (hitbox.x + 1) % 100;
     };
 
     protected void checkDied() {
