@@ -41,10 +41,10 @@ public class EffectManager {
     }
 
     public void playAttacked(int x, int y) {
-        eff.add(new EffectPlayer(attacked, x, y, 0.4));
+        eff.add(new EffectPlayer(attacked, x, y, 0.3));
     }
 
     public void playDied(int x, int y) {
-        eff.add(new EffectPlayer(died, x, y, 0.5));
+        eff.add(new EffectPlayer(died, x, y, 1));
     }
 }

@@ -168,16 +168,16 @@ public class LoadSave {
         return img;
     }
 
-    public static BufferedImage[] LinearAnimationLoader(String name, int size) {
+    public static BufferedImage[] LinearAnimationLoader(String name, int sizePerFrame) {
         BufferedImage img = GetImage(name);
-        int imgHeight = img.getHeight() / size;
-        int imgWidth = img.getWidth() / size;
+        int imgHeight = img.getHeight() / sizePerFrame;
+        int imgWidth = img.getWidth() / sizePerFrame;
         BufferedImage[] animation = new BufferedImage[imgHeight * imgWidth];
 
         for (int i = 0; i < imgHeight; i++) {
             for (int j = 0; j < imgWidth; j++) {
                 int index = (i * imgWidth) + j;
-                animation[index] = img.getSubimage(size * i, size * j, size, size);
+                animation[index] = img.getSubimage(sizePerFrame * j, sizePerFrame * i, sizePerFrame, sizePerFrame);
             }
         }
 
