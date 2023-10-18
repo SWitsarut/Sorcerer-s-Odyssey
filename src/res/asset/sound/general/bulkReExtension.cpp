@@ -46,10 +46,63 @@ void convertOggToWav(const char *inputPath, const char *outputPath)
     }
 }
 
+void convertWavTo16Bit(const char *inputPath, const char *outputPath)
+{
+    // Build the FFmpeg command with the correct output file name and audio format
+    char ffmpegCommand[1024];
+    snprintf(ffmpegCommand, sizeof(ffmpegCommand), "ffmpeg -i \"%s\" -acodec pcm_s16le \"%s\"", inputPath, outputPath);
+
+    int result = std::system(ffmpegCommand);
+    if (result == 0)
+    {
+        std::cout << "Converted " << inputPath << " to " << outputPath << std::endl;
+    }
+    else
+    {
+        std::cerr << "Error converting " << inputPath << " to " << outputPath << std::endl;
+    }
+}
+
+// int main()
+// {
+//     const char *srcDir = "./";      // Current directory
+//     const char *destDir = "./wav/"; // Subdirectory named "wav" within the current directory
+
+//     DIR *dir;
+//     struct dirent *ent;
+
+//     if ((dir = opendir(srcDir)) != NULL)
+//     {
+//         while ((ent = readdir(dir)) != NULL)
+//         {
+//             const char *filename = ent->d_name;
+
+//             // Check if it's a regular file and has a .ogg extension
+//             if (isOggFile(filename))
+//             {
+//                 char inputPath[256];
+//                 char outputPath[256];
+//                 snprintf(inputPath, sizeof(inputPath), "%s%s", srcDir, filename);
+//                 snprintf(outputPath, sizeof(outputPath), "%s%s.wav", destDir, filename);
+
+//                 convertOggToWav(inputPath, outputPath);
+//             }
+//         }
+//         closedir(dir);
+//     }
+//     else
+//     {
+//         perror("Error opening directory");
+//         return 1;
+//     }
+
+//     return 0;
+// }
 int main()
 {
-    const char *srcDir = "./";      // Current directory
-    const char *destDir = "./wav/"; // Subdirectory named "wav" within the current directory
+    const char *srcDir = "./";                            // Source directory (current directory)
+    const char *outputFolder = "/path/to/output_folder/"; // Specify the desired output folder
+    const char *destDir = "./wav/";                       // Subdirectory within the output folder
 
     DIR *dir;
     struct dirent *ent;
@@ -60,15 +113,15 @@ int main()
         {
             const char *filename = ent->d_name;
 
-            // Check if it's a regular file and has a .ogg extension
-            if (isOggFile(filename))
+            // Check if it's a regular file and has a .wav extension
+            if (strstr(filename, ".wav") != nullptr)
             {
                 char inputPath[256];
                 char outputPath[256];
                 snprintf(inputPath, sizeof(inputPath), "%s%s", srcDir, filename);
-                snprintf(outputPath, sizeof(outputPath), "%s%s.wav", destDir, filename);
+                snprintf(outputPath, sizeof(outputPath), "%s%s.wav", outputFolder, filename);
 
-                convertOggToWav(inputPath, outputPath);
+                convertWavTo16Bit(inputPath, outputPath);
             }
         }
         closedir(dir);

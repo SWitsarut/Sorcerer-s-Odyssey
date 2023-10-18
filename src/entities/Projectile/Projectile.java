@@ -4,15 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import entities.Entity;
-import gamestates.Gamestate;
 import helperClass.Coordinate;
-import util.Constants.Config;
+import helperClass.UpdateCounter;
 
 public abstract class Projectile extends Entity {
 
-    protected long maxlifeTime;
-    protected long curlifeTime;
     protected boolean active;
+    protected boolean oldActive;
+    protected UpdateCounter lifeTime;
     protected boolean PlayerOwn;
 
     /**
@@ -26,17 +25,14 @@ public abstract class Projectile extends Entity {
     private double xSpeed;
     private double ySpeed;
 
-    public Projectile(Boolean playerOwn, float xStart, float yStart, Coordinate targetCoor, float width,
+    public Projectile(Boolean playerOwn, double lifeTime, float xStart, float yStart, Coordinate targetCoor,
+            float width,
             float height) {
         super(xStart, yStart, width, height);
         this.active = true;
-        curlifeTime = 0;
+        this.lifeTime = new UpdateCounter(lifeTime, false);
         this.targetCoor = targetCoor;
         this.PlayerOwn = playerOwn;
-    }
-
-    public void setLifeTime(double second) {
-        maxlifeTime = (long) (second * Config.UPS_SET);
     }
 
     public void setExpiredOntarget(boolean expiredOntarget) {
@@ -44,10 +40,11 @@ public abstract class Projectile extends Entity {
     }
 
     public void update() {
-        if (active) {
-            updatePos();
-            updateLifeTime();
-        }
+        updatePos();
+        oldActive = active;
+        lifeTime.update();
+        active = lifeTime.active;
+        expiredUpdate();
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -57,19 +54,22 @@ public abstract class Projectile extends Entity {
                 (int) (hitbox.height));
     }
 
-    protected void onExpired() {
-
+    protected void expiredUpdate() {
+        if (oldActive != active) {
+            onExpired();
+        }
     }
+
+    protected abstract void onExpired();
 
     protected void updatePos() {
-        hitbox.x += xSpeed;
-        hitbox.y += ySpeed;
-    }
+        if (expiredOntarget && Math.abs(targetCoor.x - hitbox.x) <= xSpeed
+                && Math.abs(targetCoor.y - hitbox.y) <= ySpeed) {
+            lifeTime.active = false;
+        } else {
 
-    protected void updateLifeTime() {
-        curlifeTime++;
-        if (curlifeTime >= maxlifeTime) {
-            active = false;
+            hitbox.x += xSpeed;
+            hitbox.y += ySpeed;
         }
     }
 
@@ -82,19 +82,11 @@ public abstract class Projectile extends Entity {
             xSpeed = 0;
             ySpeed = 0;
         } else {
-            double distance = Math.sqrt(dx * dx + dy * dy);
+            // double distance = Math.sqrt(dx * dx + dy * dy);
             double angle = Math.atan2(dy, dx);
             xSpeed = speed * Math.cos(angle);
             ySpeed = speed * Math.sin(angle);
         }
-    }
-
-    public long getMaxlifeTime() {
-        return maxlifeTime;
-    }
-
-    public long getCurlifeTime() {
-        return curlifeTime;
     }
 
     public boolean isActive() {

@@ -37,7 +37,9 @@ public class Magic {
 
     public void castFireBall(Coordinate targetCoor) {
         if (player.castSpell(FireBall.cost)) {
+
             projectiles.add(new FireBall(player.getPlayerCenter(), targetCoor));
+
         }
 
     }

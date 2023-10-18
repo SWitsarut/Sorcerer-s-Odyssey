@@ -17,7 +17,7 @@ public class Game implements Runnable {
     private Thread gameThread;
 
     private Playing playing;
-    private Menu menu;
+    private Menu menu; 
     private Pause pause;
 
     public Game() {

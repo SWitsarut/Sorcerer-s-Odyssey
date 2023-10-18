@@ -11,6 +11,7 @@ public class Sound {
     public Sound(String audioPath) {
         this.url = getClass().getResource("/res/asset/sound/" + audioPath);
         loadAudio();
+        // System.out.println("/res/asset/sound/" + audioPath);
         System.out.println(url + " loaded");
     }
 
