@@ -2,8 +2,12 @@ package entities.Projectile;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import Action.Damage;
 import entities.Entity;
+import entities.Enemy.Enemy;
 import helperClass.Coordinate;
 import helperClass.UpdateCounter;
 
@@ -14,6 +18,9 @@ public abstract class Projectile extends Entity {
     protected UpdateCounter lifeTime;
     protected boolean PlayerOwn;
 
+    public Damage damage;
+    public ArrayList<Enemy> enemyhitted;
+
     /**
      * speed : pixel per update
      */
@@ -21,17 +28,23 @@ public abstract class Projectile extends Entity {
     private boolean expiredOntarget;
 
     protected Coordinate targetCoor;
+    protected BufferedImage[] animate;
 
     private double xSpeed;
     private double ySpeed;
 
-    public Projectile(Boolean playerOwn, double lifeTime, float xStart, float yStart, Coordinate targetCoor,
+    public Projectile(Damage dmg, Boolean playerOwn, double lifeTime, float xStart, float yStart, Coordinate targetCoor,
             float width,
             float height) {
         super(xStart, yStart, width, height);
+        damage = dmg;
+        enemyhitted = new ArrayList<>();
         this.active = true;
         this.lifeTime = new UpdateCounter(lifeTime, false);
         this.targetCoor = targetCoor;
+        this.targetCoor.x -= hitbox.width;
+        this.targetCoor.y -= hitbox.height;
+
         this.PlayerOwn = playerOwn;
     }
 
@@ -48,6 +61,7 @@ public abstract class Projectile extends Entity {
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
+        this.drawHitbox(g, xLvlOffset, yLvlOffset);
         g.setColor(Color.RED);
         g.fillOval((int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset),
                 (int) (hitbox.width),
@@ -82,10 +96,11 @@ public abstract class Projectile extends Entity {
             xSpeed = 0;
             ySpeed = 0;
         } else {
-            // double distance = Math.sqrt(dx * dx + dy * dy);
-            double angle = Math.atan2(dy, dx);
-            xSpeed = speed * Math.cos(angle);
-            ySpeed = speed * Math.sin(angle);
+            double distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance != 0) {
+                xSpeed = (speed / distance) * dx;
+                ySpeed = (speed / distance) * dy;
+            }
         }
     }
 

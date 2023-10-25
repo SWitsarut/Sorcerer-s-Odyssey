@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import Action.Damage;
 import Action.Def;
+import effect.EffectManager;
 import entities.Entity;
 import gamestates.Gamestate;
 import util.Constants.Config;
@@ -20,6 +21,7 @@ public abstract class Enemy extends Entity {
     protected boolean isDead;
 
     protected double hp;
+    protected double maxHp;
     protected double speed;
     protected Def def;
 
@@ -29,6 +31,11 @@ public abstract class Enemy extends Entity {
             aniTick = 0;
             aniIndex = (aniIndex + 1) % maxAniFrame;
         }
+    }
+
+    public void setHp(double hp) {
+        this.maxHp = hp;
+        this.hp = hp;
     }
 
     public Enemy(BufferedImage[] animation, float scale, Def def, float x, float y, float width, float height) {
@@ -51,19 +58,20 @@ public abstract class Enemy extends Entity {
     public void getAttacked(Damage damage) {
         switch (damage.getType()) {
             case Damage.FIRE:
-                hp -= damage.getDamage() - (100 - def.FireDef / 100);
+                hp -= damage.getDamage() * (100 - def.FireDef) / 100;
                 break;
             case Damage.HOLY:
-                hp -= damage.getDamage() - (100 - def.HolyDef / 100);
+                hp -= damage.getDamage() - Math.min((100 - def.HolyDef / 100), 0);
                 break;
             case Damage.LIGHTING:
-                hp -= damage.getDamage() - (100 - def.LightingDef / 100);
+                hp -= damage.getDamage() - Math.min((100 - def.LightingDef / 100), 0);
                 break;
             case Damage.ARCANE:
-                hp -= damage.getDamage() - (100 - def.ArcaneDef / 100);
+                // hp -= damage.getDamage() - Math.min((100 - def.ArcaneDef / 100), 0);
+                hp -= damage.getDamage() * (100 - def.ArcaneDef) / 100;
                 break;
             case Damage.PHYSICAL:
-                hp -= damage.getDamage() - (100 - def.PhysicalDef / 100);
+                hp -= damage.getDamage() - Math.min((100 - def.PhysicalDef / 100), 0);
                 break;
             default:
                 break;

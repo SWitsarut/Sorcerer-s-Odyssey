@@ -17,7 +17,7 @@ public class Game implements Runnable {
     private Thread gameThread;
 
     private Playing playing;
-    private Menu menu; 
+    private Menu menu;
     private Pause pause;
 
     public Game() {
@@ -86,9 +86,9 @@ public class Game implements Runnable {
 
         long previousTime = System.nanoTime();
 
-        int frame = 0;
-        int update = 0;
-        long lastCheck = System.currentTimeMillis();
+        // int frame = 0;
+        // int update = 0;
+        // long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
         double deltaF = 0;
@@ -103,21 +103,21 @@ public class Game implements Runnable {
             previousTime = currentTime;
             if (deltaU >= 1) {
                 // update
-                update++;
+                // update++;
                 deltaU--;
             }
             if (deltaF >= 1) {
                 gamePanel.repaint();
-                frame++;
+                // frame++;
                 deltaF--;
             }
 
-            if (System.currentTimeMillis() - lastCheck >= 1000) {
-                // System.out.println("fps : " + frame + " | ups : " + update);
-                lastCheck = System.currentTimeMillis();
-                frame = 0;
-                update = 0;
-            }
+            // if (System.currentTimeMillis() - lastCheck >= 1000) {
+            // System.out.println("fps : " + frame + " | ups : " + update);
+            // lastCheck = System.currentTimeMillis();
+            // frame = 0;
+            // update = 0;
+            // }
         }
     }
 

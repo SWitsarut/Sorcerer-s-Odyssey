@@ -79,6 +79,10 @@ public class Playing extends State implements Statemethods {
         return player;
     }
 
+    public Magic getMagic() {
+        return magic;
+    }
+
     public EffectManager getEffectManager() {
         return effectManager;
     }
@@ -140,6 +144,9 @@ public class Playing extends State implements Statemethods {
     public void mouseClicked(MouseEvent e) {
         switch (e.getButton()) {
             case MouseEvent.BUTTON1:
+                if (player.isCastable()) {
+                    magic.castArcaneBullets(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
+                }
                 break;
             case MouseEvent.BUTTON3:
                 if (player.isCastable()) {
@@ -211,25 +218,22 @@ public class Playing extends State implements Statemethods {
         }
     }
 
-    // java.awt.event.MouseEvent[MOUSE_DRAGGED,(821,366),absolute(829,397),modifiers=Meta+Button3,extModifiers=Button3,clickCount=0]
-    // on
-    // main.GamePanel[,0,0,1200x800,layout=java.awt.FlowLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=java.awt.Dimension[width=1200,height=800],minimumSize=java.awt.Dimension[width=1200,height=800],preferredSize=java.awt.Dimension[width=1200,height=800]]
-
     @Override
     public void mouseDragged(MouseEvent e) {
         mousePosX = e.getX();
         mousePosY = e.getY();
         int modifiers = e.getModifiersEx();
 
-        // Check if the right mouse button is down
         if ((modifiers & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
             if (player.isCastable()) {
                 magic.castFireBall(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
             }
         }
-        // Check if the left mouse button is down
+
         else if ((modifiers & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
-            // player.attack();
+            if (player.isCastable()) {
+                magic.castArcaneBullets(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
+            }
         }
     }
 

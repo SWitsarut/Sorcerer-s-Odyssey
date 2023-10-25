@@ -169,18 +169,6 @@ public class Player extends Entity {
         }
     }
 
-    private Coordinate getStandingTile() {
-        float centerX = hitbox.x + (hitbox.width / 2);
-        float centerY = hitbox.y + (hitbox.height / 2);
-
-        int tileX = (int) (centerX / TILE_SIZE); // Assuming TILE_SIZE is the size of a map tile
-        int tileY = (int) (centerY / TILE_SIZE);
-
-        Coordinate standingTile = new Coordinate(tileX, tileY);
-
-        return standingTile;
-    }
-
     public void render(Graphics g, int xLvlOffset, int yLvlOffset) {
         Coordinate playerOnScreen = getPlayerOnScreen(xLvlOffset, yLvlOffset);
         if (Gamestate.state == Gamestate.PLAYING) {

@@ -10,6 +10,7 @@ public class CorruptedTreant extends Enemy {
         super(animation, 2, Def.CorruptedTreantDef, x, y, 32, 32);
         maxAniFrame = 4;
         damage = 10;
+        setHp(200);
     }
 
 }

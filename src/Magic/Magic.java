@@ -9,8 +9,8 @@ import gamestates.Playing;
 import helperClass.Coordinate;
 
 public class Magic {
-    Player player;
-    ArrayList<Projectile> projectiles = new ArrayList<>();
+    private Player player;
+    public ArrayList<Projectile> projectiles = new ArrayList<>();
 
     public Magic(Playing playing) {
         this.player = playing.getPlayer();
@@ -41,7 +41,17 @@ public class Magic {
             projectiles.add(new FireBall(player.getPlayerCenter(), targetCoor));
 
         }
+    }
 
+    public void castArcaneBullets(Coordinate targetCoor) {
+        if (player.castSpell(ArcaneBullet.cost)) {
+            Coordinate left = new Coordinate(targetCoor.x - 20, targetCoor.y - 50);
+            Coordinate right = new Coordinate(targetCoor.x - 20, targetCoor.y + 50);
+            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), left));
+            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), targetCoor));
+            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), right));
+
+        }
     }
 
 }
