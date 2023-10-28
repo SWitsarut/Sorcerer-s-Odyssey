@@ -31,18 +31,20 @@ public class LightningBuff extends Buff {
                 scale * ani[buff.curCount % ani.length].getWidth(),
                 scale * ani[buff.curCount % ani.length].getHeight(),
                 null);
-        // g.drawOval((int) (player.getHitbox().x + player.hitboxXcenter - xLvlOffset),
-        // (int) (player.getHitbox().y + player.hitboxYcenter - yLvlOffset), 100, 100);
     }
 
     @Override
-    public void onActive() {
+    public void onUpdate() {
         player.speed = 7;
     }
 
     @Override
     public void onExpired() {
         player.speed = Player.speedDefault;
+    }
+
+    @Override
+    public void onActive() {
     }
 
 }

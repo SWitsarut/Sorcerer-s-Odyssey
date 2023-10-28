@@ -22,6 +22,7 @@ public abstract class Buff {
 
     public void update() {
         if (buff.active) {
+            onUpdate();
             oldActive = buff.active;
             buff.update();
             if (oldActive != buff.active) {
@@ -33,6 +34,8 @@ public abstract class Buff {
     public boolean isActive() {
         return buff.active;
     }
+
+    public abstract void onUpdate();
 
     public abstract void onActive();
 

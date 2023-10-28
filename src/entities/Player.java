@@ -46,17 +46,17 @@ public class Player extends Entity {
     private boolean up, down, right, left;
 
     private double hp, mp;
-    private double maxHp = 200, maxMp = 100;
+    private double maxHp = 175, maxMp = 150;
 
     private double mpRegen;
     private double hpRegen;
 
-    private double mpRegenMul = 1;
-    private double hpRegenMul = 1;
-    private double mpRegenMulDefault = 1;
-    private double hpRegenMulDefault = 1;
+    public double mpRegenMul = 1;
+    public double hpRegenMul = 1;
+    public double mpRegenMulDefault = 1;
+    public double hpRegenMulDefault = 1;
 
-    private int curSpellgap, maxSpellGap = (int) (0.1 * UPS_SET);
+    private int curSpellgap, maxSpellGap = (int) (0.2 * UPS_SET);
     private boolean castSpellable = true;
 
     private boolean iFraming = false;

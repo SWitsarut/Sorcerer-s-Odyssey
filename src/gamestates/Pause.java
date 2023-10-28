@@ -164,7 +164,9 @@ public class Pause extends State implements Statemethods {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
     }
 }

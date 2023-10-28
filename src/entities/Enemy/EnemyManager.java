@@ -59,7 +59,7 @@ public class EnemyManager {
                     if (!projectile.enemyhitted.contains(enemy)
                             && enemy.getHitbox().intersects(projectile.getHitbox())
                             && projectile.isPlayerOwn()) {
-                        enemy.getAttacked(projectile.damage);
+                        enemy.getAttacked(projectile.hit());
                         effectManager.playAttacked(enemyCenterX,
                                 enemyCenterY);
                         projectile.enemyhitted.add(enemy);

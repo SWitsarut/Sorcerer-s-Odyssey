@@ -13,8 +13,8 @@ public class FireBall extends Projectile {
     private SoundEffect impactSound;
 
     public FireBall(Coordinate playerCoor, Coordinate targetCoor) {
-        super(new Damage(Damage.FIRE, 80), true, 0.5, playerCoor.x, playerCoor.y, targetCoor, 32, 32);
-        setSpeed(7);
+        super(new Damage(Damage.FIRE, 80), true, 0.8, playerCoor.x, playerCoor.y, targetCoor, 32, 32);
+        setSpeed(9);
         setExpiredOntarget(true);
         castSound = new SoundEffect("magic/start.wav", 70);
         impactSound = new SoundEffect("magic/end.wav", 70);

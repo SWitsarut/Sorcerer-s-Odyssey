@@ -24,14 +24,14 @@ public abstract class Projectile extends Entity {
     /**
      * speed : pixel per update
      */
-    private double speed;
-    private boolean expiredOntarget;
+    protected double speed;
+    protected boolean expiredOntarget;
 
     protected Coordinate targetCoor;
     protected BufferedImage[] animate;
 
-    private double xSpeed;
-    private double ySpeed;
+    protected double xSpeed;
+    protected double ySpeed;
 
     public Projectile(Damage dmg, Boolean playerOwn, double lifeTime, float xStart, float yStart, Coordinate targetCoor,
             float width,
@@ -103,6 +103,14 @@ public abstract class Projectile extends Entity {
                 ySpeed = (speed / distance) * dy;
             }
         }
+    }
+
+    public Damage hit() {
+        if (expiredOntarget) {
+            active = false;
+        }
+        return damage;
+
     }
 
     public boolean isActive() {

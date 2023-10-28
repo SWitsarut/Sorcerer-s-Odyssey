@@ -44,6 +44,9 @@ public class Playing extends State implements Statemethods {
     private int crosshairSize = 40;
     // private ArrayList<MotherObject> arrObj = new ArrayList<>();
 
+    private boolean m1pressed = false;
+    private boolean m3pressed = false;
+
     public Playing(
             Game game) {
         super(game);
@@ -91,9 +94,17 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
         player.update();
+        if (m3pressed) {
+            if (player.isCastable()) {
+                magic.cast(getClickedPos(mousePosX, mousePosY, xLvlOffset,
+                        yLvlOffset));
+            }
+
+        }
         enemyManager.update();
         effectManager.update();
         magic.update();
+
         checkCloseToBorder();
     }
 
@@ -138,24 +149,17 @@ public class Playing extends State implements Statemethods {
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
-        // hud.draw(g);
+        hud.draw(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         switch (e.getButton()) {
             case MouseEvent.BUTTON1:
-                if (player.isCastable()) {
-                    magic.castArcaneBullets(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
-                }
+                m1pressed = false;
                 break;
             case MouseEvent.BUTTON3:
-                if (player.isCastable()) {
-                    magic.castFireBall(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
-                }
-                break;
-
-            default:
+                m3pressed = false;
                 break;
         }
     }
@@ -164,16 +168,6 @@ public class Playing extends State implements Statemethods {
         Coordinate playerCoor = player.getPlayerOnScreen(xLvlOffset, yLvlOffset);
         return new Coordinate((int) (player.getHitbox().x + x - playerCoor.x),
                 (int) (player.getHitbox().y + y - playerCoor.y));
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        mousePosX = e.getX();
-        mousePosY = e.getY();
     }
 
     @Override
@@ -201,8 +195,12 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_I:
                 initClass();
                 break;
-            case KeyEvent.VK_T:
-                magic.castLightningBuff();
+            case KeyEvent.VK_Q:
+                magic.cycleRight();
+                ;
+                break;
+            case KeyEvent.VK_E:
+                magic.cycleLeft();
                 break;
         }
     }
@@ -229,19 +227,37 @@ public class Playing extends State implements Statemethods {
     public void mouseDragged(MouseEvent e) {
         mousePosX = e.getX();
         mousePosY = e.getY();
-        int modifiers = e.getModifiersEx();
+    }
 
-        if ((modifiers & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
-            if (player.isCastable()) {
-                magic.castFireBall(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
-            }
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        switch (e.getButton()) {
+            case MouseEvent.BUTTON1:
+                m1pressed = false;
+                break;
+            case MouseEvent.BUTTON3:
+                m3pressed = false;
+                break;
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mousePosX = e.getX();
+        mousePosY = e.getY();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        switch (e.getButton()) {
+            case MouseEvent.BUTTON1:
+                m1pressed = true;
+                break;
+            case MouseEvent.BUTTON3:
+                m3pressed = true;
+                break;
         }
 
-        else if ((modifiers & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
-            if (player.isCastable()) {
-                magic.castArcaneBullets(getClickedPos(e.getX(), e.getY(), xLvlOffset, yLvlOffset));
-            }
-        }
     }
 
 }

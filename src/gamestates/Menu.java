@@ -91,9 +91,9 @@ public class Menu extends State implements Statemethods {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        Point start = new Point(0, 0);
-        Point end = new Point(Config.SCREEN_WIDTH, 0);
-        GradientPaint gradientPaint = new GradientPaint(start, Color.RED, end, Color.BLACK);
+        Point start = new Point(Config.SCREEN_WIDTH / 2, 0);
+        Point end = new Point(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT);
+        GradientPaint gradientPaint = new GradientPaint(start, new Color(0, 10, 40), end, Color.BLACK);
         g2d.setPaint(gradientPaint);
         g2d.fill(new Rectangle2D.Double(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
@@ -168,5 +168,9 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
     }
 }

@@ -67,22 +67,44 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        switch (Gamestate.state) {
+            case MENU:
+                gp.getGame().getMenu().mousePressed(e);
+                break;
+            case PLAYING:
+                gp.getGame().getPlaying().mousePressed(e);
+                break;
+            case PAUSE:
+                gp.getGame().getPause().mousePressed(e);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
+        switch (Gamestate.state) {
+            case MENU:
+                gp.getGame().getMenu().mouseReleased(e);
+                break;
+            case PLAYING:
+                gp.getGame().getPlaying().mouseReleased(e);
+                break;
+            case PAUSE:
+                gp.getGame().getPause().mouseReleased(e);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
 }
