@@ -41,6 +41,7 @@ public abstract class Projectile extends Entity {
         enemyhitted = new ArrayList<>();
         this.active = true;
         this.lifeTime = new UpdateCounter(lifeTime, false);
+        this.lifeTime.start();
         this.targetCoor = targetCoor;
         this.targetCoor.x -= hitbox.width;
         this.targetCoor.y -= hitbox.height;
@@ -57,11 +58,11 @@ public abstract class Projectile extends Entity {
         oldActive = active;
         lifeTime.update();
         active = lifeTime.active;
+
         expiredUpdate();
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        this.drawHitbox(g, xLvlOffset, yLvlOffset);
         g.setColor(Color.RED);
         g.fillOval((int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset),
                 (int) (hitbox.width),

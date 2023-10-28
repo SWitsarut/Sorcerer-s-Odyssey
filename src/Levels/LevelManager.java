@@ -43,7 +43,7 @@ public class LevelManager {
             }
         }
     }
-
+    
     public void nextMap() {
         curMapIndex = (curMapIndex + 1) % mapNameArr.length;
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);

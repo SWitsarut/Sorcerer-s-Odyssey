@@ -1,6 +1,5 @@
 package effect;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class EffectManager {
         died = LoadSave.LinearAnimationLoader("asset/effect/died.png", 512);
         hitSound = new SoundEffect("attack and died/hit.wav", 80);
         diedSound = new SoundEffect("attack and died/died.wav", 80);
+
     }
 
     private void updateMember() {
@@ -51,8 +51,8 @@ public class EffectManager {
     }
 
     public void playDied(int x, int y) {
-        eff.add(new EffectPlayer(died, x, y, 1));
+        eff.add(new EffectPlayer(died, x, y, 0.5));
         diedSound.play();
-
     }
+
 }

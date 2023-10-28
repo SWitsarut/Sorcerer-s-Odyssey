@@ -21,8 +21,12 @@ import util.LoadSave;
 import util.Ui;
 
 public class Pause extends State implements Statemethods {
+
+    private Playing playing;
+
     public Pause(Game game) {
         super(game);
+        playing = game.getPlaying();
         initClasses();
     }
 
@@ -38,6 +42,7 @@ public class Pause extends State implements Statemethods {
     private void initClasses() {
         font = LoadSave.GetFont(40);
         text.add("RESUME");
+        text.add("RESTART");
         text.add("EXIT TO MENU");
         maxChoice = text.size();
         nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT, 80);
@@ -54,6 +59,11 @@ public class Pause extends State implements Statemethods {
                 Gamestate.state = Gamestate.PLAYING;
                 break;
             case 1:
+                playing.initClass();
+                Gamestate.state = Gamestate.PLAYING;
+                break;
+            case 2:
+                playing.initClass();
                 Gamestate.state = Gamestate.MENU;
                 break;
         }

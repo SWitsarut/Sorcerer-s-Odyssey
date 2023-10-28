@@ -50,7 +50,7 @@ public class Playing extends State implements Statemethods {
         initClass();
     }
 
-    private void initClass() {
+    public void initClass() {
         crosshair = LoadSave.GetImage("asset/crosshair007.png");
         effectManager = new EffectManager();
         player = new Player(0, 0, effectManager);
@@ -69,6 +69,7 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
         maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT - 1;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
+
     }
 
     public void windowFocusLost() {
@@ -137,7 +138,7 @@ public class Playing extends State implements Statemethods {
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
-        hud.draw(g);
+        // hud.draw(g);
     }
 
     @Override
@@ -196,6 +197,12 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_N:
                 player.toggleNoClip();
+                break;
+            case KeyEvent.VK_I:
+                initClass();
+                break;
+            case KeyEvent.VK_T:
+                magic.castLightningBuff();
                 break;
         }
     }

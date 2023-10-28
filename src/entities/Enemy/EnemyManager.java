@@ -25,7 +25,13 @@ public class EnemyManager {
         magic = playing.getMagic();
         enemies = new ArrayList<>();
         LoadAnimation();
-        enemies.add(new CorruptedTreant(corruptedTreantAnimation, 200, 200));
+        enemies.add(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
+    }
+
+    private void initEnemy(int level) {
+        switch (level) {
+
+        }
     }
 
     private void LoadAnimation() {
@@ -41,8 +47,10 @@ public class EnemyManager {
     public void update() {
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
+            int enemyCenterX = (int) (enemy.getHitbox().x + enemy.getHitbox().width / 2);
+            int enemyCenterY = (int) (enemy.getHitbox().y + enemy.getHitbox().height / 2);
             if (!enemy.isDead) {
-                enemy.update();
+                enemy.update(player);
                 if (player.getHitbox().intersects(enemy.getHitbox())) {
                     player.getAttacked(enemy.damage);
                 }
@@ -52,12 +60,13 @@ public class EnemyManager {
                             && enemy.getHitbox().intersects(projectile.getHitbox())
                             && projectile.isPlayerOwn()) {
                         enemy.getAttacked(projectile.damage);
-                        effectManager.playAttacked((int) enemy.getHitbox().x, (int) enemy.getHitbox().y);
-                        System.out.println(enemy.hp + "/" + enemy.maxHp);
+                        effectManager.playAttacked(enemyCenterX,
+                                enemyCenterY);
                         projectile.enemyhitted.add(enemy);
                     }
                 }
             } else {
+                effectManager.playDied(enemyCenterX, enemyCenterY);
                 enemies.remove(enemy);
             }
         }

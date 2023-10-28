@@ -152,6 +152,7 @@ public class LoadSave {
     public static BufferedImage GetImage(String file) {
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/res/" + file);
+        System.out.println("try to load /res/" + file);
 
         try {
             img = ImageIO.read(is);

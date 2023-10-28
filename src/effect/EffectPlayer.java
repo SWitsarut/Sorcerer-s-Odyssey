@@ -1,10 +1,8 @@
 package effect;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import util.Constants;
 import util.Constants.Config;
 
 public class EffectPlayer {

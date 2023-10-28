@@ -25,6 +25,7 @@ public class Player extends Entity {
     private EffectManager effectManager;
 
     private BufferedImage[][] animation;
+
     private Level collisionMap;
     private float xDrawOffset = (float) (10 * SCALE);
     private float yDrawOffset = (float) (16 * SCALE);
@@ -39,7 +40,8 @@ public class Player extends Entity {
     private boolean facingLeft = false;
 
     private int palyerAction = IDLE;
-    private double speed = 5;
+    public double speed = 5;
+    public static double speedDefault = 5;
 
     private boolean up, down, right, left;
 
@@ -126,6 +128,11 @@ public class Player extends Entity {
         }
     }
 
+    public void resetRegen() {
+        mpRegenMul = mpRegenMulDefault;
+        hpRegenMul = hpRegenMulDefault;
+    }
+
     private void SpellCastGap() {
         if (!castSpellable) {
             if (curSpellgap >= maxSpellGap) {
@@ -191,7 +198,7 @@ public class Player extends Entity {
                     CHAR_SIZE,
                     null);
         }
-        drawHitbox(g, xLvlOffset, yLvlOffset);
+        // drawHitbox(g, xLvlOffset, yLvlOffset);
     }
 
     public Coordinate getPlayerOnScreen(int xLvlOffset, int yLvlOffset) {
@@ -207,7 +214,8 @@ public class Player extends Entity {
         animation = new BufferedImage[5][10];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
-                animation[i][j] = img.getSubimage(CHAR_DEFAULT_SIZE * j, CHAR_DEFAULT_SIZE * i, CHAR_DEFAULT_SIZE,
+                animation[i][j] = img.getSubimage(CHAR_DEFAULT_SIZE * j, 5 * CHAR_DEFAULT_SIZE + CHAR_DEFAULT_SIZE * i,
+                        CHAR_DEFAULT_SIZE,
                         CHAR_DEFAULT_SIZE);
             }
         }

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
+import entities.Enemy.CorruptedTreant;
+import helperClass.Coordinate;
+
 public abstract class Entity {
 
     protected float x, y, width, height;
@@ -26,6 +29,14 @@ public abstract class Entity {
 
     public void initHitbox(float x, float y, float width, float height) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
+    }
+
+    public int getCenterX() {
+        return (int) (x + width / 2);
+    }
+
+    public int getCenterY() {
+        return (int) (x + width / 2);
     }
 
     protected void updateHitbox(int x, int y) {

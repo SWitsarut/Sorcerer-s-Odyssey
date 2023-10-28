@@ -19,8 +19,8 @@ public class ArcaneBullet extends Projectile {
         super(new Damage(Damage.ARCANE, 10), true, 0.3, playerCoor.x, playerCoor.y, targetCoor, 16, 16);
         setSpeed(20);
         setExpiredOntarget(false);
-        castSound = new SoundEffect("magic/start.wav", 70);
-        impactSound = new SoundEffect("magic/end.wav", 70);
+        castSound = new SoundEffect("magic/start.wav", 40);
+        impactSound = new SoundEffect("magic/end.wav", 40);
         castSound.play();
     }
 

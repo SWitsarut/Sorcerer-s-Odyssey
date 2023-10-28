@@ -33,14 +33,14 @@ public class Menu extends State implements Statemethods {
     private Coordinate[] coordinates;
 
     private void initClasses() {
-        text.add("START");
+        text.add("NEW GAME");
         text.add("OPTION");
         text.add("CREDIT");
         text.add("EXIT TO DESKTOP");
         maxChoice = text.size();
         titleMusic = new Sound("song/title.wav");
-        nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT,80);
-        submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT,80);
+        nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT, 80);
+        submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT, 80);
         titleMusic.setVolume(60);
         nextEffect.setVolume(60);
         submitEffect.setVolume(60);

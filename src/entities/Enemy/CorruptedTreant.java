@@ -9,7 +9,9 @@ public class CorruptedTreant extends Enemy {
     public CorruptedTreant(BufferedImage[] animation, float x, float y) {
         super(animation, 2, Def.CorruptedTreantDef, x, y, 32, 32);
         maxAniFrame = 4;
-        damage = 10;
+        damage = 22;
+        speed = 4;
+        aggroRange = 420;
         setHp(200);
     }
 
