@@ -5,6 +5,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Magic.Buff_Spell.ArcaneSurge;
+import Magic.Buff_Spell.Buff;
+import Magic.Buff_Spell.LightningBuff;
+import Magic.Buff_Spell.Regeneration;
+import Magic.Projectile_Spell.ArcaneBullet;
+import Magic.Projectile_Spell.Bolt;
+import Magic.Projectile_Spell.DivineOrb;
+import Magic.Projectile_Spell.FireBall;
 import entities.Player;
 import entities.Projectile.Projectile;
 import gamestates.Playing;
@@ -52,6 +60,9 @@ public class Magic {
                     case 0:
                         castArcaneBullets(targetCoor);
                         break;
+                    case 2:
+                        castArcaneSurge();
+                        break;
                 }
                 break;
             case Lightning:
@@ -60,14 +71,19 @@ public class Magic {
                         // castLightningBuff();
                         castBolt(targetCoor);
                         break;
+                    case 2:
+                        // castLightningBuff();
+                        castLightningBuff();
+                        break;
                 }
                 break;
             case Holy:
                 switch (selectedChoice) {
                     case 0:
+                        castSmite(targetCoor);
+                        break;
+                    case 2:
                         castRegeneration();
-                        // castSmite(targetCoor);
-
                         break;
                 }
                 break;
@@ -143,9 +159,9 @@ public class Magic {
     }
 
     public void castSmite(Coordinate targetCoor) {
-        if (player.castSpell(Bolt.cost)) {
+        if (player.castSpell(DivineOrb.cost)) {
 
-            projectiles.add(new Smite(player.getPlayerCenter(), targetCoor));
+            projectiles.add(new DivineOrb(player.getPlayerCenter(), targetCoor));
         }
     }
 
@@ -163,6 +179,12 @@ public class Magic {
             projectiles.add(new ArcaneBullet(player.getPlayerCenter(), targetCoor));
             projectiles.add(new ArcaneBullet(player.getPlayerCenter(), right));
 
+        }
+    }
+
+    public void castArcaneSurge() {
+        if (player.castSpell(ArcaneSurge.cost)) {
+            buffs.add(new ArcaneSurge(player));
         }
     }
 

@@ -1,6 +1,7 @@
-package Magic;
+package Magic.Projectile_Spell;
 
 import Action.Damage;
+import entities.Player;
 import entities.Projectile.Projectile;
 import helperClass.Coordinate;
 import main.sound.SoundEffect;
@@ -13,7 +14,7 @@ public class FireBall extends Projectile {
     private SoundEffect impactSound;
 
     public FireBall(Coordinate playerCoor, Coordinate targetCoor) {
-        super(new Damage(Damage.FIRE, 80), true, 0.8, playerCoor.x, playerCoor.y, targetCoor, 32, 32);
+        super(new Damage(Damage.FIRE, 80* Player.dmgMul), true, 0.8, playerCoor.x, playerCoor.y, targetCoor, 32, 32);
         setSpeed(9);
         setExpiredOntarget(true);
         castSound = new SoundEffect("magic/start.wav", 70);

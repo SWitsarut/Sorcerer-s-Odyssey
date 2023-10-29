@@ -51,10 +51,13 @@ public class Player extends Entity {
     private double mpRegen;
     private double hpRegen;
 
-    public double mpRegenMul = 1;
-    public double hpRegenMul = 1;
-    public double mpRegenMulDefault = 1;
+    public double mpRegenMulDefault = 1.25;
     public double hpRegenMulDefault = 1;
+    public double mpRegenMul = mpRegenMulDefault;
+    public double hpRegenMul = hpRegenMulDefault;
+
+    public static double dmgMulDefault = 1;
+    public static double dmgMul = dmgMulDefault;
 
     private int curSpellgap, maxSpellGap = (int) (0.2 * UPS_SET);
     private boolean castSpellable = true;

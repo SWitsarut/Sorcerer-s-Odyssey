@@ -1,21 +1,22 @@
-package Magic;
+package Magic.Projectile_Spell;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import Action.Damage;
+import entities.Player;
 import entities.Projectile.Projectile;
 import helperClass.Coordinate;
 import main.sound.SoundEffect;
 
-public class Smite extends Projectile {
+public class DivineOrb extends Projectile {
 
     public static double cost = 24;
 
     private SoundEffect castSound;
 
-    public Smite(Coordinate playerCoor, Coordinate targetCoor) {
-        super(new Damage(Damage.HOLY, 70), true, 1, targetCoor.x - 50, targetCoor.y - 50, playerCoor, 100, 100);
+    public DivineOrb(Coordinate playerCoor, Coordinate targetCoor) {
+        super(new Damage(Damage.HOLY, 70* Player.dmgMul), true, 1, targetCoor.x - 50, targetCoor.y - 50, playerCoor, 100, 100);
         setSpeed(5);
         setExpiredOntarget(false);
         castSound = new SoundEffect("magic/start.wav", 40);

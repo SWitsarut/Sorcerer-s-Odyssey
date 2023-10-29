@@ -1,4 +1,4 @@
-package Magic;
+package Magic.Buff_Spell;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

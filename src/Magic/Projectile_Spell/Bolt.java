@@ -1,21 +1,23 @@
-package Magic;
+package Magic.Projectile_Spell;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import Action.Damage;
+import entities.Player;
 import entities.Projectile.Projectile;
 import helperClass.Coordinate;
 import main.sound.SoundEffect;
 
 public class Bolt extends Projectile {
 
-    public static double cost = 80;
+    public static double cost = 40;
 
     private SoundEffect castSound;
 
     public Bolt(Coordinate playerCoor, Coordinate targetCoor) {
-        super(new Damage(Damage.LIGHTING, 70), true, 0.2, playerCoor.x, playerCoor.y, targetCoor, 24, 24);
+        super(new Damage(Damage.LIGHTING, 70 * Player.dmgMul), true, 0.2, playerCoor.x, playerCoor.y, targetCoor, 24,
+                24);
         setSpeed(90);
         setExpiredOntarget(false);
         castSound = new SoundEffect("magic/start.wav", 40);

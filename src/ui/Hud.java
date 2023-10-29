@@ -24,10 +24,13 @@ public class Hud {
         private int aniTick = 0, aniIndex, aniFramePersecond = Config.ANIMATION_FRAME_PERSECOND;
         private int oldElement = Magic.selectedElement;
 
-        BufferedImage[][] elementAni = new BufferedImage[4][];
+        private BufferedImage[][] elementAni = new BufferedImage[4][];
+
+        private SkillHud skillHud;
 
         public Hud(Player player) {
                 this.player = player;
+                skillHud = new SkillHud();
                 BufferedImage img = LoadSave.GetImage("asset/effect/Pixel Holy Spell Effect 01.png");
                 // 64 px
                 elementAni[Magic.Holy] = new BufferedImage[16];
@@ -63,7 +66,7 @@ public class Hud {
                 oldElement = Magic.selectedElement;
         }
 
-        public void draw(Graphics g) {
+        public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
 
                 Graphics2D g2d = (Graphics2D) g;
 
@@ -106,5 +109,11 @@ public class Hud {
                 g.drawRect(elementPos.x, elementPos.y, 64, 64);
                 updateAnimationTick();
                 g.drawImage(elementAni[Magic.selectedElement][aniIndex], elementPos.x, elementPos.y, 64, 64, null);
+                Coordinate playerCoor = player.getPlayerOnScreen(xLvlOffset, yLvlOffset);
+                g.drawImage(elementAni[Magic.selectedElement][aniIndex],
+                                playerCoor.x + 16, playerCoor.y - 20, 32, 32, null);
+
+                // skill hud
+                skillHud.draw(g);
         }
 }

@@ -149,7 +149,7 @@ public class Playing extends State implements Statemethods {
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
-        hud.draw(g);
+        hud.draw(g, xLvlOffset, yLvlOffset);
     }
 
     @Override
@@ -201,6 +201,15 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_E:
                 magic.cycleLeft();
+                break;
+            case KeyEvent.VK_1:
+                Magic.selectedChoice = 0;
+                break;
+            case KeyEvent.VK_2:
+                Magic.selectedChoice = 1;
+                break;
+            case KeyEvent.VK_3:
+                Magic.selectedChoice = 2;
                 break;
         }
     }

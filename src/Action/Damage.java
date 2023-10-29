@@ -8,9 +8,9 @@ public class Damage {
     public static final int PHYSICAL = 4;
 
     private int type;
-    private int damage;
+    private double damage;
 
-    public Damage(int type, int damage) {
+    public Damage(int type, double damage) {
         this.type = type;
         this.damage = damage;
     }
@@ -23,7 +23,7 @@ public class Damage {
         this.type = type;
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 

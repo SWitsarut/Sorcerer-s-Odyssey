@@ -1,4 +1,4 @@
-package Magic;
+package Magic.Buff_Spell;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,9 +9,9 @@ import main.sound.SoundEffect;
 import util.Constants.Config;
 
 // Fantasy_UI (29).wav
-public class ArcaneSurge extends Buff {
+public class Regeneration extends Buff {
 
-    public static double cost = 75;
+    public static double cost = 95;
 
     Player player;
 
@@ -19,37 +19,38 @@ public class ArcaneSurge extends Buff {
     SoundEffect endSound;
     // int scale = 3;
 
-    public ArcaneSurge(Player player) {
-        super(8);
+    public Regeneration(Player player) {
+        super(5);
         this.player = player;
-        castSound = new SoundEffect("Fantasy/ Fantasy_UI (29).wav", 60);
-        endSound = new SoundEffect("Fantasy/Fantasy_UI (30).wav", 60);
+        castSound = new SoundEffect("Fantasy/Fantasy_UI (51).wav", 60);
+        endSound = new SoundEffect("Fantasy/Fantasy_UI (52).wav", 60);
+        castSound.play();
         start();
     }
 
     @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         Coordinate playercenter = player.getPlayerCenter();
-        g.setColor(new Color(225, 234, 61, 20));
-        g.fillOval(playercenter.x - xLvlOffset - Config.CHAR_SIZE,
-                playercenter.y - yLvlOffset - Config.CHAR_SIZE, Config.CHAR_SIZE * 2,
-                Config.CHAR_SIZE * 2);
+        g.setColor(new Color(225, 234, 61, 80));
+
+        g.drawOval(playercenter.x - xLvlOffset - Config.CHAR_SIZE / 4,
+                playercenter.y - yLvlOffset - Config.CHAR_SIZE - 16, Config.CHAR_SIZE / 2,
+                Config.CHAR_SIZE / 3);
     }
 
     @Override
     public void onUpdate() {
-        player.mpRegenMul = 2.25;
+        player.hpRegenMul = 2;
     }
 
     @Override
     public void onExpired() {
-        player.mpRegenMul = player.mpRegenMulDefault;
+        player.hpRegenMul = player.hpRegenMulDefault;
         endSound.play();
     }
 
     @Override
     public void onActive() {
-        castSound.play();
     }
 
 }
