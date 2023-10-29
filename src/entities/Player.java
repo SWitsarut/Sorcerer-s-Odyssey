@@ -59,7 +59,7 @@ public class Player extends Entity {
     public static double dmgMulDefault = 1;
     public static double dmgMul = dmgMulDefault;
 
-    private int curSpellgap, maxSpellGap = (int) (0.2 * UPS_SET);
+    public int curSpellgap, maxSpellGap = (int) (0.2 * UPS_SET);
     private boolean castSpellable = true;
 
     private boolean iFraming = false;

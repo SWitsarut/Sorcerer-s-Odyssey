@@ -11,7 +11,7 @@ import main.sound.SoundEffect;
 
 public class Bolt extends Projectile {
 
-    public static double cost = 40;
+    public static double cost = 30;
 
     private SoundEffect castSound;
 

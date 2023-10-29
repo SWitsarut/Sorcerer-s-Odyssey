@@ -9,13 +9,13 @@ import entities.Projectile.Projectile;
 import helperClass.Coordinate;
 import main.sound.SoundEffect;
 
-public class ArcaneBullet extends Projectile {
+public class ArcaneBlast extends Projectile {
 
     public static double cost = 20;
 
     private SoundEffect castSound;
 
-    public ArcaneBullet(Coordinate playerCoor, Coordinate targetCoor) {
+    public ArcaneBlast(Coordinate playerCoor, Coordinate targetCoor) {
         super(new Damage(Damage.ARCANE, 10 * Player.dmgMul), true, 0.3, playerCoor.x, playerCoor.y, targetCoor, 16, 16);
         setSpeed(20);
         setExpiredOntarget(false);

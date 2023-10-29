@@ -26,6 +26,11 @@ public abstract class Projectile extends Entity {
      */
     protected double speed;
     protected boolean expiredOntarget;
+    protected boolean expiredOnHit;
+
+    public void setExpiredOnHit(boolean expiredOnHit) {
+        this.expiredOnHit = expiredOnHit;
+    }
 
     protected Coordinate targetCoor;
     protected BufferedImage[] animate;
@@ -106,7 +111,7 @@ public abstract class Projectile extends Entity {
     }
 
     public Damage hit() {
-        if (expiredOntarget) {
+        if (expiredOntarget | expiredOnHit) {
             active = false;
         }
         return damage;

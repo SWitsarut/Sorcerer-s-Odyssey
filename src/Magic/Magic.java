@@ -9,7 +9,8 @@ import Magic.Buff_Spell.ArcaneSurge;
 import Magic.Buff_Spell.Buff;
 import Magic.Buff_Spell.LightningBuff;
 import Magic.Buff_Spell.Regeneration;
-import Magic.Projectile_Spell.ArcaneBullet;
+import Magic.Projectile_Spell.ArcaneBlast;
+import Magic.Projectile_Spell.ArcaneMachineGun;
 import Magic.Projectile_Spell.Bolt;
 import Magic.Projectile_Spell.DivineOrb;
 import Magic.Projectile_Spell.FireBall;
@@ -60,6 +61,9 @@ public class Magic {
                     case 0:
                         castArcaneBullets(targetCoor);
                         break;
+                    case 1:
+                        castArcaneMachineGun(targetCoor);
+                        break;
                     case 2:
                         castArcaneSurge();
                         break;
@@ -68,7 +72,6 @@ public class Magic {
             case Lightning:
                 switch (selectedChoice) {
                     case 0:
-                        // castLightningBuff();
                         castBolt(targetCoor);
                         break;
                     case 2:
@@ -172,13 +175,20 @@ public class Magic {
     }
 
     public void castArcaneBullets(Coordinate targetCoor) {
-        if (player.castSpell(ArcaneBullet.cost)) {
+        if (player.castSpell(ArcaneBlast.cost)) {
             Coordinate left = new Coordinate(targetCoor.x - 20, targetCoor.y - 50);
             Coordinate right = new Coordinate(targetCoor.x - 20, targetCoor.y + 50);
-            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), left));
-            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), targetCoor));
-            projectiles.add(new ArcaneBullet(player.getPlayerCenter(), right));
+            projectiles.add(new ArcaneBlast(player.getPlayerCenter(), left));
+            projectiles.add(new ArcaneBlast(player.getPlayerCenter(), targetCoor));
+            projectiles.add(new ArcaneBlast(player.getPlayerCenter(), right));
 
+        }
+    }
+
+    public void castArcaneMachineGun(Coordinate targetCoor) {
+        if (player.castSpell(ArcaneMachineGun.cost)) {
+            projectiles.add(new ArcaneMachineGun(player.getPlayerCenter(), targetCoor));
+            player.curSpellgap = player.maxSpellGap / 2 + player.maxSpellGap / 4;
         }
     }
 

@@ -38,7 +38,7 @@ public class ArcaneSurge extends Buff {
 
     @Override
     public void onUpdate() {
-        player.mpRegenMul = 1.75;
+        player.mpRegenMul = 1.3;
     }
 
     @Override
