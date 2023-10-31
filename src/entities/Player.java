@@ -87,7 +87,7 @@ public class Player extends Entity {
             curIFrameTick = 0;
             iFraming = true;
             effectManager.playAttacked((int) hitbox.x + hitboxXcenter, (int) hitbox.y +
-                    hitboxYcenter);
+                    hitboxYcenter, true);
         }
     }
 

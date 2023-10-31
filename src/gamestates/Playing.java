@@ -11,6 +11,7 @@ import effect.EffectManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
 import helperClass.Coordinate;
+import interact.InteractableManager;
 import main.Game;
 import ui.Hud;
 import util.LoadSave;
@@ -21,6 +22,16 @@ public class Playing extends State implements Statemethods {
     private LevelManager levelManager;
     private Player player;
     private EnemyManager enemyManager;
+    private InteractableManager interactableManager;
+
+    public InteractableManager getInteractableManager() {
+        return interactableManager;
+    }
+
+    public EnemyManager getEnemyManager() {
+        return enemyManager;
+    }
+
     private EffectManager effectManager;
     private Hud hud;
     private Magic magic;
@@ -47,8 +58,7 @@ public class Playing extends State implements Statemethods {
     private boolean m1pressed = false;
     private boolean m3pressed = false;
 
-    public Playing(
-            Game game) {
+    public Playing(Game game) {
         super(game);
         initClass();
     }
@@ -61,6 +71,7 @@ public class Playing extends State implements Statemethods {
         hud = new Hud(player);
         magic = new Magic(this);
         enemyManager = new EnemyManager(this);
+        interactableManager = new InteractableManager(game);
         handleMapChange();
     }
 
@@ -72,7 +83,8 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
         maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT - 1;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
-
+        levelManager.levelEvents[LevelManager.curMapIndex].onEnter();
+        enemyManager.initEnemy(LevelManager.curMapIndex);
     }
 
     public void windowFocusLost() {
@@ -103,8 +115,9 @@ public class Playing extends State implements Statemethods {
         }
         enemyManager.update();
         effectManager.update();
+        hud.update();
         magic.update();
-
+        interactableManager.update();
         checkCloseToBorder();
     }
 
@@ -138,17 +151,17 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
-        magic.draw(g, xLvlOffset, yLvlOffset);
         effectManager.draw(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
+        magic.draw(g, xLvlOffset, yLvlOffset);
         int aniIndex = player.getAniIndex();
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
+        interactableManager.draw(g, xLvlOffset, yLvlOffset);
         hud.draw(g, xLvlOffset, yLvlOffset);
     }
 
@@ -197,7 +210,6 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_Q:
                 magic.cycleRight();
-                ;
                 break;
             case KeyEvent.VK_E:
                 magic.cycleLeft();
@@ -210,6 +222,9 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_3:
                 Magic.selectedChoice = 2;
+                break;
+            case KeyEvent.VK_P:
+                levelManager.nextMap();
                 break;
         }
     }

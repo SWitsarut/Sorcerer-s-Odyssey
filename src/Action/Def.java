@@ -16,5 +16,6 @@ public class Def {
         PhysicalDef = physicalDef;
     }
 
-    public static final Def CorruptedTreantDef = new Def(-100, -10, 70, 0, 20);
+    public static final Def CorruptedTreantDef = new Def(-100, -10, 70, 0, 30);
+    public static final Def GoblinWolfRider = new Def(0, 50, 0, 20, 20);
 }

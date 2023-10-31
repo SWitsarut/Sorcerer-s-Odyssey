@@ -26,6 +26,7 @@ public abstract class Enemy extends Entity {
     protected double xSpeed;
     protected double ySpeed;
 
+    public boolean attacked = false;
     protected Def def;
 
     protected boolean chasing;
@@ -89,6 +90,9 @@ public abstract class Enemy extends Entity {
     public void update(Player player) {
         chase(player);
         move();
+        if (hp < maxHp) {
+            attacked = true;
+        }
     };
 
     protected void chase(Player player) {
@@ -103,7 +107,7 @@ public abstract class Enemy extends Entity {
 
         if (distance <= aggroRange) {
             chasing = true;
-        } else if (hp >= maxHp) {
+        } else if (hp >= maxHp && !attacked) {
             chasing = false;
             xSpeed = 0;
             ySpeed = 0;

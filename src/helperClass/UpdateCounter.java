@@ -14,6 +14,9 @@ public class UpdateCounter {
         targetCount = (int) (second * Config.UPS_SET);
     }
 
+    public void onUpdate() {
+    };
+
     public void start() {
         active = true;
     }
@@ -21,6 +24,7 @@ public class UpdateCounter {
     public void update() {
         curCount++;
         if (curCount > targetCount && active) {
+            onUpdate();
             curCount = 0;
             if (!isCycle) {
                 active = false;

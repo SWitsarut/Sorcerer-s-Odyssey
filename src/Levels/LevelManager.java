@@ -3,17 +3,26 @@ package Levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import entities.Enemy.CorruptedTreant;
+import entities.Enemy.EnemyManager;
 import main.Game;
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
 
 public class LevelManager {
-    // private Game game;
+
+    public static final int CAVE = 0;
+    public static final int CAMP = 1;
+    public static final int TEMPLE = 2;
+
+    private Game game;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
+    public LevelEvent levelEvents[];
 
-    private int curMapIndex = 0;
+    // private EnemyManager enemyManager;
+    public static int curMapIndex = 0;
     private String[] mapNameArr;
 
     public Level getCollision() {
@@ -21,10 +30,60 @@ public class LevelManager {
     }
 
     public LevelManager(Game game) {
-        // this.game = game;
+        this.game = game;
+        // enemyManager = game.getPlaying().getEnemyManager();
         importTile();
         mapNameArr = getFileList("");
+
+        System.out.println("\n**********\nList of map name\n__________\n");
+        for (String lvName : mapNameArr) {
+            System.out.println(lvName);
+        }
+        System.out.println("\n**********");
+
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
+        levelEvents = new LevelEvent[levelLayers.length];
+
+        initLevelEvent();
+
+    }
+
+    private void initLevelEvent() {
+        levelEvents[CAVE] = new LevelEvent() {
+
+            @Override
+            public void onEnter() {
+            }
+
+            @Override
+            public void onExit() {
+            }
+
+        };
+
+        levelEvents[CAMP] = new LevelEvent() {
+
+            @Override
+            public void onEnter() {
+            }
+
+            @Override
+            public void onExit() {
+            }
+
+        };
+        levelEvents[TEMPLE] = new LevelEvent() {
+
+            @Override
+            public void onEnter() {
+                game.getPlaying().getInteractableManager().monsterHordeEvent();
+            }
+
+            @Override
+            public void onExit() {
+                game.getPlaying().getInteractableManager().monsterHordeEnd();
+            }
+        };
     }
 
     public void importTile() {
@@ -43,10 +102,13 @@ public class LevelManager {
             }
         }
     }
-    
+
     public void nextMap() {
+        game.getPlaying().getEnemyManager().enemiesClear();
+        levelEvents[curMapIndex].onExit();
         curMapIndex = (curMapIndex + 1) % mapNameArr.length;
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
+        game.getPlaying().handleMapChange();
     }
 
     public void drawBehind(Graphics g, int xLvlOffset, int yLvlOffset) {

@@ -9,6 +9,14 @@ public class Level {
         // System.out.println(getXlength());
     }
 
+    public void onEnter() {
+
+    };
+
+    public void onExist() {
+
+    };
+
     public int[][] getData() {
         return lvlData;
     }

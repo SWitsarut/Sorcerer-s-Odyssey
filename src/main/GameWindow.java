@@ -9,6 +9,10 @@ import java.awt.event.WindowFocusListener;
 public class GameWindow {
     private JFrame jframe;
 
+    public void visible() {
+        jframe.setVisible(true);
+    }
+
     GameWindow(GamePanel gp) {
         jframe = new JFrame();
 
@@ -23,7 +27,7 @@ public class GameWindow {
         ImageIcon icon = new ImageIcon("src/res/asset/icond.png");
         jframe.setIconImage(icon.getImage());
         // keep last
-        jframe.setVisible(true);
+        // jframe.setVisible(true);
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 

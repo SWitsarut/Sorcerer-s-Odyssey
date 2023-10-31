@@ -45,9 +45,11 @@ public class EffectManager {
         }
     }
 
-    public void playAttacked(int x, int y) {
+    public void playAttacked(int x, int y, boolean isPlayer) {
         eff.add(new EffectPlayer(attacked, x, y, 0.3));
-        hitSound.play();
+        if (isPlayer)
+            hitSound.play();
+
     }
 
     public void playDied(int x, int y) {

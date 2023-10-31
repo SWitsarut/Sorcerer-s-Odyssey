@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import Levels.LevelManager;
 import Magic.Magic;
 import effect.EffectManager;
 import entities.Player;
@@ -14,10 +15,15 @@ import util.LoadSave;
 public class EnemyManager {
 
     BufferedImage[] corruptedTreantAnimation;
-    ArrayList<Enemy> enemies;
+    BufferedImage[] goblinWolfRiderAni;
+
+    private ArrayList<Enemy> enemies;
     private Player player;
     private EffectManager effectManager;
     private Magic magic;
+
+    public static int MOB_COUNT = 0;
+    public static final int MOBCAP = 45;
 
     public EnemyManager(Playing playing) {
         player = playing.getPlayer();
@@ -25,17 +31,28 @@ public class EnemyManager {
         magic = playing.getMagic();
         enemies = new ArrayList<>();
         LoadAnimation();
-        enemies.add(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
+        initEnemy(LevelManager.curMapIndex);
+        // enemies.add(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
     }
 
-    private void initEnemy(int level) {
+    public void initEnemy(int level) {
+        enemies.clear();
         switch (level) {
-
+            case LevelManager.CAVE:
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 750, 500));
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 800, 500));
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 1000, 500));
+                break;
+            case LevelManager.CAMP:
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 300, 700));
+                addMob(new CorruptedTreant(corruptedTreantAnimation, 700, 500));
         }
     }
 
     private void LoadAnimation() {
         corruptedTreantAnimation = LoadSave.LinearAnimationLoader("entity/enemy/CorruptedTreantIdle.png", 16);
+        goblinWolfRiderAni = LoadSave.LinearAnimationLoader("entity/enemy/GoblinWolfRiderIdleSide.png", 16);
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -44,7 +61,29 @@ public class EnemyManager {
         }
     }
 
+    public void enemiesClear() {
+        enemies.clear();
+    }
+
+    public void spawnTreant(int x, int y) {
+        addMob(new CorruptedTreant(corruptedTreantAnimation, x, y));
+    }
+
+    public void spawnWolfRider(int x, int y, boolean aggro) {
+        Enemy wolfRider = new GoblinWolfRider(goblinWolfRiderAni, x, y);
+        wolfRider.attacked = aggro;
+        addMob(wolfRider);
+
+    }
+
+    public void addMob(Enemy enemy) {
+        if (!(MOB_COUNT > MOBCAP)) {
+            enemies.add(enemy);
+        }
+    }
+
     public void update() {
+        MOB_COUNT = enemies.size();
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
             int enemyCenterX = (int) (enemy.getHitbox().x + enemy.getHitbox().width / 2);
@@ -61,7 +100,7 @@ public class EnemyManager {
                             && projectile.isPlayerOwn()) {
                         enemy.getAttacked(projectile.hit());
                         effectManager.playAttacked(enemyCenterX,
-                                enemyCenterY);
+                                enemyCenterY, false);
                         projectile.enemyhitted.add(enemy);
                     }
                 }

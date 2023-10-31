@@ -9,10 +9,9 @@ public class ArcaneMachineGun extends ArcaneBlast {
 
     public ArcaneMachineGun(Coordinate playerCoor, Coordinate targetCoor) {
         super(playerCoor, targetCoor);
-        damage = new Damage(Damage.ARCANE, 15);
+        damage = new Damage(Damage.ARCANE, 24.5);
         setExpiredOntarget(false);
         setExpiredOnHit(true);
         setSpeed(24);
     }
-
 }

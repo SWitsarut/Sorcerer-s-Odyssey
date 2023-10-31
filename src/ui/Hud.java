@@ -66,6 +66,10 @@ public class Hud {
                 oldElement = Magic.selectedElement;
         }
 
+        public void update() {
+                updateAnimationTick();
+        }
+
         public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
 
                 Graphics2D g2d = (Graphics2D) g;
@@ -107,7 +111,7 @@ public class Hud {
                 g.fillRect(elementPos.x, elementPos.y, 64, 64);
                 g.setColor(Color.GRAY);
                 g.drawRect(elementPos.x, elementPos.y, 64, 64);
-                updateAnimationTick();
+
                 g.drawImage(elementAni[Magic.selectedElement][aniIndex], elementPos.x, elementPos.y, 64, 64, null);
                 Coordinate playerCoor = player.getPlayerOnScreen(xLvlOffset, yLvlOffset);
                 g.drawImage(elementAni[Magic.selectedElement][aniIndex],

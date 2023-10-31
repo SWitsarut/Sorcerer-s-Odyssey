@@ -45,7 +45,13 @@ public abstract class Projectile extends Entity {
         damage = dmg;
         enemyhitted = new ArrayList<>();
         this.active = true;
-        this.lifeTime = new UpdateCounter(lifeTime, false);
+        this.lifeTime = new UpdateCounter(lifeTime, false) {
+
+            @Override
+            public void onUpdate() {
+            }
+
+        };
         this.lifeTime.start();
         this.targetCoor = targetCoor;
         this.targetCoor.x -= hitbox.width;
