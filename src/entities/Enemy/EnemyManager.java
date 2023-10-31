@@ -32,6 +32,7 @@ public class EnemyManager {
         enemies = new ArrayList<>();
         LoadAnimation();
         initEnemy(LevelManager.curMapIndex);
+
         // enemies.add(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
     }
 

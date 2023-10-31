@@ -1,11 +1,24 @@
 package util;
 
+import helperClass.Coordinate;
 import util.Constants.Config;
 
 public class Helper {
 
     public static double toRadius(double degrees) {
         return degrees * (Math.PI / 180);
+    }
+
+    public static Coordinate getPosFromTile(int xTile, int yTile) {
+        int xCoordinate = xTile * Config.TILE_SIZE;
+        int yCoordinate = yTile * Config.TILE_SIZE;
+
+        Coordinate coordinate = new Coordinate(xCoordinate, yCoordinate);
+        return coordinate;
+    }
+
+    public static Coordinate getPosFromTile(Coordinate tile) {
+        return getPosFromTile(tile.x, tile.y);
     }
 
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] levelData) {

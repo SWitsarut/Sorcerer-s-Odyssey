@@ -101,6 +101,15 @@ public class LevelManager {
         }
     }
 
+    public int getIndexFromMapName(String name) {
+        for (int i = 0; i < mapNameArr.length; i++) {
+            if (name == mapNameArr[i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public void nextMap() {
         game.getPlaying().getEnemyManager().enemiesClear();
         levelEvents[curMapIndex].onExit();

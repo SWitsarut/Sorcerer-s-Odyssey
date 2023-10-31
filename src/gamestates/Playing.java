@@ -10,8 +10,9 @@ import Magic.Magic;
 import effect.EffectManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
+import event.EventManager;
 import helperClass.Coordinate;
-import interact.EventManager;
+import interactable.InteractableManager;
 import main.Game;
 import ui.Hud;
 import util.LoadSave;
@@ -20,9 +21,16 @@ import util.Constants.Config;
 public class Playing extends State implements Statemethods {
 
     private LevelManager levelManager;
+
+    public LevelManager getLevelManager() {
+        return levelManager;
+    }
+
     private Player player;
     private EnemyManager enemyManager;
     private EventManager eventManager;
+
+    private InteractableManager interactableManager;
 
     public EventManager geteventManager() {
         return eventManager;
@@ -72,6 +80,7 @@ public class Playing extends State implements Statemethods {
         magic = new Magic(this);
         enemyManager = new EnemyManager(this);
         eventManager = new EventManager(game);
+        interactableManager = new InteractableManager(this);
         handleMapChange();
     }
 
@@ -85,6 +94,7 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
         levelManager.levelEvents[LevelManager.curMapIndex].onEnter();
         enemyManager.initEnemy(LevelManager.curMapIndex);
+        interactableManager.initPortal(LevelManager.curMapIndex);
     }
 
     public void windowFocusLost() {
@@ -119,6 +129,7 @@ public class Playing extends State implements Statemethods {
         magic.update();
         eventManager.update();
         checkCloseToBorder();
+        interactableManager.update();
     }
 
     private void checkCloseToBorder() {
@@ -152,6 +163,7 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
+        interactableManager.draw(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
         effectManager.draw(g, xLvlOffset, yLvlOffset);
@@ -163,6 +175,7 @@ public class Playing extends State implements Statemethods {
                 crosshairSize + aniIndex, null);// cross hair
         eventManager.draw(g, xLvlOffset, yLvlOffset);
         hud.draw(g, xLvlOffset, yLvlOffset);
+
     }
 
     @Override
@@ -204,9 +217,6 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_N:
                 player.toggleNoClip();
-                break;
-            case KeyEvent.VK_I:
-                initClass();
                 break;
             case KeyEvent.VK_Q:
                 magic.cycleRight();
