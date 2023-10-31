@@ -2,7 +2,7 @@ package interact;
 
 import java.awt.Graphics;
 
-public interface Interactable {
+public interface Event {
     // public String interactWord();
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset);
 

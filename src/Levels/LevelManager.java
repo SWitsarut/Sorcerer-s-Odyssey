@@ -3,8 +3,6 @@ package Levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import entities.Enemy.CorruptedTreant;
-import entities.Enemy.EnemyManager;
 import main.Game;
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
@@ -76,12 +74,12 @@ public class LevelManager {
 
             @Override
             public void onEnter() {
-                game.getPlaying().getInteractableManager().monsterHordeEvent();
+                game.getPlaying().geteventManager().monsterHordeEvent();
             }
 
             @Override
             public void onExit() {
-                game.getPlaying().getInteractableManager().monsterHordeEnd();
+                game.getPlaying().geteventManager().monsterHordeEnd();
             }
         };
     }

@@ -11,7 +11,7 @@ import effect.EffectManager;
 import entities.Player;
 import entities.Enemy.EnemyManager;
 import helperClass.Coordinate;
-import interact.InteractableManager;
+import interact.EventManager;
 import main.Game;
 import ui.Hud;
 import util.LoadSave;
@@ -22,10 +22,10 @@ public class Playing extends State implements Statemethods {
     private LevelManager levelManager;
     private Player player;
     private EnemyManager enemyManager;
-    private InteractableManager interactableManager;
+    private EventManager eventManager;
 
-    public InteractableManager getInteractableManager() {
-        return interactableManager;
+    public EventManager geteventManager() {
+        return eventManager;
     }
 
     public EnemyManager getEnemyManager() {
@@ -71,7 +71,7 @@ public class Playing extends State implements Statemethods {
         hud = new Hud(player);
         magic = new Magic(this);
         enemyManager = new EnemyManager(this);
-        interactableManager = new InteractableManager(game);
+        eventManager = new EventManager(game);
         handleMapChange();
     }
 
@@ -117,7 +117,7 @@ public class Playing extends State implements Statemethods {
         effectManager.update();
         hud.update();
         magic.update();
-        interactableManager.update();
+        eventManager.update();
         checkCloseToBorder();
     }
 
@@ -161,7 +161,7 @@ public class Playing extends State implements Statemethods {
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
                 crosshairSize + aniIndex,
                 crosshairSize + aniIndex, null);// cross hair
-        interactableManager.draw(g, xLvlOffset, yLvlOffset);
+        eventManager.draw(g, xLvlOffset, yLvlOffset);
         hud.draw(g, xLvlOffset, yLvlOffset);
     }
 

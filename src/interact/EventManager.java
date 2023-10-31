@@ -7,13 +7,13 @@ import main.Game;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class InteractableManager {
+public class EventManager {
 
-    private ArrayList<Interactable> interactables;
+    private ArrayList<Event> interactables;
 
     private Game game;
 
-    public InteractableManager(Game game) {
+    public EventManager(Game game) {
         this.game = game;
         initClasses();
     }
@@ -28,7 +28,7 @@ public class InteractableManager {
 
     public void monsterHordeEnd() {
         for (int i = 0; i < interactables.size(); i++) {
-            Interactable interactable = interactables.get(i);
+            Event interactable = interactables.get(i);
             if (interactable instanceof MonsterHorde) {
                 ((MonsterHorde) interactable).active = false;
             }
@@ -37,14 +37,14 @@ public class InteractableManager {
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int i = 0; i < interactables.size(); i++) {
-            Interactable interactable = interactables.get(i);
+            Event interactable = interactables.get(i);
             interactable.draw(g, xLvlOffset, yLvlOffset);
         }
     }
 
     public void update() {
         for (int i = 0; i < interactables.size(); i++) {
-            Interactable interactable = interactables.get(i);
+            Event interactable = interactables.get(i);
             if (interactable.isActive()) {
                 interactable.update();
             } else {

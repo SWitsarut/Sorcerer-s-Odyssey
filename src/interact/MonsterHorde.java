@@ -6,7 +6,7 @@ import helperClass.Coordinate;
 import helperClass.UpdateCounter;
 import main.Game;
 
-public class MonsterHorde implements Interactable {
+public class MonsterHorde implements Event {
 
     public boolean active;
     HordeSpawn spawnCounter;
