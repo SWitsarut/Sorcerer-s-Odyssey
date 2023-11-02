@@ -10,6 +10,7 @@ public class KeyboardInput implements KeyListener {
 
     private GamePanel gp;
 
+
     public KeyboardInput(GamePanel gp) {
         this.gp = gp;
     }

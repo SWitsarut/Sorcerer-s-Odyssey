@@ -36,6 +36,7 @@ public class Potal extends Interactable {
         g.setColor(Color.red);
         g.fillRect((int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset), (int) (hitbox.width),
                 (int) (hitbox.height));
+
         if (showMessage) {
             Graphics2D g2d = (Graphics2D) g;
 
