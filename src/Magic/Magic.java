@@ -9,6 +9,7 @@ import Action.Damage;
 import Magic.Buff_Spell.ArcaneSurge;
 import Magic.Buff_Spell.Buff;
 import Magic.Buff_Spell.LightningBuff;
+import Magic.Buff_Spell.Rage;
 import Magic.Buff_Spell.Regeneration;
 import Magic.Projectile_Spell.ArcaneBlast;
 import Magic.Projectile_Spell.ArcaneMachineGun;
@@ -65,6 +66,9 @@ public class Magic {
                         break;
                     case 1:
                         castFireBreath(targetCoor);
+                        break;
+                    case 2:
+                        castRage();
                         break;
                 }
                 break;
@@ -181,7 +185,15 @@ public class Magic {
     }
 
     public void castRegeneration() {
-        if (player.castSpell(Regeneration.cost)) {
+        boolean buffExists = false;
+
+        for (Buff buff : buffs) {
+            if (buff instanceof Regeneration) {
+                buffExists = true;
+                break;
+            }
+        }
+        if (!buffExists && player.castSpell(Regeneration.cost)) {
             buffs.add(new Regeneration(player));
         }
     }
@@ -211,8 +223,30 @@ public class Magic {
         }
     }
 
+    public void castRage() {
+        boolean buffExists = false;
+
+        for (Buff buff : buffs) {
+            if (buff instanceof Rage) {
+                buffExists = true;
+                break;
+            }
+        }
+        if (!buffExists && player.castSpell(Rage.cost)) {
+            buffs.add(new Rage(player));
+        }
+    }
+
     public void castArcaneSurge() {
-        if (player.castSpell(ArcaneSurge.cost)) {
+        boolean buffExists = false;
+
+        for (Buff buff : buffs) {
+            if (buff instanceof ArcaneSurge) {
+                buffExists = true;
+                break;
+            }
+        }
+        if (!buffExists && player.castSpell(ArcaneSurge.cost)) {
             buffs.add(new ArcaneSurge(player));
         }
     }

@@ -30,7 +30,7 @@ public class SkillHud {
 
         skill[Magic.Magic.Fire][0] = "Fire Ball";
         skill[Magic.Magic.Fire][1] = "Fire Breath";
-        skill[Magic.Magic.Fire][2] = "Flame within";
+        skill[Magic.Magic.Fire][2] = "Rage";
 
         skill[Magic.Magic.Arcane][0] = "Blaster";
         skill[Magic.Magic.Arcane][1] = "Machine gun";
