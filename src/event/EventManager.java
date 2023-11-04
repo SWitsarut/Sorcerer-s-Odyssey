@@ -7,13 +7,15 @@ import main.Game;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import gamestates.Playing;
+
 public class EventManager {
 
     private ArrayList<Event> interactables;
 
-    private Game game;
+    private Playing game;
 
-    public EventManager(Game game) {
+    public EventManager(Playing game) {
         this.game = game;
         initClasses();
     }

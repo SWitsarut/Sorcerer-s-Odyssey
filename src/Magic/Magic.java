@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Action.Damage;
 import Magic.Buff_Spell.ArcaneSurge;
 import Magic.Buff_Spell.Buff;
 import Magic.Buff_Spell.LightningBuff;
@@ -14,6 +15,7 @@ import Magic.Projectile_Spell.ArcaneMachineGun;
 import Magic.Projectile_Spell.Bolt;
 import Magic.Projectile_Spell.DivineOrb;
 import Magic.Projectile_Spell.FireBall;
+import entities.Entity;
 import entities.Player;
 import entities.Projectile.Projectile;
 import gamestates.Playing;
@@ -36,6 +38,7 @@ public class Magic {
     public ArrayList<Buff> buffs = new ArrayList<>();
 
     private BufferedImage lightningAni[];
+    private BufferedImage slashEffect[] = new BufferedImage[4];
 
     private SoundEffect cyclSoundEffect[] = new SoundEffect[2];
     private Random random = new Random(System.nanoTime());
@@ -45,6 +48,10 @@ public class Magic {
         lightningAni = LoadSave.LinearAnimationLoader("asset/effect/lightning.png", 32);
         cyclSoundEffect[0] = new SoundEffect("general/wav/handleSmallLeather.wav", 80);
         cyclSoundEffect[1] = new SoundEffect("general/wav/handleSmallLeather2.wav", 80);
+        slashEffect[Normal.U] = LoadSave.GetImage("asset/effect/SlashU.png");
+        slashEffect[Normal.D] = LoadSave.GetImage("asset/effect/SlashD.png");
+        slashEffect[Normal.L] = LoadSave.GetImage("asset/effect/SlashL.png");
+        slashEffect[Normal.R] = LoadSave.GetImage("asset/effect/SlashR.png");
     }
 
     public void cast(Coordinate targetCoor) {
@@ -195,6 +202,33 @@ public class Magic {
     public void castArcaneSurge() {
         if (player.castSpell(ArcaneSurge.cost)) {
             buffs.add(new ArcaneSurge(player));
+        }
+    }
+
+    public void normalAttack(Coordinate targetCoor) {
+        if (player.canAttack()) {
+            projectiles.add(new Normal(slashEffect, player.getPlayerCenter(), targetCoor) {
+
+                @Override
+                public Damage hit(Entity entity) {
+                    int relativeX = player.getPlayerCenter().x - entity.getCenterX();
+                    int relativeY = player.getPlayerCenter().y - entity.getCenterY();
+                    System.out.println("player.getCenterX()" + player.getPlayerCenter().x);
+                    System.out.println("entity.getCenterX()" + entity.getCenterX());
+                    if (relativeX > 0) {
+                        entity.updateRelativePos(-100, 0);
+                    } else {
+                        entity.updateRelativePos(100, 0);
+                    }
+                    if (relativeY > 0) {
+                        entity.updateRelativePos(0, -100);
+                    } else {
+                        entity.updateRelativePos(0, 100);
+                    }
+                    return damage;
+                }
+
+            });
         }
     }
 

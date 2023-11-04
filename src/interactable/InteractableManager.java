@@ -25,8 +25,8 @@ public class InteractableManager {
     public void initPortal(int mapIndex) {
         interactables.clear();
         switch (mapIndex) {
-            case LevelManager.CAVE:
-                spawnPotalatAtTile("temple of fire", 10, 10);
+            case LevelManager.LAVADUNGEON:
+                spawnPotalatAtTile("", 10, 10);
                 break;
         }
     }

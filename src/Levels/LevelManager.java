@@ -3,6 +3,7 @@ package Levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import gamestates.Playing;
 import main.Game;
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
@@ -10,11 +11,9 @@ import static util.Constants.LayerOrder.*;
 
 public class LevelManager {
 
-    public static final int CAVE = 0;
-    public static final int CAMP = 1;
-    public static final int TEMPLE = 2;
+    public static final int LAVADUNGEON = 0;
 
-    private Game game;
+    private Playing playing;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
     public LevelEvent levelEvents[];
@@ -27,8 +26,8 @@ public class LevelManager {
         return levelLayers[COLLISION];
     }
 
-    public LevelManager(Game game) {
-        this.game = game;
+    public LevelManager(Playing game) {
+        this.playing = game;
         // enemyManager = game.getPlaying().getEnemyManager();
         importTile();
         mapNameArr = getFileList("");
@@ -47,45 +46,58 @@ public class LevelManager {
     }
 
     private void initLevelEvent() {
-        levelEvents[CAVE] = new LevelEvent() {
+        // levelEvents[CAVE] = new LevelEvent() {
+
+        // @Override
+        // public void onEnter() {
+        // }
+
+        // @Override
+        // public void onExit() {
+        // }
+
+        // };
+
+        // levelEvents[CAMP] = new LevelEvent() {
+
+        // @Override
+        // public void onEnter() {
+        // }
+
+        // @Override
+        // public void onExit() {
+        // }
+
+        // };
+        // levelEvents[TEMPLE] = new LevelEvent() {
+
+        // @Override
+        // public void onEnter() {
+        // game.getPlaying().geteventManager().monsterHordeEvent();
+        // }
+
+        // @Override
+        // public void onExit() {
+        // game.getPlaying().geteventManager().monsterHordeEnd();
+        // }
+        // };
+        levelEvents[LAVADUNGEON] = new LevelEvent() {
 
             @Override
             public void onEnter() {
+                playing.geteventManager().monsterHordeEvent();
             }
 
             @Override
             public void onExit() {
+                // game.getPlaying().geteventManager().monsterHordeEnd();
             }
 
-        };
-
-        levelEvents[CAMP] = new LevelEvent() {
-
-            @Override
-            public void onEnter() {
-            }
-
-            @Override
-            public void onExit() {
-            }
-
-        };
-        levelEvents[TEMPLE] = new LevelEvent() {
-
-            @Override
-            public void onEnter() {
-                game.getPlaying().geteventManager().monsterHordeEvent();
-            }
-
-            @Override
-            public void onExit() {
-                game.getPlaying().geteventManager().monsterHordeEnd();
-            }
         };
     }
 
     public void importTile() {
-        BufferedImage img = GetLevelAtlas("universal_tile_set.png");
+        BufferedImage img = GetLevelAtlas("newTileSet.png");
 
         int highCount = (img.getHeight() / TILE_DEFAULT_SIZE);
         int widthCount = (img.getWidth() / TILE_DEFAULT_SIZE);
@@ -111,11 +123,11 @@ public class LevelManager {
     }
 
     public void nextMap() {
-        game.getPlaying().getEnemyManager().enemiesClear();
+        playing.getEnemyManager().enemiesClear();
         levelEvents[curMapIndex].onExit();
         curMapIndex = (curMapIndex + 1) % mapNameArr.length;
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
-        game.getPlaying().handleMapChange();
+        playing.handleMapChange();
     }
 
     public void drawBehind(Graphics g, int xLvlOffset, int yLvlOffset) {

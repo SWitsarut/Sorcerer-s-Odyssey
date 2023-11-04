@@ -3,20 +3,37 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "temple of fire.tmx",
+    "activeFile": "newTileSet.tsx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "ไฟล์ทั้งหมด (*)",
     "fileStates": {
+        "../tile set/new_universal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 0.125
+        },
         "../tile set/universal_tile_set.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 4
         },
+        "16x16 dungeon ii wall reconfig v04 spritesheet.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "C:/Programming/Sorcerers_Odyssey/tiled/tile set/universal_tile_set.tsx": {
+            "scaleInDock": 1.5
+        },
         "C:/Programming/game/tiled/tile set/universal_tile_set.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 0.75
+        },
+        "DarkDungeon.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
         },
         "Fire Effect.tsx": {
             "dynamicWrapping": true,
@@ -43,46 +60,92 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 143,
-                "y": 112.5
+                "x": 119.75,
+                "y": 119.75
             }
         },
+        "fireKeep.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1000,
+                "y": 372
+            }
+        },
+        "jungle-foliage-ground2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "jungle-ruins_V3-2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "newTileSet.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 550,
+                "y": 306
+            }
+        },
+        "newTileSet.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
         "temple of fire.tmx": {
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1020,
-                "y": 310
+                "x": 953.3333333333333,
+                "y": 520
             }
+        },
+        "terrain_atlas.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.75
         }
     },
-    "last.exportedFilePath": "C:/Programming/game/src/res/map/temple",
-    "last.imagePath": "C:/Users/suea/OneDrive/เดสก์ท็อป/3",
-    "map.height": 50,
+    "last.exportedFilePath": "C:/Programming/Sorcerers_Odyssey/src/res/map/fireKeep",
+    "last.imagePath": "C:/Programming/Sorcerers_Odyssey/src/res/tile",
+    "map.fixedSize": true,
+    "map.height": 64,
     "map.lastUsedExportFilter": "ไฟล์ CSV (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 150,
+    "map.width": 200,
     "openFiles": [
         "debug.tmx",
         "../tile set/universal_tile_set.tsx",
-        "temple of fire.tmx"
+        "temple of fire.tmx",
+        "Mercenary camp.tmx",
+        "16x16 dungeon ii wall reconfig v04 spritesheet.tsx",
+        "newTileSet.tmx",
+        "DarkDungeon.tsx",
+        "jungle-foliage-ground2.tsx",
+        "jungle-ruins_V3-2.tsx",
+        "newTileSet.tsx",
+        "fireKeep.tmx"
     ],
     "project": "Odyssey.tiled-project",
     "recentFiles": [
         "debug.tmx",
         "../tile set/universal_tile_set.tsx",
         "temple of fire.tmx",
-        "Fire Effect.tsx",
-        "C:/Programming/game/tiled/tile set/universal_tile_set.tsx",
         "Mercenary camp.tmx",
-        "cave/cave.tmx"
+        "16x16 dungeon ii wall reconfig v04 spritesheet.tsx",
+        "newTileSet.tmx",
+        "DarkDungeon.tsx",
+        "jungle-foliage-ground2.tsx",
+        "jungle-ruins_V3-2.tsx",
+        "fireKeep.tmx",
+        "newTileSet.tsx",
+        "terrain_atlas.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
         "width": 16
     },
-    "tileset.type": 1
+    "tileset.type": 0
 }

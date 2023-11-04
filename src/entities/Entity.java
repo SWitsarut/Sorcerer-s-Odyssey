@@ -6,17 +6,22 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class Entity {
 
-    protected float x, y, width, height;
+    protected float width, height;
 
     protected Rectangle2D.Float hitbox;
 
     public Entity(float x, float y, float width, float height) {
-        this.x = x;
-        this.y = y;
+        // this.x = x;
+        // this.y = y;
         this.width = width;
         this.height = height;
         initHitbox(x, y, width, height);
 
+    }
+
+    public void updateRelativePos(float x, float y) {
+        this.hitbox.x += x;
+        this.hitbox.y += y;
     }
 
     protected void drawHitbox(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -29,11 +34,11 @@ public abstract class Entity {
     }
 
     public int getCenterX() {
-        return (int) (x + width / 2);
+        return (int) (hitbox.x + width / 2);
     }
 
     public int getCenterY() {
-        return (int) (x + width / 2);
+        return (int) (hitbox.y + width / 2);
     }
 
     protected void updateHitbox(int x, int y) {

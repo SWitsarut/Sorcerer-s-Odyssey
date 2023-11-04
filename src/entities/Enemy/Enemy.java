@@ -60,7 +60,7 @@ public abstract class Enemy extends Entity {
         g.drawImage(animation[aniIndex], (int) hitbox.x - xLvlOffset, (int) hitbox.y - yLvlOffset,
                 (int) (animation[aniIndex].getWidth() * scale * Config.SCALE),
                 (int) (animation[aniIndex].getHeight() * scale * Config.SCALE), null);
-        // drawHitbox(g, xLvlOffset, yLvlOffset);
+        drawHitbox(g, xLvlOffset, yLvlOffset);
     }
 
     public void getAttacked(Damage damage) {

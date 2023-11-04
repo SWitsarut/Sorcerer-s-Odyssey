@@ -75,11 +75,12 @@ public class Playing extends State implements Statemethods {
         crosshair = LoadSave.GetImage("asset/crosshair007.png");
         effectManager = new EffectManager();
         player = new Player(0, 0, effectManager);
-        levelManager = new LevelManager(game);
+
         hud = new Hud(player);
         magic = new Magic(this);
         enemyManager = new EnemyManager(this);
-        eventManager = new EventManager(game);
+        eventManager = new EventManager(this);
+        levelManager = new LevelManager(this);
         interactableManager = new InteractableManager(this);
         handleMapChange();
     }
@@ -116,6 +117,12 @@ public class Playing extends State implements Statemethods {
     @Override
     public void update() {
         player.update();
+
+        if (m1pressed) {
+
+            magic.normalAttack(getClickedPos(mousePosX, mousePosY, xLvlOffset,
+                    yLvlOffset));
+        }
         if (m3pressed) {
             if (player.isCastable()) {
                 magic.cast(getClickedPos(mousePosX, mousePosY, xLvlOffset,

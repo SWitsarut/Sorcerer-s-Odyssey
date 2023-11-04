@@ -39,15 +39,12 @@ public class EnemyManager {
     public void initEnemy(int level) {
         enemies.clear();
         switch (level) {
-            case LevelManager.CAVE:
+            case LevelManager.LAVADUNGEON:
                 addMob(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
                 addMob(new CorruptedTreant(corruptedTreantAnimation, 750, 500));
                 addMob(new CorruptedTreant(corruptedTreantAnimation, 800, 500));
                 addMob(new CorruptedTreant(corruptedTreantAnimation, 1000, 500));
                 break;
-            case LevelManager.CAMP:
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 300, 700));
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 700, 500));
         }
     }
 
@@ -99,7 +96,7 @@ public class EnemyManager {
                     if (!projectile.enemyhitted.contains(enemy)
                             && enemy.getHitbox().intersects(projectile.getHitbox())
                             && projectile.isPlayerOwn()) {
-                        enemy.getAttacked(projectile.hit());
+                        enemy.getAttacked(projectile.hit(enemy));
                         effectManager.playAttacked(enemyCenterX,
                                 enemyCenterY, false);
                         projectile.enemyhitted.add(enemy);

@@ -9,6 +9,7 @@ import Levels.Level;
 import effect.EffectManager;
 import gamestates.Gamestate;
 import helperClass.Coordinate;
+import helperClass.UpdateCounter;
 import main.sound.Sound;
 import main.sound.SoundEffect;
 import util.LoadSave;
@@ -62,6 +63,9 @@ public class Player extends Entity {
     public int curSpellgap, maxSpellGap = (int) (0.2 * UPS_SET);
     private boolean castSpellable = true;
 
+    public int curAttackgap, maxAttackGap = (int) (0.3 * UPS_SET);
+    private boolean attackable = true;
+
     private boolean iFraming = false;
     private int curIFrameTick = 0, maxIFrameTick = (int) (0.5 * UPS_SET);
 
@@ -114,6 +118,7 @@ public class Player extends Entity {
     private void updateStatus() {
         regen();
         SpellCastGap();
+        AttackGap();
         switch (palyerAction) {
             case WALKING:
                 playFootStepSound();
@@ -138,11 +143,30 @@ public class Player extends Entity {
 
     private void SpellCastGap() {
         if (!castSpellable) {
+            curSpellgap++;
             if (curSpellgap >= maxSpellGap) {
                 curSpellgap = 0;
                 castSpellable = true;
             }
-            curSpellgap++;
+        }
+    }
+
+    private void AttackGap() {
+        if (!attackable) {
+            curAttackgap++;
+            if (curAttackgap >= maxAttackGap) {
+                curAttackgap = 0;
+                attackable = true;
+            }
+        }
+    }
+
+    public boolean canAttack() {
+        if (attackable) {
+            attackable = false;
+            return true;
+        } else {
+            return false;
         }
     }
 

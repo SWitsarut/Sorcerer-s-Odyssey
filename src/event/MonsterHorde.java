@@ -2,6 +2,7 @@ package event;
 
 import java.awt.Graphics;
 
+import gamestates.Playing;
 import helperClass.Coordinate;
 import helperClass.UpdateCounter;
 import main.Game;
@@ -11,7 +12,7 @@ public class MonsterHorde implements Event {
     public boolean active;
     HordeSpawn spawnCounter;
 
-    public MonsterHorde(Game game, double second, boolean infinite) {
+    public MonsterHorde(Playing game, double second, boolean infinite) {
         spawnCounter = new HordeSpawn(game, second, infinite);
         active = true;
         spawnCounter.start();
@@ -26,18 +27,18 @@ public class MonsterHorde implements Event {
     private class HordeSpawn extends UpdateCounter {
 
         // EnemyManager em;
-        private Game game;
+        private Playing game;
 
-        public HordeSpawn(Game game, double second, boolean cycle) {
+        public HordeSpawn(Playing game, double second, boolean cycle) {
             super(second, cycle);
             this.game = game;
         }
 
         @Override
         public void onUpdate() {
-            Coordinate platerCoordinate = game.getPlaying().getPlayer().getPlayerCenter();
-            game.getPlaying().getEnemyManager().spawnWolfRider(platerCoordinate.x, platerCoordinate.y + 350, true);
-            game.getPlaying().getEnemyManager().spawnWolfRider(platerCoordinate.x, platerCoordinate.y - 350, true);
+            Coordinate platerCoordinate = game.getPlayer().getPlayerCenter();
+            game.getEnemyManager().spawnWolfRider(platerCoordinate.x, platerCoordinate.y + 350, true);
+            game.getEnemyManager().spawnWolfRider(platerCoordinate.x, platerCoordinate.y - 350, true);
         }
 
     }

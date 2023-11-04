@@ -41,7 +41,7 @@ public abstract class Projectile extends Entity {
     public Projectile(Damage dmg, Boolean playerOwn, double lifeTime, float xStart, float yStart, Coordinate targetCoor,
             float width,
             float height) {
-        super(xStart, yStart, width, height);
+        super(xStart - width / 2, yStart - height / 2, width, height);
         damage = dmg;
         enemyhitted = new ArrayList<>();
         this.active = true;
@@ -116,7 +116,7 @@ public abstract class Projectile extends Entity {
         }
     }
 
-    public Damage hit() {
+    public Damage hit(Entity entity) {
         if (expiredOntarget | expiredOnHit) {
             active = false;
         }
