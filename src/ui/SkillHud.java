@@ -29,7 +29,7 @@ public class SkillHud {
         elementColors[Magic.Magic.Lightning] = new Color(0, 152, 220);
 
         skill[Magic.Magic.Fire][0] = "Fire Ball";
-        skill[Magic.Magic.Fire][1] = "Sun Strike";
+        skill[Magic.Magic.Fire][1] = "Fire Breath";
         skill[Magic.Magic.Fire][2] = "Flame within";
 
         skill[Magic.Magic.Arcane][0] = "Blaster";

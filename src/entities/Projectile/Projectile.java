@@ -68,13 +68,13 @@ public abstract class Projectile extends Entity {
         updatePos();
         oldActive = active;
         lifeTime.update();
-        active = lifeTime.active;
 
+        active = lifeTime.active;
         expiredUpdate();
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        g.setColor(Color.RED);
+        g.setColor(new Color(255, 12, 12, 80));
         g.fillOval((int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset),
                 (int) (hitbox.width),
                 (int) (hitbox.height));
@@ -118,6 +118,7 @@ public abstract class Projectile extends Entity {
 
     public Damage hit(Entity entity) {
         if (expiredOntarget | expiredOnHit) {
+            onExpired();
             active = false;
         }
         return damage;

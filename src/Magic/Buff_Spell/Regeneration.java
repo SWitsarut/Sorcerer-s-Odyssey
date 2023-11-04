@@ -33,8 +33,8 @@ public class Regeneration extends Buff {
         Coordinate playercenter = player.getPlayerCenter();
         g.setColor(new Color(225, 234, 61, 80));
 
-        g.drawOval(playercenter.x - xLvlOffset - Config.CHAR_SIZE / 4,
-                playercenter.y - yLvlOffset - Config.CHAR_SIZE - 16, Config.CHAR_SIZE / 2,
+        g.fillOval(playercenter.x - xLvlOffset - Config.CHAR_SIZE / 4,
+                playercenter.y - yLvlOffset - Config.CHAR_SIZE , Config.CHAR_SIZE / 2,
                 Config.CHAR_SIZE / 3);
     }
 

@@ -14,7 +14,9 @@ import Magic.Projectile_Spell.ArcaneBlast;
 import Magic.Projectile_Spell.ArcaneMachineGun;
 import Magic.Projectile_Spell.Bolt;
 import Magic.Projectile_Spell.DivineOrb;
+import Magic.Projectile_Spell.Explosion;
 import Magic.Projectile_Spell.FireBall;
+import Magic.Projectile_Spell.FireBreath;
 import entities.Entity;
 import entities.Player;
 import entities.Projectile.Projectile;
@@ -60,6 +62,9 @@ public class Magic {
                 switch (selectedChoice) {
                     case 0:
                         castFireBall(targetCoor);
+                        break;
+                    case 1:
+                        castFireBreath(targetCoor);
                         break;
                 }
                 break;
@@ -151,7 +156,7 @@ public class Magic {
     public void castFireBall(Coordinate targetCoor) {
         if (player.castSpell(FireBall.cost)) {
 
-            projectiles.add(new FireBall(player.getPlayerCenter(), targetCoor));
+            projectiles.add(new FireBall(this, player.getPlayerCenter(), targetCoor));
 
         }
     }
@@ -199,10 +204,21 @@ public class Magic {
         }
     }
 
+    public void castFireBreath(Coordinate targetCoor) {
+        if (player.castSpell(FireBreath.cost)) {
+            projectiles.add(new FireBreath(player.getPlayerCenter(), targetCoor));
+            player.curSpellgap = player.maxSpellGap / 2 + player.maxSpellGap / 3;
+        }
+    }
+
     public void castArcaneSurge() {
         if (player.castSpell(ArcaneSurge.cost)) {
             buffs.add(new ArcaneSurge(player));
         }
+    }
+
+    public void castExplosion(Coordinate targCoordinate) {
+        projectiles.add(new Explosion(targCoordinate));
     }
 
     public void normalAttack(Coordinate targetCoor) {
@@ -213,8 +229,6 @@ public class Magic {
                 public Damage hit(Entity entity) {
                     int relativeX = player.getPlayerCenter().x - entity.getCenterX();
                     int relativeY = player.getPlayerCenter().y - entity.getCenterY();
-                    System.out.println("player.getCenterX()" + player.getPlayerCenter().x);
-                    System.out.println("entity.getCenterX()" + entity.getCenterX());
                     if (relativeX > 0) {
                         entity.updateRelativePos(-100, 0);
                     } else {
