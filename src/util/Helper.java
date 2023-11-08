@@ -13,16 +13,14 @@ public class Helper {
         int xCoordinate = xTile * Config.TILE_SIZE;
         int yCoordinate = yTile * Config.TILE_SIZE;
 
-        Coordinate coordinate = new Coordinate(xCoordinate, yCoordinate);
-        return coordinate;
+        return new Coordinate(xCoordinate, yCoordinate);
     }
 
     public static Coordinate getTileFromPos(int xCoordinate, int yCoordinate) {
         int xTile = xCoordinate / Config.TILE_SIZE;
         int yTile = yCoordinate / Config.TILE_SIZE;
 
-        Coordinate tileCoordinate = new Coordinate(xTile, yTile);
-        return tileCoordinate;
+        return new Coordinate(xTile, yTile);
     }
 
     public static Coordinate getPosFromTile(Coordinate tile) {
@@ -38,8 +36,7 @@ public class Helper {
         if (!unWalkable(x, y, levelData))
             if (!unWalkable(x + width, y + height, levelData))
                 if (!unWalkable(x + width, y, levelData))
-                    if (!unWalkable(x, y + height, levelData))
-                        return true;
+                    return !unWalkable(x, y + height, levelData);
         return false;
     }
 
@@ -60,9 +57,6 @@ public class Helper {
         float yIndex = y / Constants.Config.TILE_SIZE;
 
         int value = levelData[(int) yIndex][(int) xIndex];
-        if (value == 0) {
-            return true;
-        }
-        return false;
+        return value == 0;
     }
 }

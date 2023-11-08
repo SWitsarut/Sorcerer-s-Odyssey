@@ -21,7 +21,6 @@ import Levels.Level;
 public class LoadSave {
 
     public static String PLAYER_ATLAS = "rogue.png";
-    public static String LEVEL_ATLAS = "magecity.png";
 
     public static BufferedImage GetSpriteAtlas(String file) {
         BufferedImage img = null;

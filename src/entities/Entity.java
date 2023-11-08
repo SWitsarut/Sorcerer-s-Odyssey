@@ -41,11 +41,6 @@ public abstract class Entity {
         return (int) (hitbox.y + width / 2);
     }
 
-    protected void updateHitbox(int x, int y) {
-        hitbox.x = (int) x;
-        hitbox.y = (int) y;
-    }
-
     public Rectangle2D.Float getHitbox() {
         return hitbox;
     }

@@ -164,10 +164,6 @@ public class Player extends Entity {
         }
     }
 
-    public void resetRegen() {
-        mpRegenMul = mpRegenMulDefault;
-        hpRegenMul = hpRegenMulDefault;
-    }
 
     private void SpellCastGap() {
         if (!castSpellable) {
@@ -265,8 +261,7 @@ public class Player extends Entity {
         int playerScreenX = (int) (hitbox.x - xDrawOffset) - xLvlOffset;
         int playerScreenY = (int) (hitbox.y - yDrawOffset) - yLvlOffset;
 
-        Coordinate playerScreenPosition = new Coordinate(playerScreenX, playerScreenY);
-        return playerScreenPosition;
+        return new Coordinate(playerScreenX, playerScreenY);
     }
 
     private void loadAnimation() {
@@ -291,17 +286,17 @@ public class Player extends Entity {
             float xSpeed = 0, ySpeed = 0;
             setPalyerAction(WALKING);
             if (left && !right) {
-                xSpeed -= speed;
+                xSpeed -= (float) speed;
                 facingLeft = true;
             } else if (right && !left) {
-                xSpeed += speed;
+                xSpeed += (float) speed;
                 facingLeft = false;
             }
 
             if (up && !down) {
-                ySpeed -= speed;
+                ySpeed -= (float) speed;
             } else if (down && !up) {
-                ySpeed += speed;
+                ySpeed += (float) speed;
             }
             if (!noclip) {
                 if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width,
@@ -327,25 +322,13 @@ public class Player extends Entity {
         }
     }
 
-    public Coordinate calMapCoordinate() {
-        Coordinate coor = new Coordinate((int) (hitbox.x + xDrawOffset), (int) (hitbox.y + yDrawOffset));
-        // System.out.println("coor " + coor);
-        return coor;
-    }
-
-    public void newAction(int action) {
-        aniTick = 0;
-        aniIndex = 0;
-        setPalyerAction(action);
-    }
 
     public void setPalyerAction(int palyerAction) {
         this.palyerAction = palyerAction;
     }
 
     public Coordinate getPlayerCenter() {
-        Coordinate playerCoor = new Coordinate((int) (hitbox.x + hitboxXcenter), (int) (hitbox.y + hitboxYcenter));
-        return playerCoor;
+        return new Coordinate((int) (hitbox.x + hitboxXcenter), (int) (hitbox.y + hitboxYcenter));
     }
 
     public void setUp(boolean up) {
@@ -373,10 +356,6 @@ public class Player extends Entity {
         return aniIndex;
     }
 
-    public boolean getNoclip() {
-        return noclip;
-    }
-
     public void toggleNoClip() {
         this.noclip = !noclip;
     }
@@ -395,26 +374,6 @@ public class Player extends Entity {
 
     public double getMaxMp() {
         return maxMp;
-    }
-
-    public EffectManager getEffectManager() {
-        return effectManager;
-    }
-
-    public BufferedImage[][] getAnimation() {
-        return animation;
-    }
-
-    public Level getCollisionMap() {
-        return collisionMap;
-    }
-
-    public float getxDrawOffset() {
-        return xDrawOffset;
-    }
-
-    public float getyDrawOffset() {
-        return yDrawOffset;
     }
 
     public boolean isCastable() {

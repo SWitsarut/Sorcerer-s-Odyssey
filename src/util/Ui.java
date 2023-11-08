@@ -48,41 +48,6 @@ public class Ui {
         return coor.toArray(new Coordinate[0]);
     }
 
-    public static Coordinate GetTextAtCenter(Graphics g, String text, int yOffset) {
-        FontMetrics fm = g.getFontMetrics();
-        int maxWidth = Config.SCREEN_WIDTH;
-        int y = yOffset + fm.getAscent();
-
-        // Split the text into lines
-        String[] lines = text.split("\n");
-
-        for (String line : lines) {
-            int textWidth = fm.stringWidth(line);
-            int x = (maxWidth - textWidth) / 2;
-
-            // Draw the line
-            g.drawString(line, x, y);
-
-            // Move to the next line
-            y += fm.getHeight();
-        }
-
-        return new Coordinate(0, y); // Return the final y-coordinate
-    }
-
-    public static Rectangle GetRectangleMiddleScreen(int rectWidth, int rectHeight) {
-        int x = (Config.SCREEN_WIDTH - rectWidth) / 2;
-        int y = (Config.SCREEN_HEIGHT - rectHeight) / 2;
-
-        return new Rectangle(x, y, rectWidth, rectHeight);
-    }
-
-    public static Coordinate GetTextXmiddleScreen(Graphics g, String text, int y) {
-        FontMetrics fm = g.getFontMetrics();
-        int x = (int) (Config.SCREEN_WIDTH - fm.stringWidth(text)) / 2;
-        return new Coordinate(x, y);
-    }
-
     public static int GetPercentX(double percent) {
         int x = (int) (Config.SCREEN_WIDTH * (percent / 100));
         return x;
