@@ -1,10 +1,12 @@
 package gamestates;
 
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import Inventory.Item;
 import Levels.LevelManager;
 import Magic.Magic;
 import effect.EffectManager;
@@ -86,6 +88,8 @@ public class Playing extends State implements Statemethods {
     }
 
     public void handleMapChange() {
+        levelManager.loadNewLayerData();
+        levelManager.levelEvents[LevelManager.curMapIndex].onEnter();
         player.loadCollision(levelManager.getCollision());
         lvlTileWide = levelManager.getCurrentLevels()[0].getXlength();
         lvlTileHeight = levelManager.getCurrentLevels()[0].getYlength();
@@ -93,9 +97,10 @@ public class Playing extends State implements Statemethods {
         maxLevelOffsetX = maxTileOffset * Config.TILE_SIZE;
         maxYTileOffset = lvlTileHeight - Config.TILES_IN_HEIGHT - 1;
         maxLevelOffsetY = maxYTileOffset * Config.TILE_SIZE;
-        levelManager.levelEvents[LevelManager.curMapIndex].onEnter();
+
         enemyManager.initEnemy(LevelManager.curMapIndex);
         interactableManager.initPortal(LevelManager.curMapIndex);
+
     }
 
     public void windowFocusLost() {
@@ -170,11 +175,11 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
         levelManager.drawBehind(g, xLvlOffset, yLvlOffset);
-        interactableManager.draw(g, xLvlOffset, yLvlOffset);
         player.render(g, xLvlOffset, yLvlOffset);
         enemyManager.draw(g, xLvlOffset, yLvlOffset);
         effectManager.draw(g, xLvlOffset, yLvlOffset);
         levelManager.drawFront(g, xLvlOffset, yLvlOffset);
+        interactableManager.draw(g, xLvlOffset, yLvlOffset);
         magic.draw(g, xLvlOffset, yLvlOffset);
         int aniIndex = player.getAniIndex();
         g.drawImage(crosshair, mousePosX - (crosshairSize + aniIndex) / 2, mousePosY - (crosshairSize + aniIndex) / 2,
@@ -231,6 +236,9 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_E:
                 magic.cycleLeft();
                 break;
+            case KeyEvent.VK_F:
+                player.interacting = true;
+                break;
             case KeyEvent.VK_1:
                 Magic.selectedChoice = 0;
                 break;
@@ -242,6 +250,9 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_P:
                 levelManager.nextMap();
+                break;
+            case KeyEvent.VK_G:
+                player.getInv().add(Item.dog_sigil);
                 break;
         }
     }
@@ -260,6 +271,9 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_S:// S
                 player.setDown(false);
+                break;
+            case KeyEvent.VK_F:
+                player.interacting = false;
                 break;
         }
     }

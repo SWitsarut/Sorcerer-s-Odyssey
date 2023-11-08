@@ -37,13 +37,13 @@ public class EnemyManager {
     }
 
     public void initEnemy(int level) {
-        enemies.clear();
+        // enemies.clear();
         switch (level) {
             case LevelManager.LAVADUNGEON:
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 500, 500));
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 750, 500));
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 800, 500));
-                addMob(new CorruptedTreant(corruptedTreantAnimation, 1000, 500));
+                addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 500, 500));
+                addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 750, 500));
+                addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 800, 500));
+                addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 1000, 500));
                 break;
         }
     }
@@ -55,7 +55,10 @@ public class EnemyManager {
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).draw(g, xLvlOffset, yLvlOffset);
+            Enemy enemy = enemies.get(i);
+            if (enemy.mapIndex == LevelManager.curMapIndex) {
+                enemy.draw(g, xLvlOffset, yLvlOffset);
+            }
         }
     }
 
@@ -63,12 +66,12 @@ public class EnemyManager {
         enemies.clear();
     }
 
-    public void spawnTreant(int x, int y) {
-        addMob(new CorruptedTreant(corruptedTreantAnimation, x, y));
+    public void spawnTreant(int mapIndex, int x, int y) {
+        addMob(new CorruptedTreant(mapIndex, corruptedTreantAnimation, x, y));
     }
 
-    public void spawnWolfRider(int x, int y, boolean aggro) {
-        Enemy wolfRider = new GoblinWolfRider(goblinWolfRiderAni, x, y);
+    public void spawnWolfRider(int mapIndex, int x, int y, boolean aggro) {
+        Enemy wolfRider = new GoblinWolfRider(mapIndex, goblinWolfRiderAni, x, y);
         wolfRider.attacked = aggro;
         addMob(wolfRider);
 
@@ -87,19 +90,23 @@ public class EnemyManager {
             int enemyCenterX = (int) (enemy.getHitbox().x + enemy.getHitbox().width / 2);
             int enemyCenterY = (int) (enemy.getHitbox().y + enemy.getHitbox().height / 2);
             if (!enemy.isDead) {
-                enemy.update(player);
-                if (player.getHitbox().intersects(enemy.getHitbox())) {
-                    player.getAttacked(enemy.damage);
-                }
-                for (int j = 0; j < magic.projectiles.size(); j++) {
-                    Projectile projectile = magic.projectiles.get(j);
-                    if (!projectile.enemyhitted.contains(enemy)
-                            && enemy.getHitbox().intersects(projectile.getHitbox())
-                            && projectile.isPlayerOwn()) {
-                        enemy.getAttacked(projectile.hit(enemy));
-                        effectManager.playAttacked(enemyCenterX,
-                                enemyCenterY, false);
-                        projectile.enemyhitted.add(enemy);
+                if (enemy.mapIndex == LevelManager.curMapIndex) {
+
+                    enemy.update(player);
+                    if (player.getHitbox().intersects(enemy.getHitbox())) {
+                        player.getAttacked(enemy.damage);
+                    }
+
+                    for (int j = 0; j < magic.projectiles.size(); j++) {
+                        Projectile projectile = magic.projectiles.get(j);
+                        if (!projectile.enemyhitted.contains(enemy)
+                                && enemy.getHitbox().intersects(projectile.getHitbox())
+                                && projectile.isPlayerOwn()) {
+                            enemy.getAttacked(projectile.hit(enemy));
+                            effectManager.playAttacked(enemyCenterX,
+                                    enemyCenterY, false);
+                            projectile.enemyhitted.add(enemy);
+                        }
                     }
                 }
             } else {

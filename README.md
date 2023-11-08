@@ -16,3 +16,24 @@
 1. [ ] small map fix
 
 ## Sorcerer's Odyssey
+
+```mermaid
+---
+title: Class diagram
+---
+
+classDiagram
+    class Animal
+    Animal : +eat() void
+    Animal : +isDead() boolean
+
+    class Dog
+    Dog : +color() void
+
+    Animal <-- Dog
+    Animal <-- Chicken
+
+    Chicken : String hp
+    Chicken : bark() void
+
+```

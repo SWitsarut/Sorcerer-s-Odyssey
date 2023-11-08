@@ -38,7 +38,7 @@ public abstract class Normal extends Projectile {
     @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
 
-        this.drawHitbox(g, xLvlOffset, yLvlOffset);
+        // this.drawHitbox(g, xLvlOffset, yLvlOffset);d
         if (angle_degrees <= 45 && angle_degrees >= -45) {
             g.drawImage(slash[R], (int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset), (int) (width),
                     (int) (height),

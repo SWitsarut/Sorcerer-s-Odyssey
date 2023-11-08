@@ -20,6 +20,7 @@ public class Sound {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            System.out.println(clip.getFormat());
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         } catch (Exception e) {
             e.printStackTrace();

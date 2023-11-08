@@ -42,7 +42,6 @@ public class Rage extends Buff {
             xPoints[i] = (int) (playerCenter.x - xLvlOffset + size * Math.cos(angle));
             yPoints[i] = (int) (playerCenter.y - yLvlOffset + size * Math.sin(angle));
         }
-
         g.fillPolygon(xPoints, yPoints, 6);
     }
 

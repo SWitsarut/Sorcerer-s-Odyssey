@@ -24,11 +24,11 @@ public class EventManager {
         interactables = new ArrayList<>();
     }
 
-    public void monsterHordeEvent() {
-        interactables.add(new MonsterHorde(game, 1, true));
+    public void monsterHordeEvent(int mapIndex) {
+        interactables.add(new MonsterHorde(game, mapIndex, 1, true));
     }
 
-    public void monsterHordeEnd() {
+    public void monsterHordeEnd(int mapIndex) {
         for (int i = 0; i < interactables.size(); i++) {
             Event interactable = interactables.get(i);
             if (interactable instanceof MonsterHorde) {

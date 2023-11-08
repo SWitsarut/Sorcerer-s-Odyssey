@@ -1,17 +1,19 @@
 package entities;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import Inventory.Inventory;
 import Levels.Level;
 import effect.EffectManager;
 import gamestates.Gamestate;
 import helperClass.Coordinate;
-import helperClass.UpdateCounter;
 import main.sound.Sound;
 import main.sound.SoundEffect;
+import util.Helper;
 import util.LoadSave;
 
 import static util.Constants.PlayerConstants.*;
@@ -36,6 +38,12 @@ public class Player extends Entity {
     public int hitboxXcenter;
     public int hitboxYcenter;
 
+    private Inventory inv;
+
+    public Inventory getInv() {
+        return inv;
+    }
+
     private int aniTick = 0, aniIndex, aniFramePersecond = ANIMATION_FRAME_PERSECOND;
 
     private boolean facingLeft = false;
@@ -45,6 +53,22 @@ public class Player extends Entity {
     public static double speedDefault = 5;
 
     private boolean up, down, right, left;
+
+    public boolean interacting = false;
+    public boolean interactBlock = false;
+    public int curInteractingDelay = 0;
+    public int maxInteractingDelay = (int) (0.5 * UPDATE_PER_TIME);
+
+    public void interactDelayUpdate() {
+        if (interactBlock) {
+            interacting = false;
+            curInteractingDelay++;
+            if (curInteractingDelay >= maxInteractingDelay) {
+                interactBlock = false;
+                curInteractingDelay = 0;
+            }
+        }
+    }
 
     private double hp, mp;
     private double maxHp = 175, maxMp = 150;
@@ -81,6 +105,7 @@ public class Player extends Entity {
         hitboxXcenter = (int) (hitbox.x + hitbox.width / 2);
         hitboxYcenter = (int) (hitbox.y + hitbox.height / 2);
         this.effectManager = effectManager;
+        this.inv = new Inventory();
         hp = maxHp;
         mp = maxMp;
     }
@@ -111,6 +136,8 @@ public class Player extends Entity {
     }
 
     public void update() {
+        System.out.println(Helper.getTileFromPos(getPlayerCenter()));
+        // System.out.println(hitbox);
         updateStatus();
         move();
     }
@@ -119,6 +146,7 @@ public class Player extends Entity {
         regen();
         SpellCastGap();
         AttackGap();
+        interactDelayUpdate();
         switch (palyerAction) {
             case WALKING:
                 playFootStepSound();
@@ -195,6 +223,10 @@ public class Player extends Entity {
         }
     }
 
+    public void heal(double amount) {
+        hp = Math.min(hp + amount, maxHp);
+    }
+
     private void playFootStepSound() {
         long curtime = System.currentTimeMillis();
         if (curtime - lastFootstepPlayed > 300) {
@@ -210,6 +242,7 @@ public class Player extends Entity {
         }
         if (noclip) {
             g.setColor(Color.WHITE);
+            g.setFont(new Font("Consolas", Font.PLAIN, 15));
             g.drawString("no clip enable", 0, SCREEN_HEIGHT);
         }
         if (facingLeft) {

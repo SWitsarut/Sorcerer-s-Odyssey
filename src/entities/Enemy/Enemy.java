@@ -26,6 +26,8 @@ public abstract class Enemy extends Entity {
     protected double xSpeed;
     protected double ySpeed;
 
+    public int mapIndex;
+
     public boolean attacked = false;
     protected Def def;
 
@@ -45,8 +47,10 @@ public abstract class Enemy extends Entity {
         this.hp = hp;
     }
 
-    public Enemy(BufferedImage[] animation, float scale, Def def, float x, float y, float width, float height) {
+    public Enemy(int mapIndex, BufferedImage[] animation, float scale, Def def, float x, float y, float width,
+            float height) {
         super(x, y, scale * width, scale * height);
+        this.mapIndex = mapIndex;
         this.def = def;
         this.scale = scale;
         this.animation = animation;
@@ -60,7 +64,6 @@ public abstract class Enemy extends Entity {
         g.drawImage(animation[aniIndex], (int) hitbox.x - xLvlOffset, (int) hitbox.y - yLvlOffset,
                 (int) (animation[aniIndex].getWidth() * scale * Config.SCALE),
                 (int) (animation[aniIndex].getHeight() * scale * Config.SCALE), null);
-        drawHitbox(g, xLvlOffset, yLvlOffset);
     }
 
     public void getAttacked(Damage damage) {

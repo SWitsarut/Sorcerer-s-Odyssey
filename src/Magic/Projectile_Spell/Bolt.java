@@ -4,24 +4,29 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import Action.Damage;
+import Magic.Magic;
+import entities.Entity;
 import entities.Player;
 import entities.Projectile.Projectile;
 import helperClass.Coordinate;
-import main.sound.SoundEffect;
+import main.sound.Sound;
 
 public class Bolt extends Projectile {
 
     public static double cost = 30;
 
-    private SoundEffect castSound;
+    private Sound castSound;
+    private Magic magic;
 
-    public Bolt(Coordinate playerCoor, Coordinate targetCoor) {
-        super(new Damage(Damage.LIGHTING, 70 * Player.dmgMul), true, 0.2, playerCoor.x, playerCoor.y, targetCoor, 24,
+    public Bolt(Magic magic, Coordinate playerCoor, Coordinate targetCoor) {
+        super(new Damage(Damage.LIGHTING, 50 * Player.dmgMul), true, 0.2, playerCoor.x, playerCoor.y, targetCoor, 24,
                 24);
         setSpeed(90);
         setExpiredOntarget(false);
-        castSound = new SoundEffect("magic/start.wav", 40);
+        castSound = new Sound("magic/Electric_1.wav");
+        castSound.setVolume(70);
         castSound.play();
+        this.magic = magic;
     }
 
     @Override
@@ -42,6 +47,13 @@ public class Bolt extends Projectile {
     @Override
     protected void onExpired() {
         // impactSound.play();
+    }
+
+    @Override
+    public Damage hit(Entity entity) {
+        Coordinate target = new Coordinate(entity.getCenterX(), entity.getCenterY());
+        magic.spawnLesserStrike(target);
+        return damage;
     }
 
 }

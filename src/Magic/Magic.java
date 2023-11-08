@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Action.Damage;
+import Magic.Buff_Spell.Aid;
 import Magic.Buff_Spell.ArcaneSurge;
 import Magic.Buff_Spell.Buff;
 import Magic.Buff_Spell.LightningBuff;
@@ -18,6 +19,8 @@ import Magic.Projectile_Spell.DivineOrb;
 import Magic.Projectile_Spell.Explosion;
 import Magic.Projectile_Spell.FireBall;
 import Magic.Projectile_Spell.FireBreath;
+import Magic.Projectile_Spell.LesserStrike;
+import Magic.Projectile_Spell.LightningStrike;
 import entities.Entity;
 import entities.Player;
 import entities.Projectile.Projectile;
@@ -46,6 +49,8 @@ public class Magic {
     private SoundEffect cyclSoundEffect[] = new SoundEffect[2];
     private Random random = new Random(System.nanoTime());
 
+    private SoundEffect lightningSoundEffect2;
+
     public Magic(Playing playing) {
         this.player = playing.getPlayer();
         lightningAni = LoadSave.LinearAnimationLoader("asset/effect/lightning.png", 32);
@@ -55,6 +60,8 @@ public class Magic {
         slashEffect[Normal.D] = LoadSave.GetImage("asset/effect/SlashD.png");
         slashEffect[Normal.L] = LoadSave.GetImage("asset/effect/SlashL.png");
         slashEffect[Normal.R] = LoadSave.GetImage("asset/effect/SlashR.png");
+
+        lightningSoundEffect2 = new SoundEffect("magic/Electric_2.wav", 60);
     }
 
     public void cast(Coordinate targetCoor) {
@@ -90,8 +97,10 @@ public class Magic {
                     case 0:
                         castBolt(targetCoor);
                         break;
+                    case 1:
+                        castLightningStrike(targetCoor);
+                        break;
                     case 2:
-                        // castLightningBuff();
                         castLightningBuff();
                         break;
                 }
@@ -99,7 +108,10 @@ public class Magic {
             case Holy:
                 switch (selectedChoice) {
                     case 0:
-                        castSmite(targetCoor);
+                        castDivineOrb(targetCoor);
+                        break;
+                    case 1:
+                        castDivineAid();
                         break;
                     case 2:
                         castRegeneration();
@@ -167,7 +179,13 @@ public class Magic {
 
     public void castBolt(Coordinate targetCoor) {
         if (player.castSpell(Bolt.cost)) {
-            projectiles.add(new Bolt(player.getPlayerCenter(), targetCoor));
+            projectiles.add(new Bolt(this, player.getPlayerCenter(), targetCoor));
+        }
+    }
+
+    public void castLightningStrike(Coordinate targCoordinate) {
+        if (player.castSpell(LightningStrike.cost)) {
+            projectiles.add(new LightningStrike(this, targCoordinate));
         }
     }
 
@@ -177,10 +195,15 @@ public class Magic {
         }
     }
 
-    public void castSmite(Coordinate targetCoor) {
+    public void castDivineOrb(Coordinate targetCoor) {
         if (player.castSpell(DivineOrb.cost)) {
-
             projectiles.add(new DivineOrb(player.getPlayerCenter(), targetCoor));
+        }
+    }
+
+    public void castDivineAid() {
+        if (player.castSpell(Aid.cost)) {
+            new Aid(player);
         }
     }
 
@@ -278,6 +301,10 @@ public class Magic {
 
             });
         }
+    }
+
+    public void spawnLesserStrike(Coordinate targetCoor) {
+        projectiles.add(new LesserStrike(targetCoor, lightningSoundEffect2));
     }
 
 }

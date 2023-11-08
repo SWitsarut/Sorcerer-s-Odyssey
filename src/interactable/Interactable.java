@@ -26,6 +26,10 @@ public abstract class Interactable {
         this.massage = massage;
     }
 
+    public void interact() {
+        onSubmit();
+    }
+
     public abstract void onSubmit();
 
     public abstract void draw(Graphics g, int xLvlOffset, int yLvlOffset);

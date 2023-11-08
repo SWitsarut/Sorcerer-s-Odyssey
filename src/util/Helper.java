@@ -17,8 +17,20 @@ public class Helper {
         return coordinate;
     }
 
+    public static Coordinate getTileFromPos(int xCoordinate, int yCoordinate) {
+        int xTile = xCoordinate / Config.TILE_SIZE;
+        int yTile = yCoordinate / Config.TILE_SIZE;
+
+        Coordinate tileCoordinate = new Coordinate(xTile, yTile);
+        return tileCoordinate;
+    }
+
     public static Coordinate getPosFromTile(Coordinate tile) {
         return getPosFromTile(tile.x, tile.y);
+    }
+
+    public static Coordinate getTileFromPos(Coordinate coor) {
+        return getTileFromPos(coor.x, coor.y);
     }
 
     public static boolean CanMoveHere(float x, float y, float width, float height, int[][] levelData) {

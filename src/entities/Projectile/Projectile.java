@@ -121,9 +121,13 @@ public abstract class Projectile extends Entity {
             onExpired();
             active = false;
         }
+        onHit();
         return damage;
-
     }
+
+    protected void onHit() {
+
+    };
 
     public boolean isActive() {
         return active;
