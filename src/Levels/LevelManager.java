@@ -21,6 +21,8 @@ public class LevelManager implements Manager {
 
     public static final int CAVE = 5;
 
+    public static final int WIN = 6;
+
     private Playing playing;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
@@ -117,6 +119,17 @@ public class LevelManager implements Manager {
         };
 
         levelEvents[CAVE] = new LevelEvent() {
+            @Override
+            public void onEnter() {
+
+            }
+
+            @Override
+            public void onExit() {
+
+            }
+        };
+        levelEvents[WIN] = new LevelEvent() {
             @Override
             public void onEnter() {
 

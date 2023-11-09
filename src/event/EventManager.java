@@ -23,7 +23,7 @@ public class EventManager {
     }
 
     public void wolfHordeStart(int mapIndex) {
-        interactables.add(new WolfHorde(game, mapIndex, 1, true));
+        interactables.add(new WolfHorde(game, mapIndex, 1.25, true));
     }
 
     public void wolfHordEnd(int mapIndex) {
@@ -35,7 +35,7 @@ public class EventManager {
     }
 
     public void skeletonHordeStart(int mapIndex) {
-        interactables.add(new SkeletonHorde(game, mapIndex, 0.4, true));
+        interactables.add(new SkeletonHorde(game, mapIndex, 0.8, true));
     }
 
     public void skeletonHordeEnd(int mapIndex) {

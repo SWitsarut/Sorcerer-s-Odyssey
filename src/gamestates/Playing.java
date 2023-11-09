@@ -16,6 +16,7 @@ import helperClass.Coordinate;
 import interactable.InteractableManager;
 import main.Game;
 import ui.Hud;
+import util.Helper;
 import util.LoadSave;
 import util.Constants.Config;
 
@@ -77,6 +78,9 @@ public class Playing extends State implements Statemethods {
         effectManager = new EffectManager();
         player = new Player(0, 0, effectManager);
 
+        Coordinate playerCoor = Helper.getPosFromTile(0, 35);
+        player.getHitbox().x = playerCoor.x;
+        player.getHitbox().y = playerCoor.y;
         hud = new Hud(player);
         magic = new Magic(this);
         enemyManager = new EnemyManager(this);

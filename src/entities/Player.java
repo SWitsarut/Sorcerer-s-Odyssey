@@ -135,9 +135,14 @@ public class Player extends Entity {
     }
 
     public void update() {
-        System.out.println(Helper.getTileFromPos(getPlayerCenter()) + " | x:" + hitbox.x + " y:" + hitbox.y);
-        updateStatus();
-        move();
+        if (hp > 0) {
+
+            System.out.println(Helper.getTileFromPos(getPlayerCenter()) + " | x:" + hitbox.x + " y:" + hitbox.y);
+            updateStatus();
+            move();
+        } else {
+            Gamestate.state = Gamestate.GAMEOVER;
+        }
     }
 
     private void updateStatus() {
