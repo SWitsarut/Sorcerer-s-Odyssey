@@ -1,8 +1,8 @@
 package Levels;
 
-public abstract class LevelEvent {
+public interface LevelEvent {
 
-    public abstract void onEnter();
+    public void onEnter();
 
-    public abstract void onExit();
+    public void onExit();
 }

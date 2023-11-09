@@ -7,6 +7,7 @@ public class Constants {
     }
 
     public static class Config {
+
         public static final int FPS_SET = 60;
         public static final int UPS_SET = 120;
 

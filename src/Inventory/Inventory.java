@@ -15,7 +15,11 @@ public class Inventory {
         }
     }
 
-    public boolean check(int item) {
-        return inventory.contains(item);
+    public boolean check(int[] item) {
+        boolean had = true;
+        for (int j : item) {
+            had = had && inventory.contains(j);
+        }
+        return had;
     }
 }

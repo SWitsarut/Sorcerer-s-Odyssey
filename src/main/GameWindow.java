@@ -19,15 +19,12 @@ public class GameWindow {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gp);
         jframe.setResizable(false);
-        // jframe.setLocationRelativeTo(null);
-        jframe.setLocation(0, 0);
+        jframe.setLocationRelativeTo(null);
         jframe.pack();
-        jframe.setTitle("Sorcerer's Odysey");
+        jframe.setTitle("Sorcerer's Odyssey");
 
-        ImageIcon icon = new ImageIcon("src/res/asset/icond.png");
+        ImageIcon icon = new ImageIcon("src/res/asset/icon.png");
         jframe.setIconImage(icon.getImage());
-        // keep last
-        // jframe.setVisible(true);
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 

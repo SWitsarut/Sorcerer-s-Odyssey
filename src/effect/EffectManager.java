@@ -4,10 +4,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import main.Manager;
 import main.sound.SoundEffect;
 import util.LoadSave;
 
-public class EffectManager {
+public class EffectManager implements Manager {
 
     ArrayList<EffectPlayer> eff = new ArrayList<>();
     BufferedImage attacked[];
@@ -39,9 +40,14 @@ public class EffectManager {
         }
     }
 
+    @Override
+    public void draw(Graphics g) {
+
+    }
+
     public void update() {
-        for (int i = 0; i < eff.size(); i++) {
-            eff.get(i).update();
+        for (EffectPlayer effectPlayer : eff) {
+            effectPlayer.update();
         }
     }
 

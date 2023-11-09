@@ -5,11 +5,11 @@ import gamestates.Playing;
 
 public class LockPotal extends Potal {
 
-    private int requireItem;
+    private int[] requireItem;
     private String lockMassage;
     private String originalMassage;
 
-    public LockPotal(String massage, Playing playing, String mapName, int mapIndex, int requireItem, String lockMassage) {
+    public LockPotal(String massage, Playing playing, String mapName, int mapIndex, int[] requireItem, String lockMassage) {
         super(playing, mapName, mapIndex, massage);
         this.requireItem = requireItem;
         this.lockMassage = lockMassage;

@@ -4,12 +4,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import gamestates.Playing;
+import main.Manager;
 
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
 
-public class LevelManager {
+public class LevelManager implements Manager {
 
     public static final int LAVADUNGEON = 0;
     public static final int ROOFTOP = 1;
@@ -173,15 +174,15 @@ public class LevelManager {
 
     public void drawBehind(Graphics g, int xLvlOffset, int yLvlOffset) {
         for (int layer = 0; layer < 2; layer++) {
-            drawMap(g, layer, xLvlOffset, yLvlOffset);
+            draw(g, layer, xLvlOffset, yLvlOffset);
         }
     }
 
     public void drawFront(Graphics g, int xLvlOffset, int yLvlOffset) {
-        drawMap(g, FRONT, xLvlOffset, yLvlOffset);
+        draw(g, FRONT, xLvlOffset, yLvlOffset);
     }
 
-    private void drawMap(Graphics g, int layer, int xLvlOffset, int yLvlOffset) {
+    private void draw(Graphics g, int layer, int xLvlOffset, int yLvlOffset) {
         for (int j = 0; j < levelLayers[layer].getYlength(); j++) {
             for (int i = 0; i < levelLayers[layer].getXlength(); i++) {
                 int index = levelLayers[layer].getSpriteIndex(i, j);
@@ -199,5 +200,15 @@ public class LevelManager {
 
     public Level[] getCurrentLevels() {
         return levelLayers;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
+    }
+
+    @Override
+    public void update() {
+
     }
 }
