@@ -24,8 +24,6 @@ public class GameWindow {
         jframe.pack();
         jframe.setTitle("Sorcerer's Odyssey");
 
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("/res/asset/icon.png"));
-        jframe.setIconImage(icon.getImage());
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 
