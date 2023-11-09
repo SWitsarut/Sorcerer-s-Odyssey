@@ -29,6 +29,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
             case GAMEOVER:
                 gp.getGame().getGameOver().mouseDragged(e);
                 break;
+            case WIN:
+                gp.getGame().getWin().mouseDragged(e);
+                break;
             default:
                 break;
         }
@@ -48,6 +51,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
                 break;
             case GAMEOVER:
                 gp.getGame().getGameOver().mouseMoved(e);
+                break;
+            case WIN:
+                gp.getGame().getWin().mouseMoved(e);
                 break;
             default:
                 break;
@@ -69,6 +75,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
             case GAMEOVER:
                 gp.getGame().getGameOver().mouseClicked(e);
                 break;
+            case WIN:
+                gp.getGame().getWin().mouseClicked(e);
+                break;
             default:
                 break;
         }
@@ -89,6 +98,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
             case GAMEOVER:
                 gp.getGame().getGameOver().mousePressed(e);
                 break;
+            case WIN:
+                gp.getGame().getWin().mousePressed(e);
+                break;
             default:
                 break;
         }
@@ -108,6 +120,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
                 break;
             case GAMEOVER:
                 gp.getGame().getGameOver().mouseReleased(e);
+                break;
+            case WIN:
+                gp.getGame().getWin().mouseReleased(e);
                 break;
             default:
                 break;

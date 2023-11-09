@@ -16,8 +16,9 @@ public class Game implements Runnable {
     private Playing playing;
     private Menu menu;
     private Pause pause;
-
     private GameOver gameOver;
+
+    private Win win;
 
     public Game() {
         initClasses();
@@ -34,6 +35,7 @@ public class Game implements Runnable {
         playing = new Playing(this);
         pause = new Pause(this);
         gameOver = new GameOver(this);
+        win = new Win(this);
     }
 
     public void render(Graphics g) {
@@ -54,6 +56,10 @@ public class Game implements Runnable {
             case GAMEOVER:
                 playing.draw(g);
                 gameOver.draw(g);
+                break;
+            case WIN:
+                playing.draw(g);
+                win.draw(g);
             default:
                 break;
         }
@@ -74,6 +80,9 @@ public class Game implements Runnable {
                 break;
             case GAMEOVER:
                 gameOver.update();
+                break;
+            case WIN:
+                win.update();
                 break;
             default:
                 break;
@@ -145,5 +154,9 @@ public class Game implements Runnable {
 
     public GameOver getGameOver() {
         return gameOver;
+    }
+
+    public Win getWin() {
+        return win;
     }
 }
