@@ -23,7 +23,7 @@ import static util.Helper.*;
 public class Player extends Entity {
 
     // no clip
-    private boolean noclip = true;
+    private boolean noclip = false;
 
     private EffectManager effectManager;
 
@@ -104,6 +104,7 @@ public class Player extends Entity {
         initHitbox(x, y, (float) (10 * SCALE), (float) (16 * SCALE));
         hitboxXcenter = (int) (hitbox.x + hitbox.width / 2);
         hitboxYcenter = (int) (hitbox.y + hitbox.height / 2);
+        noclip = false;
         this.effectManager = effectManager;
         this.inv = new Inventory();
         hp = maxHp;
