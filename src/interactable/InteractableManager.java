@@ -43,11 +43,11 @@ public class InteractableManager {
             case LevelManager.BRIDGE:
                 // top potal
                 spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.DOG], LevelManager.BRIDGE, 12, 0,
-                        new Coordinate(1410, 2340), 16,
+                        new Coordinate(1655, 3050), 16,
                         8);
                 // //bot potal
                 spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.BRIDGE, 12, 72,
-                        new Coordinate(1410, 2340), 16,
+                        new Coordinate(1450, 1000), 16,
                         8);
                 break;
             case LevelManager.DOG:
@@ -59,7 +59,7 @@ public class InteractableManager {
     }
 
     public void spawnPotalatAtTile(String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
-            int height) {
+                                   int height) {
         Coordinate pos = Helper.getPosFromTile(xTile, yTile);
         Potal potal = new Potal(playing, targetMap, mapIndex);
         potal.initHitbox(pos.x, pos.y, width, height);
@@ -68,7 +68,7 @@ public class InteractableManager {
     }
 
     public void LockPotalatAtTile(String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
-            int height, int requireItem, String lockMsg) {
+                                  int height, int requireItem, String lockMsg) {
         Coordinate pos = Helper.getPosFromTile(xTile, yTile);
         LockPotal potal = new LockPotal(playing, targetMap, mapIndex, requireItem, lockMsg);
         potal.initHitbox(pos.x, pos.y, width, height);

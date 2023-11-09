@@ -1,7 +1,5 @@
 package event;
 
-import main.Game;
-
 // import static util.ObjectType.*;
 
 import java.awt.Graphics;
@@ -24,22 +22,32 @@ public class EventManager {
         interactables = new ArrayList<>();
     }
 
-    public void monsterHordeEvent(int mapIndex) {
-        interactables.add(new MonsterHorde(game, mapIndex, 1, true));
+    public void wolfHordeStart(int mapIndex) {
+        interactables.add(new WolfHorde(game, mapIndex, 1, true));
     }
 
-    public void monsterHordeEnd(int mapIndex) {
-        for (int i = 0; i < interactables.size(); i++) {
-            Event interactable = interactables.get(i);
-            if (interactable instanceof MonsterHorde) {
-                ((MonsterHorde) interactable).active = false;
+    public void wolfHordEnd(int mapIndex) {
+        for (Event interactable : interactables) {
+            if (interactable instanceof WolfHorde) {
+                ((WolfHorde) interactable).active = false;
+            }
+        }
+    }
+
+    public void skeletonHordeStart(int mapIndex) {
+        interactables.add(new SkeletonHorde(game, mapIndex, 0.4, true));
+    }
+
+    public void skeletonHordeEnd(int mapIndex) {
+        for (Event interactable : interactables) {
+            if (interactable instanceof SkeletonHorde) {
+                ((SkeletonHorde) interactable).active = false;
             }
         }
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        for (int i = 0; i < interactables.size(); i++) {
-            Event interactable = interactables.get(i);
+        for (Event interactable : interactables) {
             interactable.draw(g, xLvlOffset, yLvlOffset);
         }
     }

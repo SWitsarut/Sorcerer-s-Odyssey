@@ -48,7 +48,7 @@ public abstract class Enemy extends Entity {
     }
 
     public Enemy(int mapIndex, BufferedImage[] animation, float scale, Def def, float x, float y, float width,
-            float height) {
+                 float height) {
         super(x, y, scale * width, scale * height);
         this.mapIndex = mapIndex;
         this.def = def;
@@ -64,6 +64,7 @@ public abstract class Enemy extends Entity {
         g.drawImage(animation[aniIndex], (int) hitbox.x - xLvlOffset, (int) hitbox.y - yLvlOffset,
                 (int) (animation[aniIndex].getWidth() * scale * Config.SCALE),
                 (int) (animation[aniIndex].getHeight() * scale * Config.SCALE), null);
+        drawHitbox(g, xLvlOffset, yLvlOffset);
     }
 
     public void getAttacked(Damage damage) {
@@ -96,7 +97,9 @@ public abstract class Enemy extends Entity {
         if (hp < maxHp) {
             attacked = true;
         }
-    };
+    }
+
+    ;
 
     protected void chase(Player player) {
         int playerX = (int) (player.getHitbox().x + player.getHitbox().width / 2);

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import gamestates.Playing;
+
 import static util.LoadSave.*;
 import static util.Constants.Config.*;
 import static util.Constants.LayerOrder.*;
@@ -53,12 +54,12 @@ public class LevelManager {
 
             @Override
             public void onEnter() {
-                playing.geteventManager().monsterHordeEvent(LAVADUNGEON);
+                playing.geteventManager().wolfHordeStart(LAVADUNGEON);
             }
 
             @Override
             public void onExit() {
-                playing.geteventManager().monsterHordeEnd(LAVADUNGEON);
+                playing.geteventManager().wolfHordEnd(LAVADUNGEON);
             }
 
         };
@@ -77,11 +78,12 @@ public class LevelManager {
 
             @Override
             public void onEnter() {
-
+                playing.geteventManager().skeletonHordeStart(BRIDGE);
             }
 
             @Override
             public void onExit() {
+                playing.geteventManager().skeletonHordeEnd(BRIDGE);
             }
 
         };
@@ -109,7 +111,7 @@ public class LevelManager {
             for (int j = 0; j < widthCount; j++) {
                 int index = (i * widthCount) + j;
                 levelSprite[index] = img.getSubimage((TILE_DEFAULT_SIZE * j), (TILE_DEFAULT_SIZE
-                        * i), TILE_DEFAULT_SIZE,
+                                * i), TILE_DEFAULT_SIZE,
                         TILE_DEFAULT_SIZE);
             }
         }

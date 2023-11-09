@@ -17,6 +17,8 @@ public class EnemyManager {
     BufferedImage[] corruptedTreantAnimation;
     BufferedImage[] goblinWolfRiderAni;
 
+    BufferedImage[] skeletonAni;
+
     private ArrayList<Enemy> enemies;
     private Player player;
     private EffectManager effectManager;
@@ -51,6 +53,7 @@ public class EnemyManager {
     private void LoadAnimation() {
         corruptedTreantAnimation = LoadSave.LinearAnimationLoader("entity/enemy/CorruptedTreantIdle.png", 16);
         goblinWolfRiderAni = LoadSave.LinearAnimationLoader("entity/enemy/GoblinWolfRiderIdleSide.png", 16);
+        skeletonAni = LoadSave.LinearAnimationLoader("entity/[VerArc Stash] Mini_Characters/char_35.png", 16);
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -68,6 +71,18 @@ public class EnemyManager {
 
     public void spawnTreant(int mapIndex, int x, int y) {
         addMob(new CorruptedTreant(mapIndex, corruptedTreantAnimation, x, y));
+    }
+
+    public void spawnSkeletion(int mapIndex, int x, int y) {
+        addMob(new Skeleton(mapIndex, skeletonAni, x, y));
+    }
+
+    public void spawnSkeletion(int mapIndex, int x, int y, boolean aggro) {
+
+        Enemy Skeleton = new Skeleton(mapIndex, skeletonAni, x, y);
+        Skeleton.attacked = aggro;
+        addMob(Skeleton);
+
     }
 
     public void spawnWolfRider(int mapIndex, int x, int y, boolean aggro) {

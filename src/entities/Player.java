@@ -115,8 +115,7 @@ public class Player extends Entity {
             hp -= damage;
             curIFrameTick = 0;
             iFraming = true;
-            effectManager.playAttacked((int) hitbox.x + hitboxXcenter, (int) hitbox.y +
-                    hitboxYcenter, true);
+            effectManager.playAttacked((int) hitbox.x + hitboxXcenter, (int) hitbox.y + hitboxYcenter, true);
         }
     }
 
@@ -136,7 +135,7 @@ public class Player extends Entity {
     }
 
     public void update() {
-        System.out.println(Helper.getTileFromPos(getPlayerCenter()));
+//        System.out.println(Helper.getTileFromPos(getPlayerCenter()) + " | x:" + hitbox.x + " y:" + hitbox.y);
         // System.out.println(hitbox);
         updateStatus();
         move();
@@ -242,17 +241,9 @@ public class Player extends Entity {
             g.drawString("no clip enable", 0, SCREEN_HEIGHT);
         }
         if (facingLeft) {
-            g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE),
-                    (int) (hitbox.y - yDrawOffset) - yLvlOffset,
-                    CHAR_SIZE * -1,
-                    CHAR_SIZE,
-                    null);
+            g.drawImage(animation[palyerAction][aniIndex], (int) ((hitbox.x - xDrawOffset) - xLvlOffset + CHAR_SIZE), (int) (hitbox.y - yDrawOffset) - yLvlOffset, CHAR_SIZE * -1, CHAR_SIZE, null);
         } else {
-            g.drawImage(animation[palyerAction][aniIndex], (int) playerOnScreen.x,
-                    (int) playerOnScreen.y,
-                    CHAR_SIZE,
-                    CHAR_SIZE,
-                    null);
+            g.drawImage(animation[palyerAction][aniIndex], (int) playerOnScreen.x, (int) playerOnScreen.y, CHAR_SIZE, CHAR_SIZE, null);
         }
         // drawHitbox(g, xLvlOffset, yLvlOffset);
     }
@@ -269,9 +260,7 @@ public class Player extends Entity {
         animation = new BufferedImage[5][10];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
-                animation[i][j] = img.getSubimage(CHAR_DEFAULT_SIZE * j, 5 * CHAR_DEFAULT_SIZE + CHAR_DEFAULT_SIZE * i,
-                        CHAR_DEFAULT_SIZE,
-                        CHAR_DEFAULT_SIZE);
+                animation[i][j] = img.getSubimage(CHAR_DEFAULT_SIZE * j, 5 * CHAR_DEFAULT_SIZE + CHAR_DEFAULT_SIZE * i, CHAR_DEFAULT_SIZE, CHAR_DEFAULT_SIZE);
             }
         }
     }
@@ -299,9 +288,7 @@ public class Player extends Entity {
                 ySpeed += (float) speed;
             }
             if (!noclip) {
-                if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width,
-                        hitbox.height,
-                        collisionMap.getData())) {
+                if (CanMoveHere((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, collisionMap.getData())) {
                     hitbox.x += xSpeed;
                     hitbox.y += ySpeed;
                 }
