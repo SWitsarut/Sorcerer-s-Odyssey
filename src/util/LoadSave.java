@@ -141,7 +141,8 @@ public class LoadSave {
     public static Font GetFont(int size) {
         Font font = new Font("Arial", Font.TRUETYPE_FONT, size);
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/asset/Oleaguid.ttf"));
+            InputStream is = LoadSave.class.getResourceAsStream("/res/asset/Oleaguid.ttf");
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
             font = font.deriveFont(Font.PLAIN, size);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();

@@ -11,8 +11,8 @@ import util.LoadSave;
 public class EffectManager implements Manager {
 
     ArrayList<EffectPlayer> eff = new ArrayList<>();
-    BufferedImage attacked[];
-    BufferedImage died[];
+    BufferedImage[] attacked;
+    BufferedImage[] died;
     SoundEffect hitSound;
     SoundEffect diedSound;
 
@@ -35,8 +35,8 @@ public class EffectManager implements Manager {
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
         updateMember();
-        for (int i = 0; i < eff.size(); i++) {
-            eff.get(i).draw(g, xLvlOffset, yLvlOffset);
+        for (EffectPlayer effectPlayer : eff) {
+            effectPlayer.draw(g, xLvlOffset, yLvlOffset);
         }
     }
 
