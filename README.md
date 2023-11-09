@@ -1,4 +1,7 @@
-# To-do list
+
+# Sorcerer's Odyssey
+
+## To-do list
 
 1. [x] collision + map interaction
 1. [x] layered map
@@ -14,26 +17,8 @@
 1. [ ] เดินไถลกำแพงตอนเดินติด
 1. [x] interacable
 1. [ ] small map fix
+1. [x] potal
+1. [x] inventory
+1. [x] more map 
 
-## Sorcerer's Odyssey
 
-```mermaid
----
-title: Class diagram
----
-
-classDiagram
-    class Animal
-    Animal : +eat() void
-    Animal : +isDead() boolean
-
-    class Dog
-    Dog : +color() void
-
-    Animal <-- Dog
-    Animal <-- Chicken
-
-    Chicken : String hp
-    Chicken : bark() void
-
-```

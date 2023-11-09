@@ -2,7 +2,6 @@ package Levels;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import gamestates.Playing;
 
@@ -18,13 +17,13 @@ public class LevelManager {
     public static final int DOG = 3;
 
     public static final int FOREST = 4;
-    public static final int CAVE = 5;
 
+    public static final int CAVE = 5;0
 
     private Playing playing;
     private BufferedImage[] levelSprite;
     private Level levelLayers[];
-    public ArrayList<LevelEvent> levelEvents;
+    public LevelEvent levelEvents[];
 
     // private EnemyManager enemyManager;
     public static int curMapIndex = 0;
@@ -44,14 +43,10 @@ public class LevelManager {
         for (String lvName : mapNameArr) {
             System.out.println(lvName);
         }
-
-        System.out.println("\n6 map in total\n");
         System.out.println("\n**********");
 
-
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
-        System.out.println(mapNameArr.length);
-        levelEvents = new ArrayList<>();
+        levelEvents = new LevelEvent[mapNameArr.length + 1];
 
         initLevelEvent();
 
@@ -59,7 +54,7 @@ public class LevelManager {
 
     private void initLevelEvent() {
 
-        levelEvents.add(LAVADUNGEON, new LevelEvent() {
+        levelEvents[LAVADUNGEON] = new LevelEvent() {
 
             @Override
             public void onEnter() {
@@ -71,9 +66,8 @@ public class LevelManager {
                 playing.geteventManager().wolfHordEnd(LAVADUNGEON);
             }
 
-        });
-
-        levelEvents.add(ROOFTOP, new LevelEvent() {
+        };
+        levelEvents[ROOFTOP] = new LevelEvent() {
 
             @Override
             public void onEnter() {
@@ -83,8 +77,8 @@ public class LevelManager {
             public void onExit() {
             }
 
-        });
-        levelEvents.add(BRIDGE, new LevelEvent() {
+        };
+        levelEvents[BRIDGE] = new LevelEvent() {
 
             @Override
             public void onEnter() {
@@ -96,8 +90,8 @@ public class LevelManager {
                 playing.geteventManager().skeletonHordeEnd(BRIDGE);
             }
 
-        });
-        levelEvents.add(DOG, new LevelEvent() {
+        };
+        levelEvents[DOG] = new LevelEvent() {
 
             @Override
             public void onEnter() {
@@ -107,8 +101,9 @@ public class LevelManager {
             public void onExit() {
             }
 
-        });
-        levelEvents.add(FOREST, new LevelEvent() {
+        };
+
+        levelEvents[FOREST] = new LevelEvent() {
             @Override
             public void onEnter() {
 
@@ -118,7 +113,19 @@ public class LevelManager {
             public void onExit() {
 
             }
-        });
+        };
+
+        levelEvents[CAVE] = new LevelEvent() {
+            @Override
+            public void onEnter() {
+
+            }
+
+            @Override
+            public void onExit() {
+
+            }
+        };
     }
 
     public void importTile() {
@@ -152,11 +159,12 @@ public class LevelManager {
         // playing.getEnemyManager().enemiesClear();
 
         curMapIndex = (curMapIndex + 1) % mapNameArr.length;
+        // levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
         playing.handleMapChange();
     }
 
     public void curMapEventOnExit() {
-        levelEvents.get(curMapIndex).onExit();
+        levelEvents[curMapIndex].onExit();
     }
 
     public void loadNewLayerData() {
