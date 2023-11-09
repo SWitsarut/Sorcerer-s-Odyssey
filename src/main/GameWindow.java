@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.io.InputStream;
 
 public class GameWindow {
     private JFrame jframe;
@@ -23,7 +24,7 @@ public class GameWindow {
         jframe.pack();
         jframe.setTitle("Sorcerer's Odyssey");
 
-        ImageIcon icon = new ImageIcon("src/res/asset/icon.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("/res/asset/icon.png"));
         jframe.setIconImage(icon.getImage());
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
