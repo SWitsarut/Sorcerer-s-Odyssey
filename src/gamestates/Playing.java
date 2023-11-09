@@ -89,7 +89,7 @@ public class Playing extends State implements Statemethods {
 
     public void handleMapChange() {
         levelManager.loadNewLayerData();
-        levelManager.levelEvents.get(LevelManager.curMapIndex).onEnter();
+        levelManager.levelEvents[LevelManager.curMapIndex].onEnter();
         player.loadCollision(levelManager.getCollision());
         lvlTileWide = levelManager.getCurrentLevels()[0].getXlength();
         lvlTileHeight = levelManager.getCurrentLevels()[0].getYlength();

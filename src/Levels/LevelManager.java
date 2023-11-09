@@ -18,7 +18,7 @@ public class LevelManager {
 
     public static final int FOREST = 4;
 
-    public static final int CAVE = 5;0
+    public static final int CAVE = 5;
 
     private Playing playing;
     private BufferedImage[] levelSprite;

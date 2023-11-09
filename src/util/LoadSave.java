@@ -94,6 +94,7 @@ public class LoadSave {
             br.close();
             return mapData;
         } catch (IOException e) {
+            System.out.println("Error loading file: " + file);
             e.printStackTrace();
         }
         return mapData;
@@ -130,7 +131,7 @@ public class LoadSave {
             System.out.println("layer " + string + " loaded");
         }
         Level[] lvlLayer = new Level[fileArr.length];
-        String[] layer_order_string = { "ground", "wall", "front", "collision" };
+        String[] layer_order_string = {"ground", "wall", "front", "collision"};
         for (int i = 0; i < 4; i++) {
             lvlLayer[i] = new Level(getLevelData(mapName + "/" + mapName + "_" + layer_order_string[i] + ".csv"));
         }
