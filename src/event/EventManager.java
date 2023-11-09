@@ -9,7 +9,7 @@ import gamestates.Playing;
 
 public class EventManager {
 
-    private ArrayList<Event> interactables;
+    public ArrayList<Event> interactables;
 
     private Playing game;
 
@@ -36,6 +36,10 @@ public class EventManager {
 
     public void skeletonHordeStart(int mapIndex) {
         interactables.add(new SkeletonHorde(game, mapIndex, 0.8, true));
+    }
+
+    public void startDog(int mapIndex) {
+        interactables.add(new DogChallenge(game, 1, mapIndex));
     }
 
     public void skeletonHordeEnd(int mapIndex) {

@@ -5,6 +5,7 @@ import util.Constants.Config;
 public class UpdateCounter {
 
     public boolean active;
+    public boolean oldActive;
     public boolean isCycle;
     public int targetCount, curCount;
 
@@ -15,7 +16,10 @@ public class UpdateCounter {
     }
 
     public void onUpdate() {
-    };
+    }
+
+    public void onEnd() {
+    }
 
     public void start() {
         active = true;
@@ -23,13 +27,18 @@ public class UpdateCounter {
 
     public void update() {
         curCount++;
+        oldActive = active;
         if (curCount > targetCount && active) {
             onUpdate();
             curCount = 0;
             if (!isCycle) {
                 active = false;
             }
+            if (oldActive != active) {
+                onEnd();
+            }
         }
+
     }
 
 }
