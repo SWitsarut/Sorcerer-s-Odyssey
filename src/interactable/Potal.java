@@ -27,8 +27,8 @@ public class Potal extends Interactable {
     protected Playing playing;
     protected Coordinate targetCoor;
 
-    public Potal(Playing playing, String mapName, int mapIndex) {
-        super("go to " + mapName);
+    public Potal(Playing playing, String mapName, int mapIndex, String massage) {
+        super(massage);
         this.mapIndex = mapIndex;
         this.mapName = mapName;
         font = LoadSave.GetFont(42);

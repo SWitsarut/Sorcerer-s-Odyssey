@@ -28,49 +28,49 @@ public class InteractableManager {
         interactables.clear();
         switch (mapIndex) {
             case LevelManager.LAVADUNGEON:
-                spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.LAVADUNGEON, 29, 2,
+                spawnPotalatAtTile("go to roof", LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.LAVADUNGEON, 29, 2,
                         new Coordinate(1410, 2340), 3,
                         3);
                 break;
             case LevelManager.ROOFTOP:
-                spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.BRIDGE], LevelManager.ROOFTOP, 31, 19,
+                spawnPotalatAtTile("go to bridge", LevelManager.mapNameArr[LevelManager.BRIDGE], LevelManager.ROOFTOP, 31, 19,
                         new Coordinate(945, 3700), 5,
                         5);
-                spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.LAVADUNGEON], LevelManager.ROOFTOP, 28, 48,
+                spawnPotalatAtTile("go to dungeon", LevelManager.mapNameArr[LevelManager.LAVADUNGEON], LevelManager.ROOFTOP, 28, 48,
                         new Coordinate(1455, 205), 3,
                         3);
                 break;
             case LevelManager.BRIDGE:
                 // top potal
-                spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.DOG], LevelManager.BRIDGE, 12, 0,
+                spawnPotalatAtTile("go to wolf Field", LevelManager.mapNameArr[LevelManager.DOG], LevelManager.BRIDGE, 12, 0,
                         new Coordinate(1655, 3050), 16,
                         8);
                 // //bot potal
-                spawnPotalatAtTile(LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.BRIDGE, 12, 72,
+                spawnPotalatAtTile("go to roof", LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.BRIDGE, 12, 72,
                         new Coordinate(1450, 1000), 16,
                         8);
                 break;
             case LevelManager.DOG:
-                LockPotalatAtTile(LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.DOG, 30, 14,
+                LockPotalatAtTile("warp to cave",LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.DOG, 30, 14,
                         new Coordinate(1410, 2340), 13, 10, Item.dog_sigil, "dog spirit blocking");
                 break;
         }
 
     }
 
-    public void spawnPotalatAtTile(String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
+    public void spawnPotalatAtTile(String massage, String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
                                    int height) {
         Coordinate pos = Helper.getPosFromTile(xTile, yTile);
-        Potal potal = new Potal(playing, targetMap, mapIndex);
+        Potal potal = new Potal(playing, targetMap, mapIndex, massage);
         potal.initHitbox(pos.x, pos.y, width, height);
         potal.setDes(des);
         interactables.add(potal);
     }
 
-    public void LockPotalatAtTile(String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
+    public void LockPotalatAtTile(String massage, String targetMap, int mapIndex, int xTile, int yTile, Coordinate des, int width,
                                   int height, int requireItem, String lockMsg) {
         Coordinate pos = Helper.getPosFromTile(xTile, yTile);
-        LockPotal potal = new LockPotal(playing, targetMap, mapIndex, requireItem, lockMsg);
+        LockPotal potal = new LockPotal(massage, playing, targetMap, mapIndex, requireItem, lockMsg);
         potal.initHitbox(pos.x, pos.y, width, height);
         potal.setDes(des);
         interactables.add(potal);

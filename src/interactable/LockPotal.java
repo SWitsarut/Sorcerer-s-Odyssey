@@ -9,8 +9,8 @@ public class LockPotal extends Potal {
     private String lockMassage;
     private String originalMassage;
 
-    public LockPotal(Playing playing, String mapName, int mapIndex, int requireItem, String lockMassage) {
-        super(playing, mapName, mapIndex);
+    public LockPotal(String massage, Playing playing, String mapName, int mapIndex, int requireItem, String lockMassage) {
+        super(playing, mapName, mapIndex, massage);
         this.requireItem = requireItem;
         this.lockMassage = lockMassage;
         originalMassage = massage;
