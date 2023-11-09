@@ -89,11 +89,11 @@
             }
         },
         "cave.tmx": {
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 329.33333333333337,
-                "y": 280.6666666666667
+                "x": 669,
+                "y": 672
             }
         },
         "cave/cave.tmx": {
@@ -153,7 +153,7 @@
             "scaleInEditor": 0.75
         }
     },
-    "last.exportedFilePath": "C:/Programming/Sorcerers_Odyssey/src/res/map/5FOREST",
+    "last.exportedFilePath": "C:/Programming/Sorcerers_Odyssey/src/res/map/7WIN",
     "last.imagePath": "C:/Programming/Sorcerers_Odyssey/src/res/tile set",
     "map.fixedSize": true,
     "map.height": 32,

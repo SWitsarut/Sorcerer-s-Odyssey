@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import Inventory.Item;
-import Levels.Level;
 import Levels.LevelManager;
 import entities.Player;
 import gamestates.Playing;
@@ -39,7 +38,7 @@ public class InteractableManager implements Manager {
 
                 int[] requireRightGate = new int[2];
                 requireRightGate[0] = Item.silver_key;
-                requireRightGate[1] = Item.gold_ley;
+                requireRightGate[1] = Item.gold_key;
 
                 LockPotalatAtTile("go outside", LevelManager.mapNameArr[LevelManager.FOREST], LevelManager.LAVADUNGEON, 78, 62,
                         new Coordinate(1046, 72), 4,

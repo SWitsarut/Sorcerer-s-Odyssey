@@ -38,7 +38,7 @@ public class LevelManager implements Manager {
         this.playing = game;
         // enemyManager = game.getPlaying().getEnemyManager();
         importTile();
-        mapNameArr = getFileList("");
+        mapNameArr = getFileList();
 
         System.out.println("\n**********\nList of map name\n__________\n");
         for (String lvName : mapNameArr) {

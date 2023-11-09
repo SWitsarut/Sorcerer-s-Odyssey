@@ -1,7 +1,6 @@
 package gamestates;
 
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -253,6 +252,8 @@ public class Playing extends State implements Statemethods {
                 break;
             case KeyEvent.VK_G:
                 player.getInv().add(Item.dog_sigil);
+                player.getInv().add(Item.silver_key);
+                player.getInv().add(Item.gold_key);
                 break;
         }
     }

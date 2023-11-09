@@ -1,11 +1,9 @@
 package main;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.io.InputStream;
 
 public class GameWindow {
     private JFrame jframe;
@@ -20,10 +18,9 @@ public class GameWindow {
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gp);
         jframe.setResizable(false);
-        jframe.setLocationRelativeTo(null);
+//        jframe.setLocationRelativeTo(null);
         jframe.pack();
         jframe.setTitle("Sorcerer's Odyssey");
-
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 
