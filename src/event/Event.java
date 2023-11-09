@@ -9,4 +9,6 @@ public interface Event {
     public void update();
 
     public boolean isActive();
+
+    public int getMapIndex();
 }

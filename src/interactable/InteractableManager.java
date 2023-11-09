@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import Inventory.Item;
+import Levels.LevelEvent;
 import Levels.LevelManager;
 import entities.Player;
 import gamestates.Playing;
@@ -35,14 +36,17 @@ public class InteractableManager implements Manager {
                 spawnPotalatAtTile("go outside", LevelManager.mapNameArr[LevelManager.FOREST], LevelManager.LAVADUNGEON, 78, 62,
                         new Coordinate(1046, 72), 4,
                         2);
+                spawnPotalatAtTile("go down ladder", LevelManager.mapNameArr[LevelManager.CAVE], LevelManager.LAVADUNGEON, 164, 53,
+                        Helper.getPosFromTile(2, 5), 3,
+                        3);
 
                 int[] requireRightGate = new int[2];
                 requireRightGate[0] = Item.silver_key;
                 requireRightGate[1] = Item.gold_key;
 
-                LockPotalatAtTile("go outside", LevelManager.mapNameArr[LevelManager.FOREST], LevelManager.LAVADUNGEON, 78, 62,
-                        new Coordinate(1046, 72), 4,
-                        2, requireRightGate, "need gold and silver key");
+                LockPotalatAtTile("go outside", LevelManager.mapNameArr[LevelManager.WIN], LevelManager.LAVADUNGEON, 190, 30,
+                        Helper.getPosFromTile(0, 15), 10,
+                        10, requireRightGate, "need gold and silver key");
                 break;
             case LevelManager.ROOFTOP:
                 spawnPotalatAtTile("go to bridge", LevelManager.mapNameArr[LevelManager.BRIDGE], LevelManager.ROOFTOP, 31, 19,
@@ -54,7 +58,7 @@ public class InteractableManager implements Manager {
                 break;
             case LevelManager.BRIDGE:
                 // top potal
-                spawnPotalatAtTile("go to wolf Field", LevelManager.mapNameArr[LevelManager.DOG], LevelManager.BRIDGE, 12, 0,
+                spawnPotalatAtTile("go to wolf field", LevelManager.mapNameArr[LevelManager.DOG], LevelManager.BRIDGE, 12, 0,
                         new Coordinate(1655, 3050), 16,
                         8);
                 // //bot potal
@@ -63,9 +67,17 @@ public class InteractableManager implements Manager {
                         8);
                 break;
             case LevelManager.DOG:
+
+                DogStat dogStat = new DogStat(playing, LevelManager.DOG, "take wolf sigil");
+                Coordinate coor = Helper.getPosFromTile(33, 42);
+                dogStat.initHitbox(coor.x, coor.y, 5, 5);
+                interactables.add(dogStat);
+
                 int[] dogRequire = new int[1];
-                LockPotalatAtTile("warp to cave", LevelManager.mapNameArr[LevelManager.ROOFTOP], LevelManager.DOG, 30, 14,
-                        new Coordinate(1410, 2340), 13, 10, dogRequire, "dog spirit blocking");
+
+                Coordinate CaveCoor = Helper.getPosFromTile(45, 45);
+                LockPotalatAtTile("warp to cave", LevelManager.mapNameArr[LevelManager.CAVE], LevelManager.DOG, 30, 14,
+                        CaveCoor, 13, 10, dogRequire, "dog spirit is blocking");
 
                 Coordinate desPos = Helper.getPosFromTile(45, 45);
                 spawnPotalatAtTile("go back to bridge", LevelManager.mapNameArr[LevelManager.BRIDGE], LevelManager.DOG, 27, 62,
@@ -74,7 +86,39 @@ public class InteractableManager implements Manager {
             case LevelManager.FOREST:
                 spawnPotalatAtTile("get in", LevelManager.mapNameArr[LevelManager.LAVADUNGEON], LevelManager.FOREST, 17, 0,
                         new Coordinate(3820, 2922), 10, 2);
+
+                Chest silveerKChest = new Chest(playing, LevelManager.FOREST, "take silver key", Item.silver_key);
+                Coordinate svkCoor = Helper.getPosFromTile(13, 26);
+                silveerKChest.initHitbox(svkCoor.x, svkCoor.y, 3, 3);
+                interactables.add(silveerKChest);
                 break;
+            case LevelManager.CAVE:
+                Chest goldKChest = new Chest(playing, LevelManager.CAVE, "take golden Key", Item.gold_key);
+                Coordinate gkCoor = Helper.getPosFromTile(8, 52);
+                goldKChest.initHitbox(gkCoor.x, gkCoor.y, 3, 3);
+
+                Chest regChest = new Chest(playing, LevelManager.CAVE, "take regular Key", Item.regular_key);
+                Coordinate regChestCoor = Helper.getPosFromTile(42, 6);
+                regChest.initHitbox(regChestCoor.x, regChestCoor.y, 3, 3);
+
+                interactables.add(goldKChest);
+                interactables.add(regChest);
+
+                int[] regKeyRequire = new int[1];
+                regKeyRequire[0] = Item.regular_key;
+                LockPotalatAtTile("enter the door", LevelManager.mapNameArr[LevelManager.CAVE], LevelManager.CAVE, 32, 8,
+                        Helper.getPosFromTile(35, 9), 1, 2, regKeyRequire, "need key to access");
+                LockPotalatAtTile("enter the door", LevelManager.mapNameArr[LevelManager.CAVE], LevelManager.CAVE, 35, 8,
+                        Helper.getPosFromTile(32, 9), 1, 2, regKeyRequire, "need key to access");
+
+                spawnPotalatAtTile("go up ladder", LevelManager.mapNameArr[LevelManager.LAVADUNGEON], LevelManager.CAVE, 1, 2,
+                        Helper.getPosFromTile(163, 54), 3, 3);
+                break;
+            case LevelManager.WIN:
+                Win win = new Win(playing, LevelManager.WIN, "TELEPORT!");
+                interactables.add(win);
+                break;
+
         }
 
     }
@@ -98,8 +142,7 @@ public class InteractableManager implements Manager {
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        for (int i = 0; i < interactables.size(); i++) {
-            Interactable interactable = interactables.get(i);
+        for (Interactable interactable : interactables) {
             interactable.draw(g, xLvlOffset, yLvlOffset);
         }
     }

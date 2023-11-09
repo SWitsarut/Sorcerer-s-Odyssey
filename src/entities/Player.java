@@ -137,7 +137,7 @@ public class Player extends Entity {
     public void update() {
         if (hp > 0) {
 
-            System.out.println(Helper.getTileFromPos(getPlayerCenter()) + " | x:" + hitbox.x + " y:" + hitbox.y);
+//            System.out.println(Helper.getTileFromPos(getPlayerCenter()) + " | x:" + hitbox.x + " y:" + hitbox.y);
             updateStatus();
             move();
         } else {

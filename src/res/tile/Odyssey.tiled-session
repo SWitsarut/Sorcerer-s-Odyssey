@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "cave.tmx",
+    "activeFile": "3BRIDGE.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,19 +25,19 @@
             "scaleInEditor": 3
         },
         "3BRIDGE.tmx": {
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1049.3333333333333,
-                "y": 740
+                "x": 449,
+                "y": 236
             }
         },
         "4DOGCHALLENGE.tmx": {
-            "scale": 0.75,
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 556,
-                "y": 1184
+                "x": 545,
+                "y": 747
             }
         },
         "C:/Programming/Sorcerers_Odyssey/tiled/tile set/universal_tile_set.tsx": {
@@ -57,19 +57,19 @@
             "scaleInEditor": 1
         },
         "Forest.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 329,
-                "y": 55
+                "x": 365.99999999999994,
+                "y": 206.66666666666669
             }
         },
         "LAVADUNGEON.tmx": {
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1594,
-                "y": 508
+                "x": 2874,
+                "y": 680
             }
         },
         "Mercenary camp.tmx": {
@@ -84,16 +84,24 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 511,
-                "y": 510
+                "x": 510,
+                "y": 509
+            }
+        },
+        "WIN.tmx": {
+            "scale": 2,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 473,
+                "y": 306
             }
         },
         "cave.tmx": {
-            "scale": 1,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 669,
-                "y": 672
+                "x": 158,
+                "y": 770
             }
         },
         "cave/cave.tmx": {
@@ -153,7 +161,7 @@
             "scaleInEditor": 0.75
         }
     },
-    "last.exportedFilePath": "C:/Programming/Sorcerers_Odyssey/src/res/map/7WIN",
+    "last.exportedFilePath": "C:/Programming/Sorcerers_Odyssey/src/res/map/6CAVE",
     "last.imagePath": "C:/Programming/Sorcerers_Odyssey/src/res/tile set",
     "map.fixedSize": true,
     "map.height": 32,
@@ -169,7 +177,9 @@
         "ROOFTOP.tmx",
         "3BRIDGE.tmx",
         "4DOGCHALLENGE.tmx",
-        "cave.tmx"
+        "cave.tmx",
+        "Forest.tmx",
+        "WIN.tmx"
     ],
     "project": "Odyssey.tiled-project",
     "recentFiles": [
@@ -177,14 +187,14 @@
         "newTileSet.tmx",
         "newTileSet.tsx",
         "ROOFTOP.tmx",
-        "3BRIDGE.tmx",
-        "4DOGCHALLENGE.tmx",
+        "WIN.tmx",
+        "Forest.tmx",
         "cave.tmx",
+        "4DOGCHALLENGE.tmx",
+        "3BRIDGE.tmx",
         "../tile set/universal_tile_set.tsx",
         "debug.tmx",
-        "temple of fire.tmx",
-        "Mercenary camp.tmx",
-        "16x16 dungeon ii wall reconfig v04 spritesheet.tsx"
+        "temple of fire.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

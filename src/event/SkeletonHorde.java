@@ -36,6 +36,11 @@ public class SkeletonHorde implements Event {
         return active;
     }
 
+    @Override
+    public int getMapIndex() {
+        return mapIndex;
+    }
+
     private class HordeSpawn extends UpdateCounter {
 
         // EnemyManager em;

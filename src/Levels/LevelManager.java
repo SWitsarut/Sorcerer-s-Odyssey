@@ -98,6 +98,8 @@ public class LevelManager implements Manager {
 
             @Override
             public void onEnter() {
+//                playing.geteventManager().startDog(DOG);
+//                playing.geteventManager().skeletonHordeStart(DOG);
             }
 
             @Override

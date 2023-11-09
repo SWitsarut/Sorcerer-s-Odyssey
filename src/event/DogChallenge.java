@@ -8,56 +8,57 @@ import java.awt.*;
 
 public class DogChallenge implements Event {
 
-    private Playing playing;
-
-    private int mapIndex;
-
     public boolean active;
-    private Spawner spawner;
+    public int mapIndex;
+    HordeSpawn spawnCounter;
 
-    public DogChallenge(Playing playing, double second, int mapIndex) {
-        this.spawner = new Spawner(second, false);
+    public DogChallenge(Playing game, int mapIndex, double second, boolean infinite) {
+        spawnCounter = new HordeSpawn(game, second, infinite);
+        System.out.println("start");
         this.mapIndex = mapIndex;
         active = true;
-        spawner.start();
+        spawnCounter.start();
     }
 
     @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        System.out.println(spawner.curCount + "/" + spawner.targetCount);
+
     }
 
     @Override
     public void update() {
-        spawner.update();
+        // System.out.println();
+        spawnCounter.update();
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return active;
     }
 
-    class Spawner extends UpdateCounter {
-        int time = 0;
-        int maxTime = 5;
+    @Override
+    public int getMapIndex() {
+        return mapIndex;
+    }
 
-        public Spawner(double second, boolean cycle) {
+    private class HordeSpawn extends UpdateCounter {
+
+        // EnemyManager em;
+        private final Playing playing;
+
+        public HordeSpawn(Playing playing, double second, boolean cycle) {
             super(second, cycle);
+            this.playing = playing;
         }
 
         @Override
         public void onUpdate() {
-            if (time < maxTime) {
-                Coordinate playerCoor = playing.getPlayer().getPlayerCenter();
-                playing.getEnemyManager().spawnSkeletion(mapIndex, playerCoor.x - 400, playerCoor.y, true);
-                playing.getEnemyManager().spawnSkeletion(mapIndex, playerCoor.x + 400, playerCoor.y, true);
-                time++;
-            } else {
-                active = false;
-            }
+            Coordinate playerCoor = playing.getPlayer().getPlayerCenter();
+            playing.getEnemyManager().spawnLich(mapIndex, playerCoor.x + 400, playerCoor.y + 400, true);
+            playing.getEnemyManager().spawnLich(mapIndex, playerCoor.x + 400, playerCoor.y - 400, true);
+            playing.getEnemyManager().spawnLich(mapIndex, playerCoor.x - 400, playerCoor.y + 400, true);
+            playing.getEnemyManager().spawnLich(mapIndex, playerCoor.x - 400, playerCoor.y - 400, true);
         }
 
-
     }
-
 }

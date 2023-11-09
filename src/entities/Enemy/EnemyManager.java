@@ -19,8 +19,9 @@ public class EnemyManager implements Manager {
 
     BufferedImage[] corruptedTreantAnimation;
     BufferedImage[] goblinWolfRiderAni;
-
     BufferedImage[] skeletonAni;
+
+    BufferedImage[] lichAni;
 
     private ArrayList<Enemy> enemies;
     private Player player;
@@ -45,16 +46,6 @@ public class EnemyManager implements Manager {
     public void initEnemy(int level) {
         // enemies.clear();
         switch (level) {
-            case LevelManager.LAVADUNGEON:
-                if (!spawned[LevelManager.LAVADUNGEON]) {
-
-                    addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 500, 500));
-                    addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 750, 500));
-                    addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 800, 500));
-                    addMob(new CorruptedTreant(LevelManager.LAVADUNGEON, corruptedTreantAnimation, 1000, 500));
-                    spawned[LevelManager.LAVADUNGEON] = true;
-                }
-                break;
             case LevelManager.FOREST:
                 if (!spawned[LevelManager.FOREST]) {
                     Coordinate[] enemyCoors = new Coordinate[15];
@@ -80,6 +71,17 @@ public class EnemyManager implements Manager {
                     }
                     spawned[LevelManager.FOREST] = true;
                 }
+                break;
+            case LevelManager.CAVE:
+                Coordinate[] enemyCoors = new Coordinate[3];
+
+                enemyCoors[0] = Helper.getPosFromTile(new Coordinate(37, 37));
+                enemyCoors[1] = Helper.getPosFromTile(new Coordinate(51, 37));
+                enemyCoors[2] = Helper.getPosFromTile(new Coordinate(51, 51));
+                for (Coordinate enemyCoor : enemyCoors) {
+                    addMob(new Lich(LevelManager.CAVE, lichAni, enemyCoor.x, enemyCoor.y));
+                }
+                break;
         }
     }
 
@@ -87,6 +89,7 @@ public class EnemyManager implements Manager {
         corruptedTreantAnimation = LoadSave.LinearAnimationLoader("entity/enemy/CorruptedTreantIdle.png", 16);
         goblinWolfRiderAni = LoadSave.LinearAnimationLoader("entity/enemy/GoblinWolfRiderIdleSide.png", 16);
         skeletonAni = LoadSave.LinearAnimationLoader("entity/[VerArc Stash] Mini_Characters/char_35.png", 16);
+        lichAni = LoadSave.LinearAnimationLoader("entity/enemy/BloodLichIdleSide.png", 32);
     }
 
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
@@ -123,6 +126,12 @@ public class EnemyManager implements Manager {
         wolfRider.attacked = aggro;
         addMob(wolfRider);
 
+    }
+
+    public void spawnLich(int mapIndex, int x, int y, boolean aggro) {
+        Enemy lich = new Lich(mapIndex, lichAni, x, y);
+        lich.attacked = aggro;
+        addMob(lich);
     }
 
     public void addMob(Enemy enemy) {

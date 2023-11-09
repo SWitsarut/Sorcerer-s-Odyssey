@@ -51,6 +51,11 @@ public class WolfHorde implements Event {
     }
 
     @Override
+    public int getMapIndex() {
+        return mapIndex;
+    }
+
+    @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
     }
 

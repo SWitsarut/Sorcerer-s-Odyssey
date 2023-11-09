@@ -29,7 +29,7 @@ public class Explosion extends Projectile {
 
     @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
-        this.drawHitbox(g, xLvlOffset, yLvlOffset);
+//        this.drawHitbox(g, xLvlOffset, yLvlOffset);
         g.setColor(new Color(255, 40, 12, 80));
 
         g.fillOval((int) (hitbox.x - xLvlOffset), (int) (hitbox.y - yLvlOffset),
