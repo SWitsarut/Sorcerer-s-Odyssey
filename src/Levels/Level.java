@@ -6,16 +6,7 @@ public class Level {
 
     public Level(int[][] lvlData) {
         this.lvlData = lvlData;
-        // System.out.println(getXlength());
     }
-
-    public void onEnter() {
-
-    };
-
-    public void onExist() {
-
-    };
 
     public int[][] getData() {
         return lvlData;

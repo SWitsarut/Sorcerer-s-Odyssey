@@ -100,35 +100,10 @@ public class LoadSave {
         return mapData;
     }
 
-//    public static String[] getFileList(String path) {
-//        // Specify the folder path (relative to the "src" directory)
-//        String folderPath = path; // Change this if the folder is in a different location
-//
-//        // Create a Path object for the folder
-//        Path folder = Paths.get("src/res/map", folderPath);
-//
-//        try {
-//
-//            // Create a DirectoryStream to list files in the folder
-//            try (java.nio.file.DirectoryStream<Path> stream = Files.newDirectoryStream(folder)) {
-//                List<String> fileList = new ArrayList<>();
-//                for (Path file : stream) {
-//                    fileList.add(file.getFileName().toString());
-//
-//                }
-//                System.out.println(fileList.toArray(new String[0]));
-//                return fileList.toArray(new String[0]);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
     public static String[] getFileList() {
         String[] str = new String[7];
         str[0] = "1lavaDungeon";
-        str[1] = "2Rooftop";
+        str[1] = "2ROOFTOP";
         str[2] = "3BRIDGE";
         str[3] = "4DOGCHALLENGE";
         str[4] = "5FOREST";
@@ -138,10 +113,6 @@ public class LoadSave {
     }
 
     public static Level[] getLevelLeyerData(String mapName) {
-//        String[] fileArr = getFileList(mapName);
-//        for (String string : fileArr) {
-//            System.out.println("layer " + string + " loaded");
-//        }
         Level[] lvlLayer = new Level[7];
         String[] layer_order_string = {"ground", "wall", "front", "collision"};
         for (int i = 0; i < 4; i++) {

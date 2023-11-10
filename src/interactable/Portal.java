@@ -18,19 +18,20 @@ import util.LoadSave;
 import util.Ui;
 import util.Constants.Config;
 
-public class Potal extends Interactable {
+public class Portal extends Interactable {
 
     public int mapIndex;
-    public String mapName;
+    //    public String mapName;
+    public int targetMap;
     protected Font font;
     protected LevelManager levelManager;
     protected Playing playing;
     protected Coordinate targetCoor;
 
-    public Potal(Playing playing, String mapName, int mapIndex, String massage) {
+    public Portal(Playing playing, int targetMap, int mapIndex, String massage) {
         super(massage);
         this.mapIndex = mapIndex;
-        this.mapName = mapName;
+        this.targetMap = targetMap;
         font = LoadSave.GetFont(42);
         this.playing = playing;
         this.levelManager = playing.getLevelManager();
@@ -47,10 +48,10 @@ public class Potal extends Interactable {
 
     @Override
     public void onSubmit() {
-        levelManager.curMapEventOnExit();
-        LevelManager.curMapIndex = levelManager.getIndexFromMapName(mapName);
+        playing.goTomap(targetMap);
+        System.out.println(LevelManager.curMapIndex);
         playing.getPlayer().setPosition(targetCoor);
-        playing.handleMapChange();
+
         playing.getPlayer().interacting = false;
         playing.getPlayer().interactBlock = true;
     }

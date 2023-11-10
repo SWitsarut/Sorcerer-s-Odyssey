@@ -1,16 +1,15 @@
 package interactable;
 
-import Levels.LevelManager;
 import gamestates.Playing;
 
-public class LockPotal extends Potal {
+public class LockPortal extends Portal {
 
     private int[] requireItem;
     private String lockMassage;
     private String originalMassage;
 
-    public LockPotal(String massage, Playing playing, String mapName, int mapIndex, int[] requireItem, String lockMassage) {
-        super(playing, mapName, mapIndex, massage);
+    public LockPortal(String massage, Playing playing, int targetMap, int mapIndex, int[] requireItem, String lockMassage) {
+        super(playing, targetMap, mapIndex, massage);
         this.requireItem = requireItem;
         this.lockMassage = lockMassage;
         originalMassage = massage;
@@ -19,10 +18,8 @@ public class LockPotal extends Potal {
     @Override
     public void onSubmit() {
         if (playing.getPlayer().getInv().check(requireItem)) {
-            levelManager.curMapEventOnExit();
-            LevelManager.curMapIndex = levelManager.getIndexFromMapName(mapName);
+            playing.goTomap(targetMap);
             playing.getPlayer().setPosition(targetCoor);
-            playing.handleMapChange();
             playing.getPlayer().interacting = false;
             playing.getPlayer().interactBlock = true;
         }

@@ -103,7 +103,12 @@ public class Playing extends State implements Statemethods {
 
         enemyManager.initEnemy(LevelManager.curMapIndex);
         interactableManager.initPortal(LevelManager.curMapIndex);
+    }
 
+    public void goTomap(int target) {
+        levelManager.curMapEventOnExit();
+        LevelManager.curMapIndex = target;
+        handleMapChange();
     }
 
     public void windowFocusLost() {

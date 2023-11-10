@@ -17,7 +17,7 @@
 1. [ ] เดินไถลกำแพงตอนเดินติด
 1. [x] interacable
 1. [ ] small map fix
-1. [x] potal
+1. [x] portal
 1. [x] inventory
 1. [x] more map 
 
