@@ -40,10 +40,6 @@ public class EffectManager implements Manager {
         }
     }
 
-    @Override
-    public void draw(Graphics g) {
-
-    }
 
     public void update() {
         for (EffectPlayer effectPlayer : eff) {

@@ -13,6 +13,7 @@ import java.awt.geom.Rectangle2D;
 
 import Inventory.Item;
 import Levels.LevelManager;
+import entities.Player;
 import gamestates.Gamestate;
 import gamestates.Playing;
 import helperClass.Coordinate;

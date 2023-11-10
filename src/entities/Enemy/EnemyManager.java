@@ -140,10 +140,6 @@ public class EnemyManager implements Manager {
         }
     }
 
-    @Override
-    public void draw(Graphics g) {
-
-    }
 
     public void update() {
 //        MOB_COUNT[] =enemies.size();

@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 import gamestates.Playing;
 import helperClass.Coordinate;
+import main.Manager;
 
-public class EventManager {
+public class EventManager implements Manager {
 
     public ArrayList<Event> events;
 

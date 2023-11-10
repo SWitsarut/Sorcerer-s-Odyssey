@@ -116,6 +116,8 @@ public class InteractableManager implements Manager {
                 break;
             case LevelManager.WIN:
                 Win win = new Win(playing, LevelManager.WIN, "TELEPORT!");
+                Coordinate winHitbox = Helper.getPosFromTile(31, 13);
+                win.initHitbox(winHitbox.x, winHitbox.y,7,7);
                 interactables.add(win);
                 break;
 
@@ -147,10 +149,6 @@ public class InteractableManager implements Manager {
         }
     }
 
-    @Override
-    public void draw(Graphics g) {
-
-    }
 
     public void update() {
         for (int i = 0; i < interactables.size(); i++) {

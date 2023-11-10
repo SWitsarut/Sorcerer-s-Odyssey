@@ -28,16 +28,16 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 449,
-                "y": 236
+                "x": 930,
+                "y": 376
             }
         },
         "4DOGCHALLENGE.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 545,
-                "y": 747
+                "x": 559.75,
+                "y": 559.75
             }
         },
         "C:/Programming/Sorcerers_Odyssey/tiled/tile set/universal_tile_set.tsx": {
@@ -60,16 +60,16 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 365.99999999999994,
-                "y": 206.66666666666669
+                "x": 319.66666666666663,
+                "y": 255.66666666666669
             }
         },
         "LAVADUNGEON.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2874,
-                "y": 680
+                "x": 1599.5,
+                "y": 511.5
             }
         },
         "Mercenary camp.tmx": {
@@ -84,24 +84,24 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 510,
-                "y": 509
+                "x": 511.5,
+                "y": 511.5
             }
         },
         "WIN.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 473,
-                "y": 306
+                "x": 319.75,
+                "y": 255.75
             }
         },
         "cave.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 158,
-                "y": 770
+                "x": 559.75,
+                "y": 559.75
             }
         },
         "cave/cave.tmx": {
@@ -140,8 +140,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 463,
-                "y": 264
+                "x": 463.5,
+                "y": 264.5
             }
         },
         "newTileSet.tsx": {

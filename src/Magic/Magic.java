@@ -26,10 +26,11 @@ import entities.Player;
 import entities.Projectile.Projectile;
 import gamestates.Playing;
 import helperClass.Coordinate;
+import main.Manager;
 import main.sound.SoundEffect;
 import util.LoadSave;
 
-public class Magic {
+public class Magic implements Manager {
 
     public static final int Fire = 0;
     public static final int Arcane = 1;

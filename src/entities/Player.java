@@ -360,6 +360,7 @@ public class Player extends Entity {
         return mp;
     }
 
+
     public double getMaxHp() {
         return maxHp;
     }

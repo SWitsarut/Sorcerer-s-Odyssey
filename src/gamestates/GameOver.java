@@ -42,7 +42,7 @@ public class GameOver extends State implements Statemethods {
     private void initClasses() {
         font = LoadSave.GetFont(40);
         text.add("YOU DIED");
-        text.add("Press any key to Continue");
+        text.add("Press F to Continue");
         maxChoice = text.size();
         nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT, 80);
         submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT, 80);
@@ -87,7 +87,7 @@ public class GameOver extends State implements Statemethods {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        submit();
+
     }
 
     @Override
@@ -101,12 +101,13 @@ public class GameOver extends State implements Statemethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        submit();
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            submit();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        submit();
     }
 
     @Override

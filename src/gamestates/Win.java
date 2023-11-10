@@ -34,7 +34,6 @@ public class Win extends State implements Statemethods {
     private FontMetrics fm;
     private int selectedChoice = 0;
     private ArrayList<String> text = new ArrayList<>();
-    private int maxChoice;
     private SoundEffect nextEffect;
     private SoundEffect submitEffect;
     private Coordinate[] coordinates;
@@ -42,8 +41,7 @@ public class Win extends State implements Statemethods {
     private void initClasses() {
         font = LoadSave.GetFont(40);
         text.add("YOU WIN!!!");
-        text.add("Press any key to Continue");
-        maxChoice = text.size();
+        text.add("Press F to Continue");
         nextEffect = new SoundEffect(SoundFile.NEXT_EFFECT, 80);
         submitEffect = new SoundEffect(SoundFile.SUBMIT_EFFECT, 80);
         nextEffect.setVolume(60);
@@ -69,8 +67,7 @@ public class Win extends State implements Statemethods {
 
         Point start = new Point(Config.SCREEN_WIDTH / 2, 0);
         Point end = new Point(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT);
-        GradientPaint gradientPaint = new GradientPaint(start, new Color(255, 255,
-                255, 0), end, Color.BLACK);
+        GradientPaint gradientPaint = new GradientPaint(start, new Color(255, 255, 255, 0), end, Color.BLACK);
         g2d.setPaint(gradientPaint);
         g2d.fill(new Rectangle2D.Double(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
@@ -79,15 +76,13 @@ public class Win extends State implements Statemethods {
         g.setColor(Color.WHITE);
         int fontHeight = fm.getHeight();
         coordinates = Ui.DrawArrayLineMiddle(g, text);
-        g.drawLine(Ui.GetPercentX(20), (int) (coordinates[selectedChoice].y - fontHeight), Ui.GetPercentX(80),
-                (int) (coordinates[selectedChoice].y - fontHeight));
-        g.drawLine(Ui.GetPercentX(20), (int) (coordinates[selectedChoice].y + 7.5), Ui.GetPercentX(80),
-                (int) (coordinates[selectedChoice].y + 7.5));
+        g.drawLine(Ui.GetPercentX(20), (int) (coordinates[selectedChoice].y - fontHeight), Ui.GetPercentX(80), (int) (coordinates[selectedChoice].y - fontHeight));
+        g.drawLine(Ui.GetPercentX(20), (int) (coordinates[selectedChoice].y + 7.5), Ui.GetPercentX(80), (int) (coordinates[selectedChoice].y + 7.5));
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        submit();
+
     }
 
     @Override
@@ -101,21 +96,22 @@ public class Win extends State implements Statemethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        submit();
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            submit();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        submit();
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        submit();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        submit();
+
     }
 }

@@ -48,6 +48,7 @@ public class LevelManager implements Manager {
         }
         System.out.println("\n**********");
 
+        LevelManager.curMapIndex = 0;
         levelLayers = getLevelLeyerData(mapNameArr[curMapIndex]);
         levelEvents = new LevelEvent[mapNameArr.length + 1];
 
@@ -217,8 +218,9 @@ public class LevelManager implements Manager {
         return levelLayers;
     }
 
+
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {
 
     }
 
