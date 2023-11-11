@@ -25,19 +25,19 @@
             "scaleInEditor": 3
         },
         "3BRIDGE.tmx": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 320,
-                "y": 640
+                "x": 312.3333333333333,
+                "y": 121.33333333333334
             }
         },
         "4DOGCHALLENGE.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 560,
-                "y": 560
+                "x": 559.25,
+                "y": 1075.5
             }
         },
         "C:/Programming/Sorcerers_Odyssey/tiled/tile set/universal_tile_set.tsx": {
@@ -60,16 +60,16 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 319,
-                "y": 254.99999999999997
+                "x": 318.3333333333333,
+                "y": 254.66666666666669
             }
         },
         "LAVADUNGEON.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600,
-                "y": 511
+                "x": 1599.5,
+                "y": 511.5
             }
         },
         "Mercenary camp.tmx": {
@@ -84,24 +84,24 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 512,
-                "y": 512
+                "x": 511.5,
+                "y": 511.5
             }
         },
         "WIN.tmx": {
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 279.5,
-                "y": 169.5
+                "x": 700.5,
+                "y": 309
             }
         },
         "cave.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 560,
-                "y": 560
+                "x": 559.25,
+                "y": 559.5
             }
         },
         "cave/cave.tmx": {
@@ -140,8 +140,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 464,
-                "y": 264
+                "x": 463.5,
+                "y": 263
             }
         },
         "newTileSet.tsx": {

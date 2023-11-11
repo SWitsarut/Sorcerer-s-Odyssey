@@ -78,7 +78,7 @@ public class InteractableManager implements Manager {
                 LockPotalatAtTile("warp to cave", LevelManager.CAVE, LevelManager.DOG, 30, 14,
                         CaveCoor, 13, 10, dogRequire, "dog spirit is blocking");
 
-                Coordinate desPos = Helper.getPosFromTile(45, 45);
+                Coordinate desPos = Helper.getPosFromTile(20, 5);
                 spawnPotalatAtTile("go back to bridge", LevelManager.BRIDGE, LevelManager.DOG, 27, 62,
                         desPos, 16, 8);
                 break;
