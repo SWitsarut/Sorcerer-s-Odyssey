@@ -62,12 +62,12 @@ public class LevelManager implements Manager {
 
             @Override
             public void onEnter() {
-                playing.geteventManager().wolfHordeStart(LAVADUNGEON);
+                playing.getEventManager().wolfHordeStart(LAVADUNGEON);
             }
 
             @Override
             public void onExit() {
-                playing.geteventManager().wolfHordEnd(LAVADUNGEON);
+                playing.getEventManager().wolfHordEnd(LAVADUNGEON);
             }
 
         };
@@ -86,12 +86,12 @@ public class LevelManager implements Manager {
 
             @Override
             public void onEnter() {
-                playing.geteventManager().skeletonHordeStart(BRIDGE);
+                playing.getEventManager().skeletonHordeStart(BRIDGE);
             }
 
             @Override
             public void onExit() {
-                playing.geteventManager().skeletonHordeEnd(BRIDGE);
+                playing.getEventManager().skeletonHordeEnd(BRIDGE);
             }
 
         };

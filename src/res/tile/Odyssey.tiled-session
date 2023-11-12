@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "WIN.tmx",
+    "activeFile": "LAVADUNGEON.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,19 +25,19 @@
             "scaleInEditor": 3
         },
         "3BRIDGE.tmx": {
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 312.3333333333333,
-                "y": 121.33333333333334
+                "x": 324.5,
+                "y": 384
             }
         },
         "4DOGCHALLENGE.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 559.25,
-                "y": 1075.5
+                "x": 559.75,
+                "y": 559.75
             }
         },
         "C:/Programming/Sorcerers_Odyssey/tiled/tile set/universal_tile_set.tsx": {
@@ -60,16 +60,16 @@
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 318.3333333333333,
-                "y": 254.66666666666669
+                "x": 319.66666666666663,
+                "y": 255.66666666666669
             }
         },
         "LAVADUNGEON.tmx": {
-            "scale": 1,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1599.5,
-                "y": 511.5
+                "x": 1398.4848484848485,
+                "y": 624.2424242424242
             }
         },
         "Mercenary camp.tmx": {
@@ -92,16 +92,16 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 700.5,
-                "y": 309
+                "x": 319.5,
+                "y": 256.5
             }
         },
         "cave.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 559.25,
-                "y": 559.5
+                "x": 559.75,
+                "y": 559.75
             }
         },
         "cave/cave.tmx": {
@@ -141,7 +141,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 463.5,
-                "y": 263
+                "y": 264.5
             }
         },
         "newTileSet.tsx": {
@@ -183,15 +183,15 @@
     ],
     "project": "Odyssey.tiled-project",
     "recentFiles": [
-        "LAVADUNGEON.tmx",
-        "newTileSet.tmx",
-        "newTileSet.tsx",
-        "ROOFTOP.tmx",
-        "3BRIDGE.tmx",
-        "4DOGCHALLENGE.tmx",
-        "cave.tmx",
-        "Forest.tmx",
         "WIN.tmx",
+        "Forest.tmx",
+        "cave.tmx",
+        "4DOGCHALLENGE.tmx",
+        "3BRIDGE.tmx",
+        "ROOFTOP.tmx",
+        "newTileSet.tsx",
+        "newTileSet.tmx",
+        "LAVADUNGEON.tmx",
         "../tile set/universal_tile_set.tsx",
         "debug.tmx",
         "temple of fire.tmx"

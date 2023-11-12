@@ -19,6 +19,5 @@ public class Def {
     public static final Def CorruptedTreantDef = new Def(-100, -10, 70, 0, 30);
     public static final Def GoblinWolfRider = new Def(60, 50, 0, 20, 20);
     public static final Def Skeleton = new Def(0, -100, 40, 70, 20);
-
     public static final Def Lich = new Def(30, 40, 50, 20, 65);
 }

@@ -8,12 +8,9 @@ import helperClass.Coordinate;
 import main.sound.SoundEffect;
 
 public class FireBall extends Projectile {
-
     public static double cost = 40;
-
     private SoundEffect castSound;
     private SoundEffect impactSound;
-
     private Magic magic;
 
     public FireBall(Magic magic, Coordinate playerCoor, Coordinate targetCoor) {

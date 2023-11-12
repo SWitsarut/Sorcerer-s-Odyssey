@@ -6,27 +6,18 @@ public class Damage {
     public static final int LIGHTING = 2;
     public static final int ARCANE = 3;
     public static final int PHYSICAL = 4;
-
-    private int type;
+    private final int type;
     private double damage;
-
     public Damage(int type, double damage) {
         this.type = type;
         this.damage = damage;
     }
-
     public int getType() {
         return type;
     }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public double getDamage() {
         return damage;
     }
-
     public void setDamage(int damage) {
         this.damage = damage;
     }

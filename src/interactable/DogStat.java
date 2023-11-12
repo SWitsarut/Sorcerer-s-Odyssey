@@ -12,7 +12,6 @@ import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 
 import Inventory.Item;
-import Levels.LevelManager;
 import gamestates.Playing;
 import helperClass.Coordinate;
 import util.LoadSave;
@@ -43,7 +42,7 @@ public class DogStat extends Interactable {
     public void onSubmit() {
         if (!taked) {
             playing.getPlayer().getInv().add(Item.dog_sigil);
-            playing.geteventManager().startDog(mapIndex);
+            playing.getEventManager().startChallenge(mapIndex);
         }
         taked = true;
     }

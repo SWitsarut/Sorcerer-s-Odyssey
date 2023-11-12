@@ -22,7 +22,6 @@ import static util.Helper.*;
 
 public class Player extends Entity {
 
-    // no clip
     private boolean noclip = false;
 
     private EffectManager effectManager;
@@ -151,12 +150,8 @@ public class Player extends Entity {
         SpellCastGap();
         AttackGap();
         interactDelayUpdate();
-        switch (palyerAction) {
-            case WALKING:
-                playFootStepSound();
-                break;
-            default:
-                break;
+        if (palyerAction == WALKING) {
+            playFootStepSound();
         }
         if (iFraming) {
             if (curIFrameTick >= maxIFrameTick) {
@@ -301,14 +296,6 @@ public class Player extends Entity {
                 hitbox.x += xSpeed;
                 hitbox.y += ySpeed;
             }
-            // if (!unWalkable(hitbox.x + xSpeed + hitbox.width, hitbox.y + hitbox.height,
-            // collisionMap.getData())) {
-            // hitbox.x += xSpeed;
-            // }
-            // if (!unWalkable(hitbox.x + hitbox.width, hitbox.y + hitbox.height + ySpeed,
-            // collisionMap.getData())) {
-            // hitbox.y += ySpeed;
-            // }
         } else {
             setPalyerAction(IDLE);
         }

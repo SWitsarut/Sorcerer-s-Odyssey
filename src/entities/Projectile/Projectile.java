@@ -56,7 +56,6 @@ public abstract class Projectile extends Entity {
         this.targetCoor = targetCoor;
         this.targetCoor.x -= hitbox.width;
         this.targetCoor.y -= hitbox.height;
-
         this.PlayerOwn = playerOwn;
     }
 
@@ -137,24 +136,9 @@ public abstract class Projectile extends Entity {
         return PlayerOwn;
     }
 
-    public double getSpeed() {
-        return speed;
-    }
-
-    public boolean isExpiredOntarget() {
-        return expiredOntarget;
-    }
 
     public Coordinate getTargetCoor() {
         return targetCoor;
-    }
-
-    public double getxSpeed() {
-        return xSpeed;
-    }
-
-    public double getySpeed() {
-        return ySpeed;
     }
 
 }

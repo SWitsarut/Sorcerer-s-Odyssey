@@ -6,13 +6,13 @@ import helperClass.UpdateCounter;
 
 import java.awt.*;
 
-public class DogChallenge implements Event {
+public class Challenge implements Event {
 
     public boolean active;
     public int mapIndex;
     HordeSpawn spawnCounter;
 
-    public DogChallenge(Playing game, int mapIndex, double second, boolean infinite) {
+    public Challenge(Playing game, int mapIndex, double second, boolean infinite) {
         spawnCounter = new HordeSpawn(game, second, infinite);
         System.out.println("start");
         this.mapIndex = mapIndex;

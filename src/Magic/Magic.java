@@ -172,9 +172,7 @@ public class Magic implements Manager {
 
     public void castFireBall(Coordinate targetCoor) {
         if (player.castSpell(FireBall.cost)) {
-
             projectiles.add(new FireBall(this, player.getPlayerCenter(), targetCoor));
-
         }
     }
 

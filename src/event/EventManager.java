@@ -41,11 +41,11 @@ public class EventManager implements Manager {
         events.add(new SkeletonHorde(game, mapIndex, 0.8, true));
     }
 
-    public void startDog(int mapIndex) {
+    public void startChallenge(int mapIndex) {
         boolean contain = false;
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);
-            if (event instanceof DogChallenge) {
+            if (event instanceof Challenge) {
                 contain = true;
                 break;
             }
@@ -57,7 +57,7 @@ public class EventManager implements Manager {
             game.getEnemyManager().spawnLich(mapIndex, playerCoor.x - 400, playerCoor.y + 400, true);
             game.getEnemyManager().spawnLich(mapIndex, playerCoor.x - 400, playerCoor.y - 400, true);
 
-            events.add(new DogChallenge(game, mapIndex, 3.5, true));
+            events.add(new Challenge(game, mapIndex, 3.5, true));
         }
     }
 

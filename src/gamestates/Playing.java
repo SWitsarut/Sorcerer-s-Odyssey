@@ -34,7 +34,7 @@ public class Playing extends State implements Statemethods {
 
     private InteractableManager interactableManager;
 
-    public EventManager geteventManager() {
+    public EventManager getEventManager() {
         return eventManager;
     }
 
