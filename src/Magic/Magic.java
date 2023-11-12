@@ -32,6 +32,8 @@ import util.LoadSave;
 
 public class Magic implements Manager {
 
+    public ArrayList<Projectile> projectiles = new ArrayList<>();
+    public ArrayList<Buff> buffs = new ArrayList<>();
     public static final int Fire = 0;
     public static final int Arcane = 1;
     public static final int Lightning = 2;
@@ -41,8 +43,7 @@ public class Magic implements Manager {
     public static int selectedChoice = 0;
 
     private Player player;
-    public ArrayList<Projectile> projectiles = new ArrayList<>();
-    public ArrayList<Buff> buffs = new ArrayList<>();
+
 
     private BufferedImage lightningAni[];
     private BufferedImage slashEffect[] = new BufferedImage[4];

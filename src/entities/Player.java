@@ -22,10 +22,10 @@ import static util.Helper.*;
 
 public class Player extends Entity {
 
+
+    private final EffectManager effectManager;
+
     private boolean noclip = false;
-
-    private EffectManager effectManager;
-
     private BufferedImage[][] animation;
 
     private Level collisionMap;

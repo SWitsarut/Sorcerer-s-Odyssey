@@ -53,5 +53,4 @@ public class LightningStrike extends Projectile {
         magic.spawnLesserStrike(left);
         magic.spawnLesserStrike(right);
     }
-
 }

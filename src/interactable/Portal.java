@@ -51,10 +51,10 @@ public class Portal extends Interactable {
         playing.goTomap(targetMap);
         System.out.println(LevelManager.curMapIndex);
         playing.getPlayer().setPosition(targetCoor);
-
         playing.getPlayer().interacting = false;
         playing.getPlayer().interactBlock = true;
     }
+
 
     @Override
     public void draw(Graphics g, int xLvlOffset, int yLvlOffset) {

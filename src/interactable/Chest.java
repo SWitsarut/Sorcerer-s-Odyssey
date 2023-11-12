@@ -78,12 +78,10 @@ public class Chest extends Interactable {
     @Override
     public void update() {
     }
-
     @Override
     public void onIntersects() {
         showMessage = true;
     }
-
     @Override
     public void notIntersects() {
         showMessage = false;

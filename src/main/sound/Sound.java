@@ -11,8 +11,6 @@ public class Sound {
     public Sound(String audioPath) {
         this.url = getClass().getResource("/res/asset/sound/" + audioPath);
         loadAudio();
-        // System.out.println("/res/asset/sound/" + audioPath);
-//        System.out.println(url + " loaded");
     }
 
     private void loadAudio() {
@@ -20,7 +18,6 @@ public class Sound {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-//            System.out.println(clip.getFormat());
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         } catch (Exception e) {
             e.printStackTrace();
